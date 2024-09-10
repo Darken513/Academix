@@ -25,3 +25,46 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Architecture example
+
+src/
+├── app/
+│   ├── auth/
+│   │   ├── auth.service.ts        # Authentication service
+│   │   ├── login/
+│   │   │   ├── login.component.ts
+│   │   │   └── login.component.html
+│   │   └── auth.guard.ts          # Route guard for authentication
+│   ├── core/
+│   │   ├── services/
+│   │   │   └── api.service.ts     # Service for API calls
+│   │   └── models/                # Interfaces and models
+│   │       └── user.model.ts
+│   ├── shared/
+│   │   ├── components/
+│   │   │   └── side-menu/
+│   │   │       ├── side-menu.component.ts
+│   │   │       ├── side-menu.component.html
+│   │   │       └── side-menu.component.css
+│   │   └── directives/
+│   │       └── example.directive.ts
+│   ├── features/
+│   │   ├── dashboard/
+│   │   │   ├── dashboard.component.ts
+│   │   │   └── dashboard.component.html
+│   │   └── user-management/
+│   │       ├── user-list/
+│   │       │   ├── user-list.component.ts
+│   │       │   └── user-list.component.html
+│   │       └── user-details/
+│   │           ├── user-details.component.ts
+│   │           └── user-details.component.html
+│   ├── app-routing.module.ts
+│   ├── app.component.ts
+│   └── app.module.ts
+├── assets/
+├── environments/
+├── index.html
+└── styles.css
