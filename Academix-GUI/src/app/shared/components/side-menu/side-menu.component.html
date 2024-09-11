@@ -1,1 +1,58 @@
-<p>side-menu works!</p>
+<div class="d-flex">
+    <div [ngClass]="{'collapsed': isCollapsed}" id="sidebar" class="text-white bg-dark sidebar">
+        <nav class="nav flex-column">
+            <a class="nav-link">
+                <span class="nav-icon" (click)="toggleSidebar()"><i class="fa-solid fa-bars"></i></span>
+            </a>
+            <a href="#" class="nav-link" [ngClass]="{'selected': activeLink === 'dashboard'}"
+                (click)="setActiveLink('dashboard')">
+                <span class="nav-icon"><i class="fas fa-home"></i></span>
+                <span class="nav-label">Dashboard</span>
+            </a>
+            <a href="#" class="nav-link" [ngClass]="{'selected': activeLink === 'calendar'}"
+                (click)="setActiveLink('calendar')">
+                <span class="nav-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                <span class="nav-label">Caldender</span>
+            </a>
+            <a href="#" class="nav-link" [ngClass]="{'selected': activeLink === 'students'}"
+                (click)="setActiveLink('students')">
+                <span class="nav-icon"><i class="fa-solid fa-users"></i></span>
+                <span class="nav-label">Students</span>
+            </a>
+            <a href="#" class="nav-link" [ngClass]="{'selected': activeLink === 'teachers'}"
+                (click)="setActiveLink('teachers')">
+                <span class="nav-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+                <span class="nav-label">Teachers</span>
+            </a>
+            <a href="#" class="nav-link" [ngClass]="{'selected': activeLink === 'payments'}"
+                (click)="setActiveLink('payments')">
+                <span class="nav-icon"><i class="fa-solid fa-money-check-dollar"></i></span>
+                <span class="nav-label">Payments</span>
+            </a>
+            <a href="#" class="nav-link" [ngClass]="{'selected': activeLink === 'subjects'}"
+                (click)="setActiveLink('subjects')">
+                <span class="nav-icon"><i class="fa-solid fa-book-open"></i></span>
+                <span class="nav-label">Subjects</span>
+            </a>
+            <a href="#" class="nav-link" [ngClass]="{'selected': activeLink === 'settings'}"
+                (click)="setActiveLink('settings')">
+                <span class="nav-icon"><i class="fas fa-cog"></i></span>
+                <span class="nav-label">Settings</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content - todo export to main app component -->
+    <div class="content p-4" [ngStyle]="{'margin-left': isCollapsed ? '70px' : '250px'}">
+        <h1>Main Content here</h1>
+        <hr>
+        <h3>Work in progress - same goes to the nav bar</h3>
+        <br>
+        <p>should add a top navbar as well, <strong>usually used to display app logo, user details, logout btn, and notifications</strong></p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus consequatur ducimus expedita quaerat.
+            Doloribus incidunt vel ut consequatur obcaecati voluptatibus ratione consequuntur natus vitae! Sapiente
+            omnis voluptatum debitis aut sequi.</p>
+
+        <h6>UGLY CODE TO FIX - make it generic, avoid hard typing components for lighter solution</h6>
+    </div>
+</div>
