@@ -1,15 +1,34 @@
-.sidebar {
-  height: 100vh;
-  width: 250px;
+.top-navbar {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  z-index: 1030;
+  height: 60px;
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+  ul{
+    position: absolute;
+    right: 15px;
+    li{
+      margin-left: 10px;
+    }
+  }
+}
+.sidebar {
+  height: calc(100vh - 60px);
+  width: 200px;
+  position: fixed;
+  top: 60px;
+  left: 0;
   transition: width 0.5s ease;
   .nav-link:first-of-type {
+    margin-bottom: 30px;
     text-align: end;
     .nav-icon {
       position: relative;
       top: 0;
+      right: -8px;
     }
   }
   .nav-link {
@@ -31,8 +50,11 @@
     }
 
     .nav-label {
+      font-size: 0.9rem;
       margin-left: 15px;
+      cursor: pointer;
       width: 178px;
+      text-transform: capitalize;
       transition: 0.5s;
       overflow: hidden;
     }
@@ -50,10 +72,14 @@
   }
   .nav-link:first-of-type {
     position: relative;
-    left: -3px;
+    right: 0;
+    .nav-icon {
+      right: 3px;
+    }
   }
 }
 
 .content {
   transition: margin-left 0.5s;
+  margin-top: 60px;
 }

@@ -6,12 +6,12 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { SideMenuComponent } from './shared/components/side-menu/side-menu.component';
+import { SideTopMenuComponent } from './shared/components/side-top-menu/side-top-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SideMenuComponent
+    SideTopMenuComponent
   ],
   imports: [
     BrowserModule,
