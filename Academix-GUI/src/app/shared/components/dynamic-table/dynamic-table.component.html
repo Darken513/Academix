@@ -1,0 +1,47 @@
+<ng-container *ngIf="hasNokInput; else dynamicTable">
+    <ng-container><!-- todo-achraf : display some msg to the user that the conf is nok --></ng-container>
+</ng-container>
+<ng-template #dynamicTable>
+    <!-- Global Actions -->
+    <div class="table-actions" *ngIf="tableConfig!.globalActions">
+        <button *ngFor="let action of tableConfig!.globalActions" (click)="executeGlobalAction(action)">
+            <i *ngIf="action.icon" class="icon">{{ action.icon }}</i>
+            {{ action.label }}
+        </button>
+    </div>
+
+    <!-- Table -->
+    <table class="custom-table" [ngStyle]="tableConfig!.styles">
+        <thead>
+            <tr>
+                <!-- Table Headers -->
+                <th *ngFor="let col of tableConfig!.columns" [ngStyle]="{ width: col.width }">
+                    {{ col.header }}
+                    <button *ngIf="col.sortable" (click)="sortColumn(col.field)">Sort</button>
+                    <button *ngIf="col.filterable" (click)="filterColumn(col.field)">Filter</button>
+                </th>
+                <!-- Actions Header -->
+                <th *ngIf="tableConfig!.rowActions">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of data">
+                <!-- Row Actions -->
+                <td *ngIf="tableConfig!.rowActions">
+                    <button *ngFor="let action of tableConfig!.rowActions" (click)="executeRowAction(action, row)">
+                        <i *ngIf="action.icon" class="icon">{{ action.icon }}</i>
+                        {{ action.label }}
+                    </button>
+                </td>
+                <!-- Row Data -->
+                <td *ngFor="let col of tableConfig!.columns">
+                    <ng-container *ngIf="col.cellTemplate; else defaultCell">
+                        <ng-container
+                            *ngTemplateOutlet="col.cellTemplate; context: { $implicit: row[col.field] }"></ng-container>
+                    </ng-container>
+                    <ng-template #defaultCell>{{ row[col.field] }}</ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-template>

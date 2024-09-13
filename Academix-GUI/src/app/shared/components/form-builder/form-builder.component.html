@@ -1,0 +1,32 @@
+<form [formGroup]="formGroup!">
+    <div *ngFor="let field of formFields">
+        <label>{{ field.label }}</label>
+
+        <!-- wip-achraf : Text, Email Inputs -->
+        <input *ngIf="field.type === 'text' || field.type === 'email'" [formControlName]="field.key"
+            [type]="field.type" />
+
+        <!-- wip-achraf : Textarea -->
+        <textarea *ngIf="field.type === 'textarea'" [formControlName]="field.key">
+      </textarea>
+
+        <!-- wip-achraf : Select -->
+        <select *ngIf="field.type === 'select'" [formControlName]="field.key">
+            <option *ngFor="let option of field.options" [value]="option">
+                {{ option }}
+            </option>
+        </select>
+
+        <!-- wip-achraf : Single Checkbox -->
+        <input *ngIf="field.type === 'checkbox'" type="checkbox" [formControlName]="field.key" />
+
+        <!-- wip-achraf : Multi-Checkbox -->
+        <div *ngIf="field.type === 'multicheckbox'">
+            <div *ngFor="let option of field.options">
+                <input type="checkbox" [checked]="isChecked(field.key, option)"
+                    (change)="toggleSelection(field.key, option)">
+                {{ option }}
+            </div>
+        </div>
+    </div>
+</form>

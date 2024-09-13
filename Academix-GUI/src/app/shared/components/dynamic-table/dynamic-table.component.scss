@@ -1,0 +1,18 @@
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.table-actions button {
+  margin-right: 8px;
+}
+
+.icon {
+  margin-right: 4px;
+}

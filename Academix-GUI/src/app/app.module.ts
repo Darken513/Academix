@@ -7,10 +7,14 @@ import { AppRoutingModule } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SideTopMenuComponent } from './shared/components/side-top-menu/side-top-menu.component';
+import { FormBuilderComponent } from './shared/components/form-builder/form-builder.component';
+import { DynamicTableComponent } from './shared/components/dynamic-table/dynamic-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FormBuilderComponent,
+    DynamicTableComponent,
     SideTopMenuComponent
   ],
   imports: [
