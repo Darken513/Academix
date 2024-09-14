@@ -6,16 +6,15 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { SideTopMenuComponent } from './shared/components/side-top-menu/side-top-menu.component';
-import { FormBuilderComponent } from './shared/components/form-builder/form-builder.component';
-import { DynamicTableComponent } from './shared/components/dynamic-table/dynamic-table.component';
+import { AdminModule } from './features/admin/admin.module';
+import { SharedModule } from './shared/shared.module';
+import { TeacherModule } from './features/teacher/teacher.module';
+import { StudentModule } from './features/student/student.module';
+import { ParentModule } from './features/parent/parent.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormBuilderComponent,
-    DynamicTableComponent,
-    SideTopMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +23,12 @@ import { DynamicTableComponent } from './shared/components/dynamic-table/dynamic
     CommonModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AdminModule,
+    TeacherModule,
+    StudentModule,
+    ParentModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

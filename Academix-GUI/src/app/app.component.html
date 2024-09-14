@@ -1,2 +1,6 @@
-<app-side-top-menu *ngIf="isLoggedIn"></app-side-top-menu>
-<router-outlet></router-outlet>
+<div class="d-flex">
+    <app-side-top-menu *ngIf="isLoggedIn" (collapseEvent)="sideCollapsed = $event"></app-side-top-menu>
+    <div class="content p-4" [ngStyle]="{'margin-left': sideCollapsed ? '70px' : '200px'}">
+        <router-outlet></router-outlet>
+    </div>
+</div>

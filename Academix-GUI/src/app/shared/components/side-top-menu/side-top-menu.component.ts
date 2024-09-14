@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
 
 interface screenNavOption {
   name: string;
@@ -13,8 +13,9 @@ interface screenNavOption {
   styleUrls: ['./side-top-menu.component.scss']
 })
 export class SideTopMenuComponent {
-  isCollapsed = false;
+  sideCollapsed = false;
   activeLink: string = 'dashboard';
+  @Output() collapseEvent: EventEmitter<any> = new EventEmitter();
 
   screens: screenNavOption[] = [
     {
@@ -60,7 +61,8 @@ export class SideTopMenuComponent {
   }
 
   toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
+    this.sideCollapsed = !this.sideCollapsed;
+    this.collapseEvent.emit(this.sideCollapsed)
   }
   setActiveLink(link: string) {
     this.activeLink = link; // Update the active link when a nav item is clicked
