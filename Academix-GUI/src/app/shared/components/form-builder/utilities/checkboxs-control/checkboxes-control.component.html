@@ -2,9 +2,10 @@
     <label [ngClass]="{ 'required': required }">{{ label }}</label>
 
     <div *ngFor="let option of options" class="form-check">
-        <input type="checkbox" class="form-check-input" [checked]="isChecked(option)"
+        <input type="checkbox" class="form-check-input" [name]="'checkboxes-' + label"
+            [id]="'checkboxes-' + label + option" [checked]="isChecked(option)"
             (change)="onCheckboxChange(option, $event)">
-        <label class="form-check-label">{{ option }}</label>
+        <label [for]="'checkboxes-' + label + option" class="form-check-label">{{ option }}</label>
     </div>
 
     <div *ngIf="!valid" class="invalid-feedback">

@@ -7,5 +7,7 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   styleUrl: './text-area-control.component.scss'
 })
 export class TextAreaControlComponent extends BaseFormFieldComponent {
-
+  override onValueChange(event: any) {
+    this.valueChange.emit(event.target.value);
+  }
 }

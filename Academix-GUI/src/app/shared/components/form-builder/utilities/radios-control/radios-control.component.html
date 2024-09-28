@@ -1,0 +1,13 @@
+<div class="form-group">
+    <label [ngClass]="{ 'required': required }">{{ label }}</label>
+
+    <div *ngFor="let option of options" class="form-check">
+        <input [name]="'radios-' + label" [id]="'radios-' + label + option" type="radio" class="form-check-input" [value]="option"
+            [checked]="value === option" (change)="onValueChange(option)">
+        <label [for]="'radios-' + label + option" class="form-check-label">{{ option }}</label>
+    </div>
+
+    <div *ngIf="!valid" class="invalid-feedback">
+        {{ errorMessage }}
+    </div>
+</div>

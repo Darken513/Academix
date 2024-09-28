@@ -8,4 +8,8 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
 })
 export class SelectControlComponent extends BaseFormFieldComponent {
   @Input() options: string[] = [];
+
+  override onValueChange(event: any) {
+    this.valueChange.emit(event.target.value);
+  }
 }

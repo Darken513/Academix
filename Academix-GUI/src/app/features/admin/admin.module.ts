@@ -27,6 +27,7 @@ import { SubjectListComponent } from './subjectManagement/subject-list/subject-l
 import { UserDetailsComponent } from './userManagement/user-details/user-details.component';
 import { UserEditionComponent } from './userManagement/user-edition/user-edition.component';
 import { UserListComponent } from './userManagement/user-list/user-list.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { UserListComponent } from './userManagement/user-list/user-list.componen
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild([
       { path: 'dashboard', component: DashboardComponent },
       {

@@ -8,4 +8,7 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
 })
 export class TextControlComponent extends BaseFormFieldComponent {
 
+  override onValueChange(event: any) {
+    this.valueChange.emit(event.target.value);
+  }
 }

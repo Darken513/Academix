@@ -7,6 +7,11 @@ import { FormBuilderComponent } from './components/form-builder/form-builder.com
 import { SideTopMenuComponent } from './components/side-top-menu/side-top-menu.component';
 import { TableBuilderComponent } from './components/table-builder/table-builder.component';
 import { AuthService } from './auth/auth.service';
+import { TextControlComponent } from './components/form-builder/utilities/text-control/text-control.component';
+import { SelectControlComponent } from './components/form-builder/utilities/select-control/select-control.component';
+import { RadiosControlComponent } from './components/form-builder/utilities/radios-control/radios-control.component';
+import { TextAreaControlComponent } from './components/form-builder/utilities/text-area-control/text-area-control.component';
+import { CheckboxesControlComponent } from './components/form-builder/utilities/checkboxs-control/checkboxes-control.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +19,12 @@ import { AuthService } from './auth/auth.service';
     DetailsBuilderComponent,
     FormBuilderComponent,
     SideTopMenuComponent,
-    TableBuilderComponent
+    TableBuilderComponent,
+    TextControlComponent,
+    SelectControlComponent,
+    RadiosControlComponent,
+    TextAreaControlComponent,
+    CheckboxesControlComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -29,7 +39,7 @@ import { AuthService } from './auth/auth.service';
     DetailsBuilderComponent,
     FormBuilderComponent,
     SideTopMenuComponent,
-    TableBuilderComponent
+    TableBuilderComponent,
   ]
 })
 export class SharedModule { }

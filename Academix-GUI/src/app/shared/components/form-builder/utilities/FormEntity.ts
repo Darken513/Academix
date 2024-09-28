@@ -3,7 +3,7 @@ import 'reflect-metadata';
 class FormEntity {
     static addFormField(target: any, key: string, config: {
         label: string,
-        type: 'text' | 'email' | 'select' | 'textarea' | 'checkbox' | 'multicheckbox',
+        type: 'text' | 'email' | 'select' | 'textarea' | 'checkboxes' | 'radios',
         required?: boolean,
         options?: string[],
         relation?: string[],
@@ -54,7 +54,7 @@ class FormEntity {
 // The decorator method inside FormEntity
 function FormField(config: {
     label: string,
-    type: 'text' | 'email' | 'select' | 'textarea' | 'checkbox' | 'multicheckbox',
+    type: 'text' | 'email' | 'select' | 'textarea' | 'checkboxes' | 'radios',
     required?: boolean,
     options?: string[],
     relation?: string[],

@@ -12,7 +12,7 @@ export abstract class BaseFormFieldComponent {
   @Output() valueChange = new EventEmitter<any>();
 
   // Emit value changes from form field
-  onValueChange(event: any) {
-    this.valueChange.emit(event);
+  onValueChange(value: any) {
+    this.valueChange.emit(value);
   }
 }

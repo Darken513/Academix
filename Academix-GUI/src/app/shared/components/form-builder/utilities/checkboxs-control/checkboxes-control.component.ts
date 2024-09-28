@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BaseFormFieldComponent } from '../base-form-field-component/base-form-field.component';
 
 @Component({
@@ -7,6 +7,7 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   styleUrl: './checkboxes-control.component.scss'
 })
 export class CheckboxesControlComponent extends BaseFormFieldComponent {
+  @Input() options: string[] = [];
   // For multiple checkbox, the value will be an array of selected values
   constructor() {
     super();

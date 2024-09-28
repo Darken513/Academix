@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormEntity } from '../../../../shared/components/form-builder/utilities/FormEntity';
+import { SubjectForm } from './subject.model';
 
 @Component({
   selector: 'app-subject-edition',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './subject-edition.component.scss'
 })
 export class SubjectEditionComponent {
-
+  entity:FormEntity = new SubjectForm()
 }
