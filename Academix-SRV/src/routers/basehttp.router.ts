@@ -13,6 +13,6 @@ export abstract class BaseHttpRouter<T> {
     this.router.get('/getAll', (req, res) => this.controller.getAll(req, res));
     this.router.get('/getById/:id', (req, res) => this.controller.getById(req, res));
     this.router.post('/create', (req, res) => this.controller.create(req, res));
-    this.router.get('/deleteById/:id', (req, res) => this.controller.deleteById(req, res));
+    this.router.delete('/deleteById/:id', (req, res) => this.controller.deleteById(req, res));
   }
 }
