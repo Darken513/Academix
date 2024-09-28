@@ -1,0 +1,33 @@
+import { Component } from '@angular/core';
+import { BaseFormFieldComponent } from '../base-form-field-component/base-form-field.component';
+
+@Component({
+  selector: 'app-checkboxes-control',
+  templateUrl: './checkboxes-control.component.html',
+  styleUrl: './checkboxes-control.component.scss'
+})
+export class CheckboxesControlComponent extends BaseFormFieldComponent {
+  // For multiple checkbox, the value will be an array of selected values
+  constructor() {
+    super();
+    if (!this.value) {
+      this.value = [];  // Ensure the value is an array for multi-checkbox
+    }
+  }
+  onCheckboxChange(option: string, event: any) {
+    const checked = event.target.checked;
+    if (checked) {
+      this.value.push(option);
+    } else {
+      const index = this.value.indexOf(option);
+      if (index > -1) {
+        this.value.splice(index, 1);
+      }
+    }
+    this.valueChange.emit(this.value);
+  }
+
+  isChecked(option: string): boolean {
+    return this.value.includes(option);
+  }
+}

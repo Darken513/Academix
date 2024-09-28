@@ -1,6 +1,9 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormEntity } from './utilities/FormEntity';
+import { TextControlComponent } from './utilities/text-control/text-control.component';
+import { SelectControlComponent } from './utilities/select-control/select-control.component';
+import { TextAreaControlComponent } from './utilities/text-area-control/text-area-control.component';
+import { CheckboxesControlComponent } from './utilities/checkboxs-control/checkboxes-control.component';
 
 @Component({
   selector: 'app-form-builder',
@@ -8,37 +11,71 @@ import { FormEntity } from './utilities/FormEntity';
   styleUrl: './form-builder.component.scss'
 })
 export class FormBuilderComponent {
-  formGroup?: FormGroup;
-  formFields: any[] = [];
-  @Input() model?: FormEntity;
+  @Input() targetClass: FormEntity = new FormEntity();
+  formFields = FormEntity.getFormFields(this.targetClass);
+  formData: any = {};
+  validation: any = {};
 
-  constructor(private fb: FormBuilder) { }
+  @ViewChild('formFieldHost', { read: ViewContainerRef, static: true }) formFieldHost!: ViewContainerRef;
+
+  constructor() {
+    this.formFields.forEach((field: any) => {
+      this.validation[field.key] = { valid: true, errorMessage: '' };
+    });
+  }
 
   ngOnInit() {
-    this.formFields = this.model ? Reflect.getMetadata('formFields', this.model) || [] : [];
-
-    // Create FormGroup dynamically
-    const formGroupConfig = this.formFields.reduce((acc, field) => {
-      acc[field.key] = [null];
-      return acc;
-    }, {});
-
-    this.formGroup = this.fb.group(formGroupConfig);
+    this.renderFormFields();
   }
 
-  // wip-achraf : Check if multicheckbox option is selected
-  isChecked(fieldKey: string, option: string): boolean {
-    const field = this.formGroup!.get(fieldKey)?.value || [];
-    return field.includes(option);
+  renderFormFields() {
+    this.formFields.forEach((field: any) => {
+      let componentRef;
+
+      if (field.type === 'text') {
+        componentRef = this.formFieldHost.createComponent(TextControlComponent);
+      } else if (field.type === 'textarea') {
+        componentRef = this.formFieldHost.createComponent(TextAreaControlComponent);
+      } else if (field.type === 'select') {
+        componentRef = this.formFieldHost.createComponent(SelectControlComponent);
+      } else if (field.type === 'checkboxes') {
+        componentRef = this.formFieldHost.createComponent(CheckboxesControlComponent);
+      }
+
+      if (componentRef) {
+        this.setupComponentInstance(componentRef, field);
+      }
+    });
   }
 
-  // wip-achraf : Toggle multicheckbox selection
-  toggleSelection(fieldKey: string, option: string) {
-    const control = this.formGroup!.get(fieldKey);
-    const currentSelection = control?.value || [];
-    const newSelection = currentSelection.includes(option)
-      ? currentSelection.filter((item: string) => item !== option)
-      : [...currentSelection, option];
-    control?.setValue(newSelection);
+  setupComponentInstance(componentRef: any, field: any) {
+    componentRef.instance.label = field.label;
+    componentRef.instance.required = field.required;
+    componentRef.instance.valid = this.validation[field.key].valid;
+    componentRef.instance.errorMessage = this.validation[field.key].errorMessage;
+    componentRef.instance.options = field.options || [];  // Pass options to checkbox
+    componentRef.instance.value = this.formData[field.key] || [];
+
+    // Listen for value changes and update formData
+    componentRef.instance.valueChange.subscribe((newValue: any) => {
+      this.onValueChange(field.key, newValue);
+    });
+  }
+
+  onValueChange(key: string, value: any) {
+    this.formData[key] = value;
+  }
+
+  onSubmit() {
+    const validationResults = FormEntity.validateForm(this.targetClass, this.formData);
+    this.formFields.forEach((field: any) => {
+      const isValid = validationResults.errors.find(err => err.includes(field.label)) === undefined;
+      this.validation[field.key].valid = isValid;
+      this.validation[field.key].errorMessage = !isValid ? 'Invalid field' : '';
+    });
+
+    if (validationResults.valid) {
+      console.log('Form is valid!', this.formData);
+    }
   }
 }

@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label [ngClass]="{ 'required': required }">{{ label }}</label>
+    <textarea class="form-control" [ngClass]="{ 'is-invalid': !valid }" [(ngModel)]="value"
+        (input)="onValueChange($event)"></textarea>
+    <div *ngIf="!valid" class="invalid-feedback">
+        {{ errorMessage }}
+    </div>
+</div>
