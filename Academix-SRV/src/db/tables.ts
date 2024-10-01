@@ -36,7 +36,18 @@ export const createTables = async () => {
         subject_id INT REFERENCES subjects(id) ON DELETE CASCADE
       );
     `);
-
+    // Create the 'rooms' table
+    // for last_update, find a replacement to ON UPDATE CURRENT_TIMESTAMP
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS rooms (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        capacity INT NOT NULL,
+        enabled BOOLEAN DEFAULT TRUE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
     await client.query('COMMIT');
     console.log('Tables created successfully or already exist.');
   } catch (error) {
