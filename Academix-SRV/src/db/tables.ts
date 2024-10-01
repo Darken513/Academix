@@ -37,6 +37,19 @@ export const createTables = async () => {
       );
     `);
 
+    // Create the 'establishment'
+    //TODO: Add trigger to update value of last_update
+    await client.query(` 
+      CREATE TABLE IF NOT EXISTS establishment (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        description VARCHAR(255),
+        enabled BOOLEAN DEFAULT TRUE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+    
     await client.query('COMMIT');
     console.log('Tables created successfully or already exist.');
   } catch (error) {
