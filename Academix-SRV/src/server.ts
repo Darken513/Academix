@@ -2,8 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { initializeRouters } from './routers/routersInitializer';
-import { createTables } from './db/tables';
-import { pool } from './db/pool';
+import { DATA_SOURCE } from './db/dataSource';
 
 class App {
   public app: express.Application;
@@ -12,6 +11,7 @@ class App {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 8080;
+
     this.initializeMiddlewares();
     this.initializeRouters();
     this.handleFallback();
@@ -25,7 +25,7 @@ class App {
   }
 
   private initializeRouters(): void {
-    initializeRouters(this.app, pool); // Pass the pool to the routers
+    initializeRouters(this.app);
   }
 
   private handleFallback(): void {
@@ -42,7 +42,7 @@ class App {
 
   public async start(): Promise<void> {
     try {
-      await createTables();
+      await DATA_SOURCE.initialize();
 
       this.app.listen(this.port, () => {
         console.log(`Server started on port ${this.port}`);

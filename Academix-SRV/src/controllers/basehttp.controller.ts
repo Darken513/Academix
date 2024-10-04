@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { BaseHttpService } from '../services/basehttp.service';
+import { ObjectLiteral } from 'typeorm';
 
-export abstract class BaseHttpController<T> {
-  protected service: BaseHttpService<T>;
+export abstract class BaseHttpController<T extends ObjectLiteral> {
 
-  constructor(service: BaseHttpService<T>) {
+  constructor(protected service: BaseHttpService<T>) {
     this.service = service;
   }
 
@@ -20,7 +20,7 @@ export abstract class BaseHttpController<T> {
 
   public async getById(req: Request, res: Response): Promise<void> {
     try {
-      const def = await this.service.getById(req.params.id);
+      const def = await this.service.getById(Number(req.params.id));
       if (!def) {
         res.status(404).json({ title: 'Error', body: 'Item not found.' });
       } else {
@@ -44,7 +44,7 @@ export abstract class BaseHttpController<T> {
 
   public async deleteById(req: Request, res: Response): Promise<void> {
     try {
-      await this.service.deleteById(req.params.id);
+      await this.service.deleteById(Number(req.params.id));
       res.json({ done: true });
     } catch (error) {
       console.error('Error deleting document:', error);

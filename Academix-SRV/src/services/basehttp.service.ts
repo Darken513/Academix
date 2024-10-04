@@ -1,34 +1,28 @@
-import { Pool } from 'pg';
+import { Repository, ObjectLiteral } from 'typeorm';
 
-export abstract class BaseHttpService<T> {
-  protected tableName: string;
+//todo add some error handling to avoid server crash
+export abstract class BaseHttpService<T extends ObjectLiteral> {
+  protected repository: Repository<T>;
 
-  constructor(protected db: Pool, tableName: string) {
-    this.tableName = tableName;
+  constructor(repository: Repository<T>) {
+    this.repository = repository;
   }
 
   public async getAll(): Promise<T[]> {
-    const result = await this.db.query(`SELECT * FROM ${this.tableName}`);
-    return result.rows;
+    return await this.repository.find();
   }
 
-  public async getById(id: string): Promise<T | null> {
-    const result = await this.db.query(`SELECT * FROM ${this.tableName} WHERE id = $1`, [id]);
-    if (result.rows.length === 0) return null;
-    return result.rows[0];
+  public async getById(id: number): Promise<T | null> {
+    let args: any = { id };
+    return await this.repository.findOneBy(args);
   }
 
   public async create(data: T): Promise<T> {
-    const keys = Object.keys((data as any)).join(', ');
-    const values = Object.values((data as any));
-    const placeholders = values.map((_, index) => `$${index + 1}`).join(', ');
-
-    const query = `INSERT INTO ${this.tableName} (${keys}) VALUES (${placeholders}) RETURNING *`;
-    const result = await this.db.query(query, values);
-    return result.rows[0];
+    const entity = this.repository.create(data);
+    return await this.repository.save(entity);
   }
 
-  public async deleteById(id: string): Promise<void> {
-    await this.db.query(`DELETE FROM ${this.tableName} WHERE id = $1`, [id]);
+  public async deleteById(id: number): Promise<void> {
+    await this.repository.delete(id);
   }
 }

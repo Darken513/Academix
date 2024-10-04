@@ -1,8 +1,18 @@
-export interface Subject {
-    id: number;
-    name: string;
-    created_at: Date
-}
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+} from "typeorm";
 
-//todo: there should be a table for subject-user
-//since a subject could belong to many users and a user could own many subjects
+@Entity("subjects")
+export class Subject {
+  @PrimaryGeneratedColumn()
+  id!: number;
+
+  @Column({ type: "varchar", length: 255 })
+  name!: string;
+
+  @CreateDateColumn()
+  created_at?: Date;
+}

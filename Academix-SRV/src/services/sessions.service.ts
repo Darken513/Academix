@@ -1,9 +1,9 @@
-import { Pool } from 'pg';
 import { BaseHttpService } from './basehttp.service';
 import { Sessions } from '../models/Sessions';
+import { DATA_SOURCE } from '../db/dataSource';
 
 export class SessionsService extends BaseHttpService<Sessions> {
-  constructor(db: Pool) {
-    super(db, 'sessions');
+  constructor() {
+    super(DATA_SOURCE.getRepository(Sessions));
   }
 }
