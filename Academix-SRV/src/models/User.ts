@@ -1,11 +1,15 @@
 import { Role } from './Role';
 
 export interface User {
-  id: string;
+  id: number;
   first_name: string;
   last_name: string;
-  phone_number: string;
-  email: string;
+  phone_number?: string;
+  email?: string;
   role: Role;
-  created_at: Date;
+  extra_details_id?: number;
+  password?: string;
+  enabled?: boolean;
+  created_at?: Date;
+  last_update?: Date;
 }
