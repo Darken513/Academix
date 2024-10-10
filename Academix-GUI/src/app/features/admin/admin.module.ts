@@ -65,7 +65,7 @@ import { SharedModule } from '../../shared/shared.module';
       {
         path: 'attendance-management',
         children: [
-          { path: 'details', component: AttendanceDetailsComponent },
+          { path: 'details/:id', component: AttendanceDetailsComponent },
           { path: 'edit/:id', component: AttendanceEditionComponent },
           { path: 'history', component: AttendanceHistoryComponent }
         ]
@@ -73,15 +73,28 @@ import { SharedModule } from '../../shared/shared.module';
       {
         path: 'cours-management',
         children: [
-          { path: 'details', component: CoursDetailsComponent },
+          {
+            path: 'details/:id', component: CoursDetailsComponent, children: [
+              {
+                path: 'session',
+                children: [
+                  { path: 'details/:id', component: SessionDetailsComponent },
+                  { path: 'edit/:id', component: SessionEditionComponent },
+                  { path: 'list', component: SessionListComponent },
+                  { path: '', redirectTo: 'list' }
+                ]
+              }
+            ]
+          },
           { path: 'edit/:id', component: CoursEditionComponent },
-          { path: 'list', component: CoursListComponent }
+          { path: 'list', component: CoursListComponent },
+          { path: '', redirectTo: 'list' }
         ]
       },
       {
         path: 'establishment-management',
         children: [
-          { path: 'details', component: EstablishmentDetailsComponent },
+          { path: 'details/:id', component: EstablishmentDetailsComponent },
           { path: 'edit/:id', component: EstablishmentEditionComponent },
           { path: 'list', component: EstablishmentListComponent }
         ]
@@ -89,7 +102,7 @@ import { SharedModule } from '../../shared/shared.module';
       {
         path: 'payment-management',
         children: [
-          { path: 'details', component: PaymentDetailsComponent },
+          { path: 'details/:id', component: PaymentDetailsComponent },
           { path: 'edit/:id', component: PaymentEditionComponent },
           { path: 'history', component: PaymentHistoryComponent }
         ]
@@ -97,23 +110,15 @@ import { SharedModule } from '../../shared/shared.module';
       {
         path: 'room-management',
         children: [
-          { path: 'details', component: RoomDetailsComponent },
+          { path: 'details/:id', component: RoomDetailsComponent },
           { path: 'edit/:id', component: RoomEditionComponent },
           { path: 'list', component: RoomListComponent }
         ]
       },
       {
-        path: 'session-management',
-        children: [
-          { path: 'details', component: SessionDetailsComponent },
-          { path: 'edit/:id', component: SessionEditionComponent },
-          { path: 'list', component: SessionListComponent }
-        ]
-      },
-      {
         path: 'subject-management',
         children: [
-          { path: 'details', component: SubjectDetailsComponent },
+          { path: 'details/:id', component: SubjectDetailsComponent },
           { path: 'edit/:id', component: SubjectEditionComponent },
           { path: 'list', component: SubjectListComponent }
         ]

@@ -21,32 +21,37 @@ export class SideTopMenuComponent {
     {
       name: 'Dashboard',
       icon: 'fas fa-home',
-      href: 'dashboard'
+      href: 'admin/dashboard'
     },
     {
-      name: 'calendar',
-      icon: 'fa-solid fa-calendar-days',
-      href: 'calendar'
-    },
-    {
-      name: 'students',
+      name: 'Users',
       icon: 'fa-solid fa-users',
-      href: 'students'
+      href: 'admin/user-management'
     },
     {
-      name: 'teachers',
+      name: 'Courses',
+      icon: 'fa-solid fa-calendar-days',
+      href: 'admin/cours-management'
+    },
+    {
+      name: 'Rooms',
       icon: 'fa-solid fa-chalkboard-user',
-      href: 'teachers'
+      href: 'admin/room-management'
+    },
+    {
+      name: 'subjects',
+      icon: 'fa-solid fa-book',
+      href: 'admin/subject-management'
+    },
+    {
+      name: 'Establishments',
+      icon: 'fa-solid fa-building',
+      href: 'admin/establishment-management'
     },
     {
       name: 'payments',
       icon: 'fa-solid fa-money-check-dollar',
-      href: 'payments'
-    },
-    {
-      name: 'subjects',
-      icon: 'fa-solid fa-book-open',
-      href: 'subjects'
+      href: 'admin/payment-management'
     },
     {
       name: 'settings',

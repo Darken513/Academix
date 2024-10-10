@@ -24,7 +24,7 @@
         </a>
         <!-- use navOption.href-->
         <a *ngFor="let navOption of screens" class="nav-link" [ngClass]="{'selected': activeLink === navOption.href}"
-            (click)="setActiveLink(navOption.href)">
+            (click)="setActiveLink(navOption.href)" [href]="navOption.href">
             <span class="nav-icon"><i [class]="navOption.icon"></i></span>
             <span class="nav-label">{{navOption.name}}</span>
         </a>
