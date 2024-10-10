@@ -7,6 +7,7 @@ import { CoursRouter } from './courses.router';
 import { StudentsPaymentRouter } from './studentsPayments.router';
 import { TeacherPaymentsRouter} from './teacherPayments.router';
 import { RoomsRouter} from './rooms.router';
+import { AttendanceRouter } from './attendance.router';
 
 export function initializeRouters(app: Application): void {
     const usersRouter = new UsersRouter();
@@ -17,6 +18,7 @@ export function initializeRouters(app: Application): void {
     const StudentsPaymentsRouter = new StudentsPaymentRouter();
     const teacherPaymentsRouter = new TeacherPaymentsRouter();
     const roomsRouter = new RoomsRouter();
+    const attendanceRouter = new AttendanceRouter();
 
     app.use('/users', usersRouter.router);
     app.use('/subjects', subjectsRouter.router);
@@ -26,4 +28,5 @@ export function initializeRouters(app: Application): void {
     app.use('/studentsPayments', StudentsPaymentsRouter.router);
     app.use('/teacherPayments', teacherPaymentsRouter.router);
     app.use('/rooms', roomsRouter.router);
+    app.use('/attendance', attendanceRouter.router);
 }
