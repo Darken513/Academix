@@ -23,6 +23,21 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   password!: string;
 
+  @Column()
+  establishment_id!: number; 
+
+  @Column()
+  parent_id!: number; 
+
+  @Column({ type: 'varchar', length: 255 })
+  grade!: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  note!: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  imgURL!: string;
+
   @Column({ type: 'boolean', default: true })
   enabled?: boolean;
 
