@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Establishment } from './Establishment';
+import { Attendance } from './Attendance';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -23,12 +24,6 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   password!: string;
 
-  @Column()
-  establishment_id!: number; 
-
-  @Column()
-  parent_id!: number; 
-
   @Column({ type: 'varchar', length: 255 })
   grade!: string;
 
@@ -46,4 +41,21 @@ export class User {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at?: Date;
+
+  // Many users (teachers) can work in one establishment
+  @ManyToOne(() => Establishment, (establishment) => establishment.teachers)
+  @JoinColumn({ name: 'establishment_id' })  // This will store the establishment reference in the "users" table
+  establishment?: Establishment;
+  
+  // Many users can have one parent (many-to-one relationship)
+  @ManyToOne(() => User, (user) => user.children)
+  @JoinColumn({ name: 'parent_id' })  // references the parent_id field
+  parent?: User;
+  
+  // One user can have many children (one-to-many relationship)
+  @OneToMany(() => User, (user) => user.parent)
+  children?: User[];
+  
+  @OneToMany(() => Attendance, (attendance) => attendance.user)
+  attendances!: Attendance[];  // One user can have many attendance records
 }

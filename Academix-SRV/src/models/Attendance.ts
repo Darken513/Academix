@@ -1,16 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
-
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Establishment } from './Establishment';
+import { User } from './User';
 @Entity('attendance')
 export class Attendance {
 
   @PrimaryGeneratedColumn()
   id!: number;  // primary key, auto-incremented
 
-  @Column()
-  student_id!: number;  // foreign key to student entity 
+  @ManyToOne(() => Establishment, (establishment) => establishment.attendances)
+  @JoinColumn({ name: 'establishment_id' })  // Foreign key to the establishment
+  establishment!: Establishment;
 
-  @Column()
-  session_id!: number;  // foreign key to session entity
+  @ManyToOne(() => User, (user) => user.attendances)
+  @JoinColumn({ name: 'user_id' })  // Foreign key to the user
+  user!: User;
 
   @Column({ type: 'varchar', length: 255 })
   status!: string;
