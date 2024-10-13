@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Establishment } from './Establishment';
 import { Attendance } from './Attendance';
+import { Role } from './Role';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
@@ -19,7 +20,7 @@ export class User {
   email?: string;
 
   @Column({ type: 'varchar', length: 50 })
-  role!: string;
+  role!: Role;
 
   @Column({ type: 'varchar', length: 255 })
   password!: string;
@@ -27,10 +28,10 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   grade!: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, nullable: true })
   note!: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, nullable: true })
   imgURL!: string;
 
   @Column({ type: 'boolean', default: true })
@@ -42,20 +43,17 @@ export class User {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at?: Date;
 
-  // Many users (teachers) can work in one establishment
-  @ManyToOne(() => Establishment, (establishment) => establishment.teachers)
-  @JoinColumn({ name: 'establishment_id' })  // This will store the establishment reference in the "users" table
+  @ManyToOne(() => Establishment, (establishment) => establishment.users, { eager: true })
+  @JoinColumn({ name: 'establishment_id' }) 
   establishment?: Establishment;
-  
-  // Many users can have one parent (many-to-one relationship)
+
   @ManyToOne(() => User, (user) => user.children)
-  @JoinColumn({ name: 'parent_id' })  // references the parent_id field
+  @JoinColumn({ name: 'parent_id' })
   parent?: User;
-  
-  // One user can have many children (one-to-many relationship)
+
   @OneToMany(() => User, (user) => user.parent)
   children?: User[];
-  
+
   @OneToMany(() => Attendance, (attendance) => attendance.user)
-  attendances!: Attendance[];  // One user can have many attendance records
+  attendances!: Attendance[];
 }

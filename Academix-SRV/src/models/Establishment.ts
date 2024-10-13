@@ -22,8 +22,6 @@ export class Establishment {
     last_update?: Date;
     
     // One establishment can have many teachers (users)
-    @OneToMany(() => User, (user) => user.establishment)
-    teachers?: User[];  // Array of users (teachers) who work at this establishment
-
-    
+    @OneToMany(() => User, (user) => user.establishment, { eager: false })
+    users?: User[];  // Array of users (teachers) who work at this establishment
 }

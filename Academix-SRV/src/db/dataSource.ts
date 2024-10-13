@@ -9,6 +9,7 @@ const DATA_SOURCE = new DataSource({
     password: 'root',
     database: 'academix',
     synchronize: true,
+    dropSchema: true,
     entities: [__dirname + '/../models/*.ts'],
     logging: false,
 });
