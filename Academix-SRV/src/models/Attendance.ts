@@ -10,9 +10,6 @@ export class Attendance {
   @Column()
   student_id!: number;  // foreign key to student entity 
 
-  @Column()
-  session_id!: number;  // foreign key to session entity
-
   @Column({ type: 'varchar', length: 255 })
   status!: string;
 

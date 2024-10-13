@@ -22,6 +22,6 @@ export class Rooms {
     @CreateDateColumn({ type: 'timestamp', nullable: true })
     last_update?: Date;
 
-    @OneToMany(() => Sessions, (session) => session.room_id)
+    @OneToMany(() => Sessions, (session) => session.room)
     sessions?: Sessions[];
 }

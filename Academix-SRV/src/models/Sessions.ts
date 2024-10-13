@@ -7,12 +7,6 @@ export class Sessions {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: "varchar", length: 255 })
-  cours_id!: string;
-
-  @Column({ type: "varchar", length: 255 })
-  room_id!: string;
-
   @Column({ type: "date" })
   session_date!: Date;
 
@@ -34,7 +28,7 @@ export class Sessions {
   @ManyToOne(() => Rooms, (room) => room.sessions)
   room?: Rooms;
 
-  @OneToMany(() => Attendance, (attendance) => attendance.session)
+  @OneToMany(() => Attendance, (attendance) => attendance.session, { eager: true })
   attendances?: Attendance[];
 
   @ManyToOne(() => Cours, (cours) => cours.sessions)
