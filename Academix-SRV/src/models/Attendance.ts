@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Establishment } from './Establishment';
+import { Sessions } from './Sessions';
 import { User } from './User';
 @Entity('attendance')
 export class Attendance {
@@ -7,9 +7,9 @@ export class Attendance {
   @PrimaryGeneratedColumn()
   id!: number;  // primary key, auto-incremented
 
-  @ManyToOne(() => Establishment, (establishment) => establishment.attendances)
-  @JoinColumn({ name: 'establishment_id' })  // Foreign key to the establishment
-  establishment!: Establishment;
+  @ManyToOne(() => Sessions, (session) => session.attendances)
+  @JoinColumn({ name: 'session_id' })  // Foreign key to the establishment
+  sessions!: Sessions;
 
   @ManyToOne(() => User, (user) => user.attendances)
   @JoinColumn({ name: 'user_id' })  // Foreign key to the user

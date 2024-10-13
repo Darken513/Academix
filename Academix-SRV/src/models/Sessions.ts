@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Attendance } from './Attendance'; 
 
 @Entity("sessions")
 export class Sessions {
@@ -28,4 +29,7 @@ export class Sessions {
 
   @Column({ type: "timestamp", nullable: true })
   last_update?: Date;
+
+  @OneToMany(() => Attendance, (attendance) => attendance.sessions)
+  attendances!: Attendance[];  // One establishment can have many attendance records
 }
