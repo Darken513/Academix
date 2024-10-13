@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany  } from 'typeorm';
 import { User } from './User'; 
-import { Attendance } from './Attendance'; 
 
 @Entity('establishments')
 export class Establishment {
@@ -26,7 +25,5 @@ export class Establishment {
     @OneToMany(() => User, (user) => user.establishment)
     teachers?: User[];  // Array of users (teachers) who work at this establishment
 
-    @OneToMany(() => Attendance, (attendance) => attendance.establishment)
-    attendances!: Attendance[];  // One establishment can have many attendance records
     
 }
