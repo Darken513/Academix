@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany, ManyToOne } from 'typeorm';
+import {Sessions} from './Sessions'
 
 @Entity('attendance')
 export class Attendance {
@@ -26,4 +27,7 @@ export class Attendance {
 
   @CreateDateColumn({ type: 'date' })
   last_update?: Date;
+
+  @ManyToOne(() => Sessions, (session) => session.attendances)
+  session?: Sessions;
 }

@@ -1,5 +1,6 @@
 import internal from 'stream';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import { Sessions } from './Sessions';
 
 @Entity('rooms')
 export class Rooms {
@@ -20,4 +21,7 @@ export class Rooms {
 
     @CreateDateColumn({ type: 'timestamp', nullable: true })
     last_update?: Date;
+
+    @OneToMany(() => Sessions, (session) => session.room_id)
+    sessions?: Sessions[];
 }

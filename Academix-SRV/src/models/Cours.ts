@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
-
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import {Sessions} from './Sessions'
 @Entity('courses') // maps to the 'cours' table in the database
 export class Cours {
   
@@ -41,4 +41,7 @@ export class Cours {
   
   @Column({ type: 'date', nullable: true })
   last_update!: Date; // manually updated field, nullable if no updates have been made
+
+  @OneToMany (() => Sessions, (session) => session.cours)
+  sessions?: Sessions[];
 }

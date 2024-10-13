@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, ManyToOne, OneToMany } from "typeorm";
+import {Rooms} from './Rooms';
+import {Attendance} from './Attendance'
+import {Cours} from './Cours'
 @Entity("sessions")
 export class Sessions {
   @PrimaryGeneratedColumn()
@@ -28,4 +30,13 @@ export class Sessions {
 
   @Column({ type: "timestamp", nullable: true })
   last_update?: Date;
+
+  @ManyToOne(() => Rooms, (room) => room.sessions)
+  room?: Rooms;
+
+  @OneToMany(() => Attendance, (attendance) => attendance.session)
+  attendances?: Attendance[];
+
+  @ManyToOne(() => Cours, (cours) => cours.sessions)
+  cours?: Cours;
 }
