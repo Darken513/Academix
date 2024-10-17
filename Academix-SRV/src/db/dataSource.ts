@@ -10,7 +10,7 @@ const DATA_SOURCE = new DataSource({
     database: 'academix',
     synchronize: true,
     dropSchema: true,
-    entities: [__dirname + '/../models/*.ts'],
+    entities: [__dirname + '/../models/**/*.ts', __dirname + '/../models/*.ts'],
     logging: false,
 });
 

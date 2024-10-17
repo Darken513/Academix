@@ -4,7 +4,9 @@ import {
   Column,
   CreateDateColumn,
   Timestamp,
+  OneToMany,
 } from "typeorm";
+import { Cours } from "./Cours";
 
 @Entity("subjects")
 export class Subject {
@@ -25,4 +27,7 @@ export class Subject {
 
   @CreateDateColumn({ type: "timestamp" })
   last_update!: Date;
+
+  @OneToMany(() => Cours, (cours) => cours.subject)
+  courses!: Cours[];
 }

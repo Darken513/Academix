@@ -1,44 +1,48 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Subject } from './Subject';
+import { Teacher } from './userRoles/Teacher';
 
-@Entity('courses') // maps to the 'cours' table in the database
+@Entity('courses')
 export class Cours {
-  
+
   @PrimaryGeneratedColumn()
-  id!: number; // primary key
-  
-  @Column()
-  subject_id!: number; // foreign key to the subject entity
-  
-  @Column()
-  teacher_id!: number; // foreign key to the teacher entity
-  
+  id!: number;
+
+  @ManyToOne(() => Subject, (subject) => subject.courses)
+  @JoinColumn({ name: 'subject_id' })
+  subject!: Subject;
+
+  @ManyToOne(() => Teacher, (teacher) => teacher.courses)
+  @JoinColumn({ name: 'teacher_id' })
+  teacher!: Teacher;
+
   @Column({ type: 'boolean' })
-  managed_by_center!: boolean; // boolean flag for whether it's managed by the center
-  
+  managed_by_center!: boolean;
+
   @Column({ type: 'float' })
-  student_price_per_session!: number; // price per session for students
-  
+  student_price_per_session!: number;
+
   @Column({ type: 'varchar', length: 255 })
-  paymentType!: string; // varchar to store the type of payment
-  
+  paymentType!: string;
+
   @Column({ type: 'float' })
-  teacher_price_per_session!: number; // price per session for the teacher
-  
+  teacher_price_per_session!: number;
+
   @Column({ type: 'float' })
-  teacher_price_per_student!: number; // price per student per session for the teacher
-  
+  teacher_price_per_student!: number;
+
   @Column({ type: 'float' })
-  teacher_price_flat_rate!: number; // flat rate for the teacher
-  
+  teacher_price_flat_rate!: number;
+
   @Column({ type: 'integer' })
-  unpaid_total!: number; // total unpaid amount
-  
+  unpaid_total!: number;
+
   @Column({ type: 'boolean' })
-  enabled!: boolean; // flag for whether the course is enabled or not
-  
+  enabled!: boolean;
+
   @CreateDateColumn({ type: 'date' })
-  created_at!: Date; // date when the course was created (auto-generated)
-  
+  created_at!: Date;
+
   @Column({ type: 'date', nullable: true })
-  last_update!: Date; // manually updated field, nullable if no updates have been made
+  last_update!: Date;
 }

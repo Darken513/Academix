@@ -1,6 +1,6 @@
 import { UserController } from '../controllers/user.controller';
 import { BaseHttpRouter } from './basehttp.router';
-import { User } from '../models/User';
+import { User } from '../models/userRoles/User';
 
 export class UsersRouter extends BaseHttpRouter<User> {
   constructor() {

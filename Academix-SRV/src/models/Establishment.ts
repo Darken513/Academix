@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany  } from 'typeorm';
-import { User } from './User'; 
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Student } from './userRoles/Student';
+import { Teacher } from './userRoles/Teacher';
 
 @Entity('establishments')
 export class Establishment {
@@ -20,8 +21,10 @@ export class Establishment {
 
     @Column({ type: 'timestamp', nullable: true })
     last_update?: Date;
-    
-    // One establishment can have many teachers (users)
-    @OneToMany(() => User, (user) => user.establishment, { eager: false })
-    users?: User[];  // Array of users (teachers) who work at this establishment
+
+    @OneToMany(() => Student, (student) => student.establishment, { eager: false })
+    student?: Student[];
+
+    @OneToMany(() => Teacher, (teacher) => teacher.establishment, { eager: false })
+    teacher?: Teacher[];
 }

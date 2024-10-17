@@ -1,19 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Sessions } from './Sessions';
-import { User } from './User';
+import { Student } from './userRoles/Student';
 @Entity('attendance')
 export class Attendance {
 
   @PrimaryGeneratedColumn()
-  id!: number;  // primary key, auto-incremented
+  id!: number;
 
   @ManyToOne(() => Sessions, (session) => session.attendances)
-  @JoinColumn({ name: 'session_id' })  // Foreign key to the establishment
+  @JoinColumn({ name: 'session_id' })
   sessions!: Sessions;
 
-  @ManyToOne(() => User, (user) => user.attendances)
-  @JoinColumn({ name: 'user_id' })  // Foreign key to the user
-  user!: User;
+  @ManyToOne(() => Student, (student) => student.attendances)
+  @JoinColumn({ name: 'student_id' })
+  student!: Student;
 
   @Column({ type: 'varchar', length: 255 })
   status!: string;
@@ -25,7 +25,7 @@ export class Attendance {
   enabled!: boolean;
 
   @CreateDateColumn({ type: 'date' })
-  created_at?: Date; 
+  created_at?: Date;
 
   @CreateDateColumn({ type: 'date' })
   last_update?: Date;
