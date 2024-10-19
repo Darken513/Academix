@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { CoursStudent } from './CoursStudent';
 
 @Entity('studentPayments')
 export class StudentPayment {
@@ -14,4 +15,8 @@ export class StudentPayment {
 
   @CreateDateColumn({ type: 'date' })
   paid_at!: Date;  // automatically set to the date when the payment was recorded
+
+  @ManyToOne(()=>CoursStudent, (coursStudent)=>coursStudent.studentPayment)
+  @JoinColumn({name: 'cours_student_id'})
+  coursStudent?: CoursStudent;
 }

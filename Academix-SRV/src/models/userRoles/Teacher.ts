@@ -2,6 +2,8 @@ import { ChildEntity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { User } from './User';
 import { Establishment } from '../Establishment';
 import { Cours } from '../Cours';
+import { TeacherPayments } from '../TeacherPayments';
+import { TeachersSubjects } from '../TeachersSubjects';
 
 @ChildEntity('Teacher')
 export class Teacher extends User {
@@ -11,4 +13,10 @@ export class Teacher extends User {
 
     @OneToMany(() => Cours, (cours) => cours.teacher)
     courses!: Cours[];
+
+    @OneToMany(()=>TeacherPayments, (teacherpayments)=>teacherpayments.teacher)
+    teacherpayments?: TeacherPayments[];
+
+    @OneToMany(()=>TeachersSubjects, (teachersSubjects)=>teachersSubjects.teacher)
+    teachersSubjects?: TeachersSubjects[];
 }
