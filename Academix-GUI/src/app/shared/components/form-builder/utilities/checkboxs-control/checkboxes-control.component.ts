@@ -17,6 +17,9 @@ export class CheckboxesControlComponent extends BaseFormFieldComponent {
   }
   onCheckboxChange(option: string, event: any) {
     const checked = event.target.checked;
+    if (!this.value) {
+      this.value = [];
+    }
     if (checked) {
       this.value.push(option);
     } else {
@@ -25,10 +28,10 @@ export class CheckboxesControlComponent extends BaseFormFieldComponent {
         this.value.splice(index, 1);
       }
     }
-    this.valueChange.emit(this.value);
+    this.valueChange.emit({ value: this.value });
   }
 
   isChecked(option: string): boolean {
-    return this.value.includes(option);
+    return this.value && this.value.includes(option);
   }
 }

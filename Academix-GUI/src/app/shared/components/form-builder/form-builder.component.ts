@@ -6,6 +6,8 @@ import { TextAreaControlComponent } from './utilities/text-area-control/text-are
 import { CheckboxesControlComponent } from './utilities/checkboxs-control/checkboxes-control.component';
 import { RadiosControlComponent } from './utilities/radios-control/radios-control.component';
 
+
+//todo-achraf validators should be disabled if not displayed ngIf
 @Component({
   selector: 'app-form-builder',
   templateUrl: './form-builder.component.html',
@@ -14,19 +16,19 @@ import { RadiosControlComponent } from './utilities/radios-control/radios-contro
 export class FormBuilderComponent {
   @Input() entity: FormEntity = new FormEntity();
   formFields: any[] = [];
-  formData: any = {};
-  validation: any = {};
 
   @ViewChild('formFieldHost', { read: ViewContainerRef, static: true }) formFieldHost!: ViewContainerRef;
 
   constructor() {
-    this.formFields.forEach((field: any) => {
-      this.validation[field.key] = { valid: true, errorMessage: '' };
-    });
   }
 
   ngOnInit() {
-    this.formFields = FormEntity.getFormFields(this.entity);
+    this.formFields = FormEntity.getFormFields(this.entity).map((formField: any) => {
+      return {
+        formField,
+        componentRef: undefined
+      }
+    });
     this.renderFormFields();
   }
 
@@ -34,52 +36,55 @@ export class FormBuilderComponent {
     this.formFields.forEach((field: any) => {
       let componentRef;
 
-      if (field.type === 'text') {
+      if (field.formField.type === 'text') {
         componentRef = this.formFieldHost.createComponent(TextControlComponent);
-      } else if (field.type === 'textarea') {
+      } else if (field.formField.type === 'textarea') {
         componentRef = this.formFieldHost.createComponent(TextAreaControlComponent);
-      } else if (field.type === 'select') {
+      } else if (field.formField.type === 'select') {
         componentRef = this.formFieldHost.createComponent(SelectControlComponent);
-      } else if (field.type === 'checkboxes') {
+      } else if (field.formField.type === 'checkboxes') {
         componentRef = this.formFieldHost.createComponent(CheckboxesControlComponent);
-      } else if (field.type === 'radios') {
+      } else if (field.formField.type === 'radios') {
         componentRef = this.formFieldHost.createComponent(RadiosControlComponent);
       }
 
       if (componentRef) {
-        this.setupComponentInstance(componentRef, field);
+        field.componentRef = componentRef;
+        this.setupComponentInstance(field);
       }
     });
   }
 
-  setupComponentInstance(componentRef: any, field: any) {
-    componentRef.instance.label = field.label;
-    componentRef.instance.required = field.required;
-    componentRef.instance.options = field.options || [];  // Pass options to checkbox
-    componentRef.instance.value = this.formData[field.key] || [];
+  setupComponentInstance(field: any) {
+    field.componentRef.instance.label = field.formField.label;
+    field.componentRef.instance.required = field.formField.required;
+    field.componentRef.instance.options = field.formField.options || [];
+    field.componentRef.instance.value = (this.entity as any)[field.formField.key] || undefined;
+    field.componentRef.instance.displayCondition = field.formField.displayCondition || (() => { return true });
+    field.componentRef.instance.errorEmitter = field.formField.errorEmitter;
 
-    // Listen for value changes and update formData
-    componentRef.instance.valueChange.subscribe((event: any) => {
-      this.onValueChange(field.key, event);
+    field.componentRef.instance.valueChange.subscribe((event: any) => {
+      this.onValueChange(field.formField.key, event);
     });
+    field.componentRef.instance.checkVisibility();
   }
 
-  onValueChange(key: string, value: any) {
-    this.formData[key] = value;
+  onValueChange(key: string, event: any) {
+    (this.entity as any)[key] = event.value;
+    if (event.avoidCheck) {
+      return;
+    }
+    this.formFields.forEach(field => {
+      if (field.componentRef && field.componentRef.instance.displayCondition) {
+        field.componentRef.instance.checkVisibility();
+      }
+    });
   }
 
   onSubmit() {
-    const validationResults = FormEntity.validateForm(this.entity, this.formData);
-    this.formFields.forEach((field: any) => {
-      const isValid = validationResults.errors.find(err => err.includes(field.label)) === undefined;
-      if (this.validation[field.key]) {
-        this.validation[field.key].valid = isValid;
-        this.validation[field.key].errorMessage = !isValid ? 'Invalid field' : '';
-      }
-    });
-
+    const validationResults = FormEntity.validateForm(this.entity);
     if (validationResults.valid) {
-      console.log('Form is valid!', this.formData);
+      console.log('Form is valid!', this.entity);
     }
   }
 }

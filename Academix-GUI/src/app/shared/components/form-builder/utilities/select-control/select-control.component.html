@@ -1,10 +1,10 @@
-<div class="form-group">
+<div class="form-group" *ngIf="visible">
     <label [ngClass]="{ 'required': required }">{{ label }}</label>
-    <select class="form-control" [ngClass]="{ 'is-invalid': !valid }" [(ngModel)]="value"
+    <select class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [(ngModel)]="value"
         (change)="onValueChange($event)">
         <option *ngFor="let option of options" [value]="option">{{ option }}</option>
     </select>
-    <div *ngIf="!valid" class="invalid-feedback">
+    <div *ngIf="errorMessage" class="invalid-feedback">
         {{ errorMessage }}
     </div>
 </div>

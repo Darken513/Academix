@@ -1,8 +1,8 @@
-<div class="form-group">
+<div class="form-group" *ngIf="visible">
     <label [ngClass]="{ 'required': required }">{{ label }}</label>
-    <input type="text" class="form-control" [ngClass]="{ 'is-invalid': !valid }" [(ngModel)]="value"
+    <input type="text" class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [(ngModel)]="value"
         (input)="onValueChange($event)">
-    <div *ngIf="!valid" class="invalid-feedback">
+    <div *ngIf="errorMessage" class="invalid-feedback">
         {{ errorMessage }}
     </div>
 </div>

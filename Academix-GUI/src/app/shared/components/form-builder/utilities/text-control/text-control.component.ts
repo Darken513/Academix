@@ -8,7 +8,7 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
 })
 export class TextControlComponent extends BaseFormFieldComponent {
 
-  override onValueChange(event: any) {
-    this.valueChange.emit(event.target.value);
+  override onValueChange(event: any, avoidCheck?:boolean) {
+    this.valueChange.emit({ value: event && event.target && event.target.value, avoidCheck: avoidCheck});
   }
 }

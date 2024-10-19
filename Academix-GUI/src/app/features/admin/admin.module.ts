@@ -74,21 +74,20 @@ import { SharedModule } from '../../shared/shared.module';
         path: 'cours-management',
         children: [
           {
-            path: 'details/:id', component: CoursDetailsComponent, children: [
-              {
-                path: 'session',
-                children: [
-                  { path: 'details/:id', component: SessionDetailsComponent },
-                  { path: 'edit/:id', component: SessionEditionComponent },
-                  { path: 'list', component: SessionListComponent },
-                  { path: '', redirectTo: 'list' }
-                ]
-              }
+            path: 'details/:id', component: CoursDetailsComponent,
+          },
+          {
+            path: 'session',
+            children: [
+              { path: 'details/:coursId/:id', component: SessionDetailsComponent },
+              { path: 'edit/:coursId/:id', component: SessionEditionComponent },
+              { path: 'list/:coursId', component: SessionListComponent },
+              { path: '**', redirectTo: '/cours-management/list', pathMatch: 'full' }
             ]
           },
           { path: 'edit/:id', component: CoursEditionComponent },
           { path: 'list', component: CoursListComponent },
-          { path: '', redirectTo: 'list' }
+          { path: '', redirectTo: 'list', pathMatch: 'full' }
         ]
       },
       {
@@ -96,7 +95,8 @@ import { SharedModule } from '../../shared/shared.module';
         children: [
           { path: 'details/:id', component: EstablishmentDetailsComponent },
           { path: 'edit/:id', component: EstablishmentEditionComponent },
-          { path: 'list', component: EstablishmentListComponent }
+          { path: 'list', component: EstablishmentListComponent },
+          { path: '', redirectTo: 'list', pathMatch: 'full' }
         ]
       },
       {
@@ -104,7 +104,8 @@ import { SharedModule } from '../../shared/shared.module';
         children: [
           { path: 'details/:id', component: PaymentDetailsComponent },
           { path: 'edit/:id', component: PaymentEditionComponent },
-          { path: 'history', component: PaymentHistoryComponent }
+          { path: 'history', component: PaymentHistoryComponent },
+          { path: '', redirectTo: 'history', pathMatch: 'full' }
         ]
       },
       {
@@ -112,7 +113,8 @@ import { SharedModule } from '../../shared/shared.module';
         children: [
           { path: 'details/:id', component: RoomDetailsComponent },
           { path: 'edit/:id', component: RoomEditionComponent },
-          { path: 'list', component: RoomListComponent }
+          { path: 'list', component: RoomListComponent },
+          { path: '', redirectTo: 'list', pathMatch: 'full' }
         ]
       },
       {
@@ -120,7 +122,8 @@ import { SharedModule } from '../../shared/shared.module';
         children: [
           { path: 'details/:id', component: SubjectDetailsComponent },
           { path: 'edit/:id', component: SubjectEditionComponent },
-          { path: 'list', component: SubjectListComponent }
+          { path: 'list', component: SubjectListComponent },
+          { path: '', redirectTo: 'list', pathMatch: 'full' }
         ]
       },
       {
@@ -128,9 +131,11 @@ import { SharedModule } from '../../shared/shared.module';
         children: [
           { path: 'list', component: UserListComponent },
           { path: 'details/:id', component: UserDetailsComponent },
-          { path: 'edit/:id', component: UserEditionComponent }
+          { path: 'edit/:id', component: UserEditionComponent },
+          { path: '', redirectTo: 'list', pathMatch: 'full' }
         ]
-      }
+      },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ])
   ]
 })

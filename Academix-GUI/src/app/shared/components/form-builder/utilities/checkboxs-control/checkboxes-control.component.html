@@ -1,14 +1,14 @@
-<div class="form-group">
+<div class="form-group" *ngIf="visible">
     <label [ngClass]="{ 'required': required }">{{ label }}</label>
 
-    <div *ngFor="let option of options" class="form-check">
+    <div *ngFor="let option of options" class="form-check" [ngClass]="{ 'is-invalid': !!errorMessage }">
         <input type="checkbox" class="form-check-input" [name]="'checkboxes-' + label"
             [id]="'checkboxes-' + label + option" [checked]="isChecked(option)"
             (change)="onCheckboxChange(option, $event)">
         <label [for]="'checkboxes-' + label + option" class="form-check-label">{{ option }}</label>
     </div>
 
-    <div *ngIf="!valid" class="invalid-feedback">
+    <div *ngIf="errorMessage" class="invalid-feedback">
         {{ errorMessage }}
     </div>
 </div>
