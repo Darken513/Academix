@@ -1,16 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { Attendance } from './Attendance'; 
+import { Rooms } from "./Rooms";
+import { Cours } from "./Cours";
 
 @Entity("sessions")
 export class Sessions {
   @PrimaryGeneratedColumn()
   id!: number;
-
-  @Column({ type: "varchar", length: 255 })
-  cours_id!: string;
-
-  @Column({ type: "varchar", length: 255 })
-  room_id!: string;
 
   @Column({ type: "date" })
   session_date!: Date;
@@ -32,4 +28,12 @@ export class Sessions {
 
   @OneToMany(() => Attendance, (attendance) => attendance.sessions)
   attendances!: Attendance[];  // One establishment can have many attendance records
+  
+  @ManyToOne(() => Rooms, (rooms) => rooms.sessions)
+  @JoinColumn({name: 'room_id'})
+  rooms?: Rooms;
+
+  @ManyToOne(()=>Cours, (cours)=>cours.sessions)
+  @JoinColumn({name: 'cours_id'})
+  cours?: Sessions;
 }

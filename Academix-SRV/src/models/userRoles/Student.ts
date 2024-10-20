@@ -3,6 +3,7 @@ import { User } from './User';
 import { Establishment } from '../Establishment';
 import { Attendance } from '../Attendance';
 import { Parent } from './Parent';
+import { CoursStudent } from '../CoursStudent';
 
 @ChildEntity('Student')
 export class Student extends User {
@@ -19,4 +20,7 @@ export class Student extends User {
 
   @OneToMany(() => Attendance, (attendance) => attendance.student, { eager: false })
   attendances!: Attendance[];
+
+  @OneToMany(() => CoursStudent, (coursStudent) => coursStudent.student)
+  coursStudent?: CoursStudent[];
 }

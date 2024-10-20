@@ -8,6 +8,8 @@ import { StudentsPaymentRouter } from './studentsPayments.router';
 import { TeacherPaymentsRouter} from './teacherPayments.router';
 import { RoomsRouter} from './rooms.router';
 import { AttendanceRouter } from './attendance.router';
+import { TeachersSubjectsRouter } from './teachersSubjects.router';
+import { CoursStudentRouter } from './coursStudent.router';
 
 export function initializeRouters(app: Application): void {
     const usersRouter = new UsersRouter();
@@ -19,6 +21,8 @@ export function initializeRouters(app: Application): void {
     const teacherPaymentsRouter = new TeacherPaymentsRouter();
     const roomsRouter = new RoomsRouter();
     const attendanceRouter = new AttendanceRouter();
+    const teachersSubjectsRouter = new TeachersSubjectsRouter();
+    const coursStudentRouter = new CoursStudentRouter();
 
     app.use('/users', usersRouter.router);
     app.use('/subjects', subjectsRouter.router);
@@ -29,4 +33,6 @@ export function initializeRouters(app: Application): void {
     app.use('/teacherPayments', teacherPaymentsRouter.router);
     app.use('/rooms', roomsRouter.router);
     app.use('/attendance', attendanceRouter.router);
+    app.use('/teachersSubjects', teachersSubjectsRouter.router);
+    app.use('/coursStudent', coursStudentRouter.router);
 }
