@@ -4,7 +4,7 @@
     <div *ngFor="let option of options" class="form-check" [ngClass]="{ 'is-invalid': !!errorMessage }">
         <input type="checkbox" class="form-check-input" [name]="'checkboxes-' + label"
             [id]="'checkboxes-' + label + option" [checked]="isChecked(option)"
-            (change)="onCheckboxChange(option, $event)">
+            (change)="onCheckboxChange(option, $event); onBlur()">
         <label [for]="'checkboxes-' + label + option" class="form-check-label">{{ option }}</label>
     </div>
 

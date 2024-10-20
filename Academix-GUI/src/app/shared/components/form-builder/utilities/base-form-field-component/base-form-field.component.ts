@@ -10,12 +10,13 @@ export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
   @Input() displayCondition?: () => boolean;
   @Input() errorEmitter?: EventEmitter<any>;
   @Output() valueChange = new EventEmitter<any>();
+  @Output() blur = new EventEmitter<void>();
   visible: boolean = true;
   errorMessage: string = '';
 
   ngOnInit(): void {
     this.errorEmitter?.subscribe((next) => {
-      this.errorMessage = next.error ? next.error : ''; 
+      this.errorMessage = next.error ? next.error : '';
     })
   }
 
@@ -35,5 +36,9 @@ export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
 
   onValueChange(value: any, avoidCheck?: boolean) {
     this.valueChange.emit({ value: value, avoidCheck: avoidCheck });
+  }
+
+  onBlur() {
+    this.blur.emit();
   }
 }

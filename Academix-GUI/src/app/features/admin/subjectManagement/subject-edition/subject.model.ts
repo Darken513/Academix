@@ -1,8 +1,5 @@
 import { FormEntity, FormField } from "../../../../shared/components/form-builder/utilities/FormEntity";
 
-let fn = () => {
-    return true;
-};
 export class SubjectForm extends FormEntity {
     id: number | undefined;
 

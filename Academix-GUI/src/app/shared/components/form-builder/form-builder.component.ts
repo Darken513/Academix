@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormEntity } from './utilities/FormEntity';
 import { TextControlComponent } from './utilities/text-control/text-control.component';
 import { SelectControlComponent } from './utilities/select-control/select-control.component';
@@ -6,8 +6,6 @@ import { TextAreaControlComponent } from './utilities/text-area-control/text-are
 import { CheckboxesControlComponent } from './utilities/checkboxs-control/checkboxes-control.component';
 import { RadiosControlComponent } from './utilities/radios-control/radios-control.component';
 
-
-//todo-achraf validators should be disabled if not displayed ngIf
 @Component({
   selector: 'app-form-builder',
   templateUrl: './form-builder.component.html',
@@ -18,6 +16,7 @@ export class FormBuilderComponent {
   formFields: any[] = [];
 
   @ViewChild('formFieldHost', { read: ViewContainerRef, static: true }) formFieldHost!: ViewContainerRef;
+  @Output() submitEvent = new EventEmitter<any>();
 
   constructor() {
   }
@@ -66,6 +65,9 @@ export class FormBuilderComponent {
     field.componentRef.instance.valueChange.subscribe((event: any) => {
       this.onValueChange(field.formField.key, event);
     });
+    field.componentRef.instance.blur.subscribe(() => {
+      this.onFieldBlur(field.formField.key);
+    });
     field.componentRef.instance.checkVisibility();
   }
 
@@ -80,11 +82,15 @@ export class FormBuilderComponent {
       }
     });
   }
+  onFieldBlur(key: string) {
+    const fieldValue = (this.entity as any)[key];
+    FormEntity.validateField(this.entity, key, fieldValue);
+  }
 
   onSubmit() {
     const validationResults = FormEntity.validateForm(this.entity);
     if (validationResults.valid) {
-      console.log('Form is valid!', this.entity);
+      this.submitEvent.emit();
     }
   }
 }

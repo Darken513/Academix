@@ -8,5 +8,9 @@ import { SubjectForm } from './subject.model';
   styleUrl: './subject-edition.component.scss'
 })
 export class SubjectEditionComponent {
-  entity:FormEntity = new SubjectForm()
+  entity: FormEntity = new SubjectForm()
+
+  public onSubmit() {
+    console.log(this.entity);
+  }
 }

@@ -7,7 +7,6 @@ class FormEntity {
         type: 'text' | 'email' | 'select' | 'textarea' | 'checkboxes' | 'radios',
         required?: boolean,
         options?: string[],
-        relation?: string[],
         validators?: ((value: any) => { valid: boolean, errorMsg: string })[];
         displayCondition?: () => boolean
     }) {
@@ -30,22 +29,34 @@ class FormEntity {
     }
 
     // Validate fields with custom validators
-    static validateField(target: any, key: string, value: any): boolean {
-        const fields = this.getFormFields(target);
-        const field = fields.find((f: any) => f.key === key);
-        if (!field || !field.validators) return true;
-        let valid = true;
-        for (let idx = 0; idx < field.validators.length; idx++) {
-            const validator = field.validators[idx];
-            let validRes = validator(value);
-            if (!validRes.valid) {
-                field.errorEmitter.emit({
-                    error: validRes.errorMessage
-                });
-                break;
+    static validateField(entity: any, fieldKey: string, fieldValue: any): boolean {
+        const field = this.getFormFields(entity).find((f: any) => f.key === fieldKey);
+        if (!field) return true;
+        if (field.displayCondition && !field.displayCondition()) {
+            field.errorEmitter.emit({ error: false });
+            return true;
+        }
+
+        if (field.required && !hasValue(fieldValue)) {
+            field.errorEmitter.emit({
+                error: field.label + ' is required'
+            });
+            return false;
+        }
+
+        if (field.validators) {
+            for (const validator of field.validators) {
+                const validation = validator(fieldValue);
+                if (!validation.valid) {
+                    field.errorEmitter.emit({
+                        error: validation.errorMsg
+                    });
+                    return false;
+                }
             }
         }
-        return valid;
+        field.errorEmitter.emit({ error: false });
+        return true;
     }
 
     // Validate the entire form data
@@ -57,21 +68,25 @@ class FormEntity {
             if (field.displayCondition && !field.displayCondition()) {
                 return;
             }
-            //todo-achraf else if, to send valid case
             if (field.required && !hasValue(entity[field.key])) {
                 field.errorEmitter.emit({
                     error: field.label + ' is required'
                 });
                 valid = false;
             }
-            if (!this.validateField(entity, field.key, entity[field.key])) {
+            else if (!this.validateField(entity, field.key, entity[field.key])) {
                 valid = false;
             }
         });
 
         return { valid };
     }
+
+
+
 }
+
+
 
 function hasValue(val: any) {
     if (Array.isArray(val)) {
@@ -81,7 +96,7 @@ function hasValue(val: any) {
         return false;
     }
     if (typeof val === 'string') {
-        return val.trim().length !== 0; 
+        return val.trim().length !== 0;
     }
     if (typeof val === 'object') {
         return Object.keys(val).length !== 0;
@@ -89,13 +104,21 @@ function hasValue(val: any) {
     return true;
 }
 
-// The decorator method inside FormEntity
+/**
+config: {
+    @param {string} label The label for the form field, displayed in the UI
+    @param {string} type The type of form field, can be 'text', 'email', 'select', 'textarea', 'checkboxes', or 'radios'
+    @param {boolean} required Optional, Marks the field as required (optional property). If true, the field must be filled out.
+    //todo make this a list of objects, label value
+    @param {string[]} options Optional, For 'select', 'checkboxes', or 'radios' types, these are the options available to choose from.
+    @param {((value: any) => { valid: boolean, errorMsg: string })[]} validators Optional, An array of custom validator functions. Each validator returns an object with a 'valid' flag and an 'errorMsg' if the validation fails
+    @param {(() => boolean)} displayCondition Optional, A function that returns a boolean determining whether this field should be displayed.
+*/
 function FormField(config: {
     label: string,
     type: 'text' | 'email' | 'select' | 'textarea' | 'checkboxes' | 'radios',
     required?: boolean,
     options?: string[],
-    relation?: string[],
     validators?: ((value: any) => { valid: boolean, errorMsg: string })[],
     displayCondition?: (() => boolean),
 }) {

@@ -1,7 +1,7 @@
 <div class="form-group" *ngIf="visible">
     <label [ngClass]="{ 'required': required }">{{ label }}</label>
     <input type="text" class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [(ngModel)]="value"
-        (input)="onValueChange($event)">
+        (input)="onValueChange($event)" (blur)="onBlur()">
     <div *ngIf="errorMessage" class="invalid-feedback">
         {{ errorMessage }}
     </div>

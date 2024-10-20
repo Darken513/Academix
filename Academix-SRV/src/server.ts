@@ -48,47 +48,6 @@ class App {
 
       this.app.listen(this.port, () => {
         console.log(`Server started on port ${this.port}`);
-
-        async function createTeacher() {
-          // Get the repository for the Teacher entity
-          const teacherRepository = DATA_SOURCE.getRepository(Teacher);
-
-          // Create a new Teacher instance
-          let test = {
-            email: 'teacher@example.com',
-            first_name: 'John',
-            last_name: 'Doe',
-            password: 'securepassword',  // Remember to hash the password in a real scenario
-            enabled: true,
-            subject: 'Mathematics',  // Teacher-specific field
-          }
-          const newTeacher = teacherRepository.create(test);
-
-          // Save the new teacher to the database
-          await teacherRepository.save(newTeacher);
-
-          console.log('New teacher created:', newTeacher);
-        }
-
-        async function createStudent() {
-          const studentRepository = DATA_SOURCE.getRepository(Student);
-
-          let test = {
-            email: 'student@example.com',
-            first_name: 'Nejma',
-            last_name: 'Triple N',
-            password: 'securepassword',  
-            enabled: true,
-          }
-          const newTeacher = studentRepository.create(test);
-
-          // Save the new student to the database
-          await studentRepository.save(newTeacher);
-
-          console.log('New student created:', newTeacher);
-        }
-        createStudent();
-        createTeacher();
       });
     } catch (error) {
       console.error('Error starting the server:', error);

@@ -1,7 +1,7 @@
 <div class="form-group" *ngIf="visible">
     <label [ngClass]="{ 'required': required }">{{ label }}</label>
     <select class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [(ngModel)]="value"
-        (change)="onValueChange($event)">
+        (change)="onValueChange($event); onBlur()">
         <option *ngFor="let option of options" [value]="option">{{ option }}</option>
     </select>
     <div *ngIf="errorMessage" class="invalid-feedback">

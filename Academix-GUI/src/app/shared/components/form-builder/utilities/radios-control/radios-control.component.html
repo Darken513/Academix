@@ -3,7 +3,7 @@
 
     <div *ngFor="let option of options" class="form-check" [ngClass]="{ 'is-invalid': !!errorMessage }">
         <input [name]="'radios-' + label" [id]="'radios-' + label + option" type="radio" class="form-check-input" [value]="option"
-            [checked]="value === option" (change)="onValueChange(option)">
+            [checked]="value === option" (change)="onValueChange(option); onBlur()">
         <label [for]="'radios-' + label + option" class="form-check-label">{{ option }}</label>
     </div>
 
