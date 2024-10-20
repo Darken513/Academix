@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { FormEntity } from '../../../../shared/components/form-builder/utilities/FormEntity';
+import { Component, OnInit } from '@angular/core';
 import { SubjectForm } from './subject.model';
 
 @Component({
@@ -7,10 +6,16 @@ import { SubjectForm } from './subject.model';
   templateUrl: './subject-edition.component.html',
   styleUrl: './subject-edition.component.scss'
 })
-export class SubjectEditionComponent {
-  entity: FormEntity = new SubjectForm()
+export class SubjectEditionComponent implements OnInit {
+  entity: SubjectForm = new SubjectForm()
+
+  ngOnInit(): void {
+    //it should fetch the data from server or cache
+    return;
+  }
 
   public onSubmit() {
+    //it should send the data to server and save cache version if succeeded
     console.log(this.entity);
   }
 }

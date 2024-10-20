@@ -21,7 +21,7 @@ interface TableAction {
 * @param {string} type The type of data this column will display. Possible values: 'text', 'number', 'date', 'action'.
 * @param {boolean} sortable Optional flag indicating whether the column can be sorted by the user. If true, sorting functionality will be enabled for this column.
 * @param {boolean} filterable Optional flag indicating whether the column can be filtered by the user. If true, filtering functionality will be enabled for this column.
-* @param {string} width Optional width of the column. This can be specified as a string, e.g., '100px', '20%'. //todo-achraf extend this to style customization
+* @param {string} width Optional width of the column. This can be specified as a string, e.g., '100px', '20%'. //todo extend this to style customization
 * @param {TemplateRef<any>} cellTemplate Optional custom template for rendering the cell content. This allows for more complex content than a simple text display.
 */
 interface ColumnConfig {

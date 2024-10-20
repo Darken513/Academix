@@ -59,6 +59,8 @@ export class FormBuilderComponent {
     field.componentRef.instance.required = field.formField.required;
     field.componentRef.instance.options = field.formField.options || [];
     field.componentRef.instance.value = (this.entity as any)[field.formField.key] || undefined;
+    field.componentRef.instance.inputRegex = field.formField.inputRegex || undefined;
+    field.componentRef.instance.helpers = field.formField.helpers || undefined;
     field.componentRef.instance.displayCondition = field.formField.displayCondition || (() => { return true });
     field.componentRef.instance.errorEmitter = field.formField.errorEmitter;
 

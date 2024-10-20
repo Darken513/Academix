@@ -1,7 +1,14 @@
 <div class="form-group" *ngIf="visible">
-    <label [ngClass]="{ 'required': required }">{{ label }}</label>
+    <label [ngClass]="{ 'required': required }">{{ label }}</label> <button class="helperBtn"
+        *ngIf="helpers && helpers.length" type="button"><i class="fa-solid fa-circle-info"></i></button>
     <input type="text" class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [(ngModel)]="value"
         (input)="onValueChange($event)" (blur)="onBlur()">
+    <div *ngIf="helpers && helpers.length" class="form-text helpers-wrapper">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+            <small style="display: block;" *ngFor="let helper of helpers">{{ helper }}</small>
+        </div>
+    </div>
     <div *ngIf="errorMessage" class="invalid-feedback">
         {{ errorMessage }}
     </div>

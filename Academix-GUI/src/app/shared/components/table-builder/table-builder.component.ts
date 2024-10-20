@@ -38,10 +38,10 @@ export class TableBuilderComponent {
   }
 
   sortColumn(field: string) {
-    //todo-achraf : Sorting logic here
+    //todo : Sorting logic here
   }
 
   filterColumn(field: string) {
-    //todo-achraf : filtering logic here
+    //todo : filtering logic here
   }
 }

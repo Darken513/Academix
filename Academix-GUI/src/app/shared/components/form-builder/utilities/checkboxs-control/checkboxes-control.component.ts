@@ -4,7 +4,10 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
 @Component({
   selector: 'app-checkboxes-control',
   templateUrl: './checkboxes-control.component.html',
-  styleUrl: './checkboxes-control.component.scss'
+  styleUrls: [
+    '../base-form-field-component/base-form-field.component.scss',
+    './checkboxes-control.component.scss'
+  ]
 })
 export class CheckboxesControlComponent extends BaseFormFieldComponent {
   @Input() options: string[] = [];

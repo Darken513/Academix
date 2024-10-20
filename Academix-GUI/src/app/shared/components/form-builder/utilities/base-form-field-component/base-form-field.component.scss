@@ -1,0 +1,39 @@
+.form-group {
+  position: relative;
+}
+.helpers-wrapper {
+  position: absolute;
+  color: rgb(38, 193, 255);
+  background: rgb(237, 246, 255);
+  border-radius: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s, border 0.5s;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  border: 0px solid;
+  box-sizing: border-box;
+  i {
+    color: rgb(0 124 255 / 50%);
+    position: absolute;
+    top: 8px;
+    left: 5px;
+  }
+  div {
+    padding: 5px 25px;
+  }
+}
+.helperBtn {
+  padding: 0;
+  margin-left: 5px;
+  background: transparent;
+  border: none;
+  color: rgb(74 162 255);
+}
+.form-group:has(.helperBtn:focus) {
+  .helpers-wrapper {
+    border: 1px solid;
+    max-height: 100px;
+  }
+}

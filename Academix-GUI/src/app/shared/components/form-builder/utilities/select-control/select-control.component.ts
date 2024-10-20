@@ -4,7 +4,10 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
 @Component({
   selector: 'app-select-control',
   templateUrl: './select-control.component.html',
-  styleUrl: './select-control.component.scss'
+  styleUrls: [
+    '../base-form-field-component/base-form-field.component.scss',
+    './select-control.component.scss'
+  ]
 })
 export class SelectControlComponent extends BaseFormFieldComponent {
   @Input() options: string[] = [];

@@ -1,12 +1,14 @@
 import { Component, Input, Output, EventEmitter, OnChanges, OnInit } from '@angular/core';
 @Component({
   selector: 'app-base-form-field',
-  template: ''
+  template: '',
 })
 export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
   @Input() label: string = '';
   @Input() required: boolean = false;
   @Input() value: any = '';
+  @Input() inputRegex?: RegExp;
+  @Input() helpers?: string[];
   @Input() displayCondition?: () => boolean;
   @Input() errorEmitter?: EventEmitter<any>;
   @Output() valueChange = new EventEmitter<any>();
@@ -32,6 +34,12 @@ export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
         this.onValueChange(this.value, true);
       }
     }
+  }
+
+  isConformToRegex(value: string) {
+    if (!this.inputRegex)
+      return true;
+    return this.inputRegex.test(value)
   }
 
   onValueChange(value: any, avoidCheck?: boolean) {
