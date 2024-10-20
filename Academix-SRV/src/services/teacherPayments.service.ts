@@ -1,9 +1,9 @@
 import { BaseHttpService } from './basehttp.service';
-import { TeacherPayments } from '../models/TeacherPayments';
+import { TeacherPayment } from '../models/TeacherPayment';
 import { DATA_SOURCE } from '../db/dataSource';
 
-export class TeacherPaymentsService extends BaseHttpService<TeacherPayments> {
+export class TeacherPaymentsService extends BaseHttpService<TeacherPayment> {
   constructor() {
-    super(DATA_SOURCE.getRepository(TeacherPayments));
+    super(DATA_SOURCE.getRepository(TeacherPayment));
   }
 }

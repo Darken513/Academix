@@ -1,8 +1,8 @@
 import { TeacherPaymentsService } from '../services/teacherPayments.service';
 import { BaseHttpController } from './basehttp.controller';
-import { TeacherPayments } from '../models/TeacherPayments';
+import { TeacherPayment } from '../models/TeacherPayment';
 
-export class TeacherPaymentsController extends BaseHttpController<TeacherPayments> {
+export class TeacherPaymentsController extends BaseHttpController<TeacherPayment> {
   constructor() {
     const service = new TeacherPaymentsService();
     super(service);

@@ -2,8 +2,9 @@ import { ChildEntity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { User } from './User';
 import { Establishment } from '../Establishment';
 import { Cours } from '../Cours';
-import { TeacherPayments } from '../TeacherPayments';
-import { TeachersSubjects } from '../TeachersSubjects';
+import { TeacherPayment } from '../TeacherPayment';
+import { TeacherSubject } from '../TeacherSubject';
+import { CenterReferedUser } from '../centerReferedUser';
 
 @ChildEntity('Teacher')
 export class Teacher extends User {
@@ -14,9 +15,12 @@ export class Teacher extends User {
     @OneToMany(() => Cours, (cours) => cours.teacher)
     courses!: Cours[];
 
-    @OneToMany(()=>TeacherPayments, (teacherpayments)=>teacherpayments.teacher)
-    teacherpayments?: TeacherPayments[];
+    @OneToMany(()=>TeacherPayment, (teacherpayment)=>teacherpayment.teacher)
+    teacherpayments?: TeacherPayment[];
 
-    @OneToMany(()=>TeachersSubjects, (teachersSubjects)=>teachersSubjects.teacher)
-    teachersSubjects?: TeachersSubjects[];
+    @OneToMany(()=>TeacherSubject, (teachersSubjects)=>teachersSubjects.teacher)
+    teachersSubjects?: TeacherSubject[];
+
+    @OneToMany(()=>CenterReferedUser, (centerRefereduser)=>centerRefereduser.teacher)
+    centerReferedUsers?: CenterReferedUser[];
 }

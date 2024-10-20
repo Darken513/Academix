@@ -7,9 +7,6 @@ export class StudentPayment {
   @PrimaryGeneratedColumn()
   id!: number;  // primary key, auto-incremented
 
-  @Column()
-  cours_student_id!: number;  // foreign key to course_student entity (assuming)
-
   @Column({ type: 'integer' })
   amount!: number;  // the amount paid
 

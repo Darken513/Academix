@@ -1,8 +1,8 @@
 import { TeacherPaymentsController } from '../controllers/teacherPayments.controller';
 import { BaseHttpRouter } from './basehttp.router';
-import { TeacherPayments } from '../models/TeacherPayments';
+import { TeacherPayment } from '../models/TeacherPayment';
 
-export class TeacherPaymentsRouter extends BaseHttpRouter<TeacherPayments> {
+export class TeacherPaymentsRouter extends BaseHttpRouter<TeacherPayment> {
   constructor() {
     const controller = new TeacherPaymentsController();
     super(controller);

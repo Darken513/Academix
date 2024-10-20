@@ -3,7 +3,7 @@ import { Teacher } from './userRoles/Teacher';
 import { Subject } from './Subject';
 
 @Entity('teachersSubjects')
-export class TeachersSubjects {
+export class TeacherSubject {
 
   @PrimaryGeneratedColumn()
   id!: number;  

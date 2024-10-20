@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { Sessions } from './Sessions';
+import { Session } from './Session';
 import { Student } from './userRoles/Student';
-@Entity('attendance')
+@Entity('attendances')
 export class Attendance {
 
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Sessions, (session) => session.attendances)
+  @ManyToOne(() => Session, (session) => session.attendances)
   @JoinColumn({ name: 'session_id' })
-  sessions!: Sessions;
+  sessions!: Session;
 
   @ManyToOne(() => Student, (student) => student.attendances)
   @JoinColumn({ name: 'student_id' })

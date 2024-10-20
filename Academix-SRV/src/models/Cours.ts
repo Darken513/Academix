@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Subject } from './Subject';
 import { Teacher } from './userRoles/Teacher';
-import { Session } from 'node:inspector/promises';
-import { Sessions } from './Sessions';
+import { Session } from './Session';
 import { CoursStudent } from './CoursStudent';
+import { CenterReferedUser } from './centerReferedUser';
 
 @Entity('courses')
 export class Cours {
@@ -49,9 +49,12 @@ export class Cours {
   @Column({ type: 'date', nullable: true })
   last_update!: Date;
 
-  @OneToMany(()=>Sessions, (sessions)=>sessions.cours)
-  sessions?: Sessions[];
+  @OneToMany(()=>Session, (session)=>session.cours)
+  sessions?: Session[];
 
   @OneToMany(()=>CoursStudent, (coursStudent)=>coursStudent.cours)
   coursStudent?: CoursStudent[];
+
+  @OneToMany(()=>CenterReferedUser, (centerRefereduser)=>centerRefereduser.cours)
+  centerReferedUsers?: CenterReferedUser[];
 }

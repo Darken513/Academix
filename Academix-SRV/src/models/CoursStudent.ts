@@ -4,7 +4,7 @@ import { Cours } from './Cours';
 import { Student } from './userRoles/Student';
 import { StudentPayment } from './StudentPayment';
 
-@Entity('coursStudent')
+@Entity('coursStudents')
 export class CoursStudent {
     @PrimaryGeneratedColumn()
     id!: number;

@@ -1,9 +1,9 @@
 import { BaseHttpService } from './basehttp.service';
-import { Sessions } from '../models/Sessions';
+import { Session } from '../models/Session';
 import { DATA_SOURCE } from '../db/dataSource';
 
-export class SessionsService extends BaseHttpService<Sessions> {
+export class SessionsService extends BaseHttpService<Session> {
   constructor() {
-    super(DATA_SOURCE.getRepository(Sessions));
+    super(DATA_SOURCE.getRepository(Session));
   }
 }

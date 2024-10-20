@@ -113,7 +113,7 @@ config: {
     @param {boolean} required Optional, Marks the field as required (optional property). If true, the field must be filled out.
     @param {RegExp} inputRegex Optional, A regular expression for the field's value. If provided, the input will only match the inputRegex pattern.
     @param {string[]} helpers Optional. An array of strings that provide examples or descriptions to help the user understand what input is expected for this field.
-    //todo make this a list of objects, label value
+    //todo-achraf make this a list of objects, label value
     @param {string[]} options Optional, For 'select', 'checkboxes', or 'radios' types, these are the options available to choose from.
     @param {((value: any) => { valid: boolean, errorMsg: string })[]} validators Optional, An array of custom validator functions. Each validator returns an object with a 'valid' flag and an 'errorMsg' if the validation fails.
     @param {(() => boolean)} displayCondition Optional, A function that returns a boolean determining whether this field should be displayed.

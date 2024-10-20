@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, Jo
 import { Teacher } from './userRoles/Teacher';
 
 @Entity('teacherPayments')
-export class TeacherPayments {
+export class TeacherPayment {
 
   @PrimaryGeneratedColumn()
   id!: number;  // primary key, auto-incremented

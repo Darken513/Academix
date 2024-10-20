@@ -1,8 +1,8 @@
 import { SessionsController } from '../controllers/sessions.controller';
 import { BaseHttpRouter } from './basehttp.router';
-import { Sessions } from '../models/Sessions';
+import { Session } from '../models/Session';
 
-export class SessionsRouter extends BaseHttpRouter<Sessions> {
+export class SessionsRouter extends BaseHttpRouter<Session> {
   constructor() {
     const controller = new SessionsController();
     super(controller);

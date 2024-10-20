@@ -1,10 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { Attendance } from './Attendance'; 
-import { Rooms } from "./Rooms";
+import { Rooms } from "./Room";
 import { Cours } from "./Cours";
 
 @Entity("sessions")
-export class Sessions {
+export class Session {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -35,5 +35,5 @@ export class Sessions {
 
   @ManyToOne(()=>Cours, (cours)=>cours.sessions)
   @JoinColumn({name: 'cours_id'})
-  cours?: Sessions;
+  cours?: Session;
 }
