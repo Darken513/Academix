@@ -13,7 +13,9 @@ export class SubjectForm extends FormEntity {
         inputRegex: /^\d{1,4}$/,
         helpers: [
             'this field takes only numbers as input',
-            'it expects a number from 0 to 9999'
+            'it expects a number from 0 to 9999',
+            '../../../../shared/components/form-builder/utilities/FormEntity',
+            '@ManyToOne(() => Cours, (cours) => cours.centerReferedUsers)',
         ],
     })
     name: string = '';

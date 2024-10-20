@@ -1,5 +1,5 @@
 <div class="form-group" *ngIf="visible">
-    <label [ngClass]="{ 'required': required }">{{ label }}</label> <button class="helperBtn"
+    <label [ngClass]="{ 'required': required }">{{ label }}</label> <button tabindex="-1" class="helperBtn"
         *ngIf="helpers && helpers.length" type="button"><i class="fa-solid fa-circle-info"></i></button>
     <textarea class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [(ngModel)]="value"
         (input)="onValueChange($event)" (blur)="onBlur()"></textarea>
