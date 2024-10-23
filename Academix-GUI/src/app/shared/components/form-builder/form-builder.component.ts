@@ -6,6 +6,7 @@ import { TextAreaControlComponent } from './utilities/text-area-control/text-are
 import { CheckboxesControlComponent } from './utilities/checkboxs-control/checkboxes-control.component';
 import { RadiosControlComponent } from './utilities/radios-control/radios-control.component';
 import { AutoCompleteControlComponent } from './utilities/auto-complete-control/auto-complete-control.component';
+import { CalendarControlComponent } from './utilities/calendar-control/calendar-control.component';
 
 @Component({
   selector: 'app-form-builder',
@@ -42,6 +43,8 @@ export class FormBuilderComponent {
         componentRef = this.formFieldHost.createComponent(TextAreaControlComponent);
       } else if (field.formField.type === 'autocomplete') {
         componentRef = this.formFieldHost.createComponent(AutoCompleteControlComponent);
+      } else if (field.formField.type === 'calendar') {
+        componentRef = this.formFieldHost.createComponent(CalendarControlComponent);
       } else if (field.formField.type === 'select') {
         componentRef = this.formFieldHost.createComponent(SelectControlComponent);
       } else if (field.formField.type === 'checkboxes') {
@@ -62,6 +65,7 @@ export class FormBuilderComponent {
     field.componentRef.instance.required = field.formField.required;
     field.componentRef.instance.options = field.formField.options || [];
     field.componentRef.instance.fetchOptionsFrom = field.formField.fetchOptionsFrom || undefined;
+    field.componentRef.instance.params = field.formField.params || undefined;
     field.componentRef.instance.value = (this.entity as any)[field.formField.key] || undefined;
     field.componentRef.instance.inputRegex = field.formField.inputRegex || undefined;
     field.componentRef.instance.helpers = field.formField.helpers || undefined;

@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 @Component({
   selector: 'app-base-form-field',
   template: '',
@@ -11,6 +10,7 @@ export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
   @Input() value: any = '';
   @Input() options?: string[];
   @Input() fetchOptionsFrom?: string;
+  @Input() params?: any;
   @Input() inputRegex?: RegExp;
   @Input() helpers?: string[];
   @Input() displayCondition?: () => boolean;

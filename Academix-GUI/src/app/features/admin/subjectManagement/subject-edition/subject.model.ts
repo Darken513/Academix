@@ -52,7 +52,17 @@ export class SubjectForm extends FormEntity {
             'this field takes only letters as input',
         ],
     })
-    newField_autocomplete: any;
+    autocompleteField: any;
+
+    @FormField({
+        label: 'autocomplete Options',
+        type: 'calendar',
+        required: true,
+        helpers: [
+            'this field takes only letters as input',
+        ],
+    })
+    calendarField: any;
 
     @FormField({
         label: 'Radio Options',
