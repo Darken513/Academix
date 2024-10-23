@@ -5,6 +5,7 @@ import { SelectControlComponent } from './utilities/select-control/select-contro
 import { TextAreaControlComponent } from './utilities/text-area-control/text-area-control.component';
 import { CheckboxesControlComponent } from './utilities/checkboxs-control/checkboxes-control.component';
 import { RadiosControlComponent } from './utilities/radios-control/radios-control.component';
+import { AutoCompleteControlComponent } from './utilities/auto-complete-control/auto-complete-control.component';
 
 @Component({
   selector: 'app-form-builder',
@@ -39,6 +40,8 @@ export class FormBuilderComponent {
         componentRef = this.formFieldHost.createComponent(TextControlComponent);
       } else if (field.formField.type === 'textarea') {
         componentRef = this.formFieldHost.createComponent(TextAreaControlComponent);
+      } else if (field.formField.type === 'autocomplete') {
+        componentRef = this.formFieldHost.createComponent(AutoCompleteControlComponent);
       } else if (field.formField.type === 'select') {
         componentRef = this.formFieldHost.createComponent(SelectControlComponent);
       } else if (field.formField.type === 'checkboxes') {

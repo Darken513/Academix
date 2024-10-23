@@ -1,0 +1,18 @@
+<div class="form-group" *ngIf="visible">
+    <label [ngClass]="{ 'required': required }">{{ label }}</label>
+    <button tabindex="-1" class="helperBtn" *ngIf="helpers && helpers.length" type="button">
+        <i class="fa-solid fa-circle-info"></i>
+    </button>
+    <p-autoComplete class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [(ngModel)]="value"
+        [suggestions]="filteredOptions" (onKeyUp)="onValueChange($event)" (onSelect)="onValueSelect($event)"
+        (onBlur)="onBlur()" (completeMethod)="filterOptions($event)" />
+    <div *ngIf="helpers && helpers.length" class="form-text helpers-wrapper">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+            <small style="display: block;" *ngFor="let helper of helpers">{{ helper }}</small>
+        </div>
+    </div>
+    <div *ngIf="errorMessage" class="invalid-feedback">
+        {{ errorMessage }}
+    </div>
+</div>

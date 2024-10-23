@@ -44,6 +44,17 @@ export class SubjectForm extends FormEntity {
     checkboxOptions: any;
 
     @FormField({
+        label: 'autocomplete Options',
+        type: 'autocomplete',
+        required: true,
+        options: ['value 1', 'value 2', 'val 3'],
+        helpers: [
+            'this field takes only letters as input',
+        ],
+    })
+    newField_autocomplete: any;
+
+    @FormField({
         label: 'Radio Options',
         type: 'radios',
         required: true,

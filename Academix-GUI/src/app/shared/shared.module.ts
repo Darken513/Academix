@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { DashboardBuilderComponent } from './components/dashboard-builder/dashboard-builder.component';
 import { DetailsBuilderComponent } from './components/details-builder/details-builder.component';
 import { FormBuilderComponent } from './components/form-builder/form-builder.component';
@@ -12,7 +13,8 @@ import { SelectControlComponent } from './components/form-builder/utilities/sele
 import { RadiosControlComponent } from './components/form-builder/utilities/radios-control/radios-control.component';
 import { TextAreaControlComponent } from './components/form-builder/utilities/text-area-control/text-area-control.component';
 import { CheckboxesControlComponent } from './components/form-builder/utilities/checkboxs-control/checkboxes-control.component';
-
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { AutoCompleteControlComponent } from './components/form-builder/utilities/auto-complete-control/auto-complete-control.component';
 @NgModule({
   declarations: [
     DashboardBuilderComponent,
@@ -24,12 +26,14 @@ import { CheckboxesControlComponent } from './components/form-builder/utilities/
     SelectControlComponent,
     RadiosControlComponent,
     TextAreaControlComponent,
-    CheckboxesControlComponent
+    CheckboxesControlComponent,
+    AutoCompleteControlComponent
   ],
   imports: [
     ReactiveFormsModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    AutoCompleteModule,
   ],
   providers: [
     AuthService

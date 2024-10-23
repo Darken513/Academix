@@ -4,7 +4,7 @@ import 'reflect-metadata';
 class FormEntity {
     static addFormField(target: any, key: string, config: {
         label: string,
-        type: 'text' | 'select' | 'textarea' | 'checkboxes' | 'radios',
+        type: 'text' | 'select' | 'autocomplete' | 'textarea' | 'checkboxes' | 'radios',
         required?: boolean,
         inputRegex?: RegExp,
         helpers?: string[],
@@ -123,7 +123,7 @@ config: {
 */
 function FormField(config: {
     label: string,
-    type: 'text' | 'select' | 'textarea' | 'checkboxes' | 'radios',
+    type: 'text' | 'select' | 'autocomplete' | 'textarea' | 'checkboxes' | 'radios',
     required?: boolean,
     inputRegex?: RegExp,
     helpers?: string[],
