@@ -10,6 +10,8 @@ export class SubjectEditionComponent implements OnInit {
   entity: SubjectForm = new SubjectForm()
 
   ngOnInit(): void {
+    console.log(this.entity);
+    this.entity.parseJSON({ name: 'achraf', description: 'Hello world', radioOptions: 'first value', checkboxOptions: ['second value'] })
     //it should fetch the data from server or cache
     return;
   }

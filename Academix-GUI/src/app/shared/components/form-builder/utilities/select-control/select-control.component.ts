@@ -10,7 +10,6 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   ]
 })
 export class SelectControlComponent extends BaseFormFieldComponent {
-  @Input() options: string[] = [];
 
   override onValueChange(event: any, avoidCheck?:boolean) {
     this.valueChange.emit({ value: event && event.target && event.target.value, avoidCheck: avoidCheck});

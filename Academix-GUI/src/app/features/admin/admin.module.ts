@@ -130,8 +130,8 @@ import { SharedModule } from '../../shared/shared.module';
         path: 'user-management',
         children: [
           { path: 'list', component: UserListComponent },
-          { path: 'details/:id', component: UserDetailsComponent },
           { path: 'edit/:id', component: UserEditionComponent },
+          { path: 'details/:id', component: UserDetailsComponent },
           { path: '', redirectTo: 'list', pathMatch: 'full' }
         ]
       },

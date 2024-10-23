@@ -10,5 +10,4 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   ]
 })
 export class RadiosControlComponent extends BaseFormFieldComponent {
-  @Input() options: string[] = [];
 }

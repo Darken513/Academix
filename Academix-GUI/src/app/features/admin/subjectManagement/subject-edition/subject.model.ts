@@ -39,6 +39,7 @@ export class SubjectForm extends FormEntity {
         type: 'checkboxes',
         required: true,
         options: ['first value', 'second value', 'third value'],
+        fetchOptionsFrom: 'routeHere'
     })
     checkboxOptions: any;
 

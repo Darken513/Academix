@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnChanges, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-base-form-field',
   template: '',
@@ -7,6 +9,8 @@ export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
   @Input() label: string = '';
   @Input() required: boolean = false;
   @Input() value: any = '';
+  @Input() options?: string[];
+  @Input() fetchOptionsFrom?: string;
   @Input() inputRegex?: RegExp;
   @Input() helpers?: string[];
   @Input() displayCondition?: () => boolean;
@@ -16,10 +20,20 @@ export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
   visible: boolean = true;
   errorMessage: string = '';
 
+  constructor(private http: HttpClient) {
+  }
+
   ngOnInit(): void {
     this.errorEmitter?.subscribe((next) => {
       this.errorMessage = next.error ? next.error : '';
     })
+    if (this.fetchOptionsFrom) {
+      this.http.get<any>(this.fetchOptionsFrom).subscribe({
+        next: (next) => {
+          this.options = next;
+        }
+      });
+    }
   }
 
   ngOnChanges() {

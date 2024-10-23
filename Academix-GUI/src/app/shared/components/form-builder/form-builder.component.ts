@@ -58,6 +58,7 @@ export class FormBuilderComponent {
     field.componentRef.instance.label = field.formField.label;
     field.componentRef.instance.required = field.formField.required;
     field.componentRef.instance.options = field.formField.options || [];
+    field.componentRef.instance.fetchOptionsFrom = field.formField.fetchOptionsFrom || undefined;
     field.componentRef.instance.value = (this.entity as any)[field.formField.key] || undefined;
     field.componentRef.instance.inputRegex = field.formField.inputRegex || undefined;
     field.componentRef.instance.helpers = field.formField.helpers || undefined;
