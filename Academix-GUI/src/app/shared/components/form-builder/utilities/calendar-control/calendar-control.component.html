@@ -4,12 +4,7 @@
         <i class="fa-solid fa-circle-info"></i>
     </button>
     <p-calendar class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [(ngModel)]="value"
-        [iconDisplay]="'input'" [showIcon]="true" [timeOnly]="true" inputId="templatedisplay"
-        (ngModelChange)="onValueChange($event)"
-        (onBlur)="onBlur()">
-        <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
-            <i class="pi pi-user pointer-events-none" (click)="clickCallBack($event)"></i>
-        </ng-template>
+        [timeOnly]="params && params.timeOnly" (ngModelChange)="onValueChange($event)" (onBlur)="onBlur()">
     </p-calendar>
     <div *ngIf="helpers && helpers.length" class="form-text helpers-wrapper">
         <i class="fa-solid fa-circle-info"></i>

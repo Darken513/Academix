@@ -10,15 +10,28 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   ]
 })
 export class CalendarControlComponent extends BaseFormFieldComponent {
-  override onValueChange(event: any, avoidCheck?:boolean) {
-    console.log(event);
-    let hasValue = event && event.target && typeof event.target.value == "string";
-    if (!hasValue)
+  /*
+  params could contain the following :
+  timeOnly:boolean
+  */
+
+  override onValueChange(event: any, avoidCheck?: boolean) {
+    if (!event)
       return;
-    this.valueChange.emit({ value: event.target.value, avoidCheck: avoidCheck });
-  }
-  onValueSelect(event: any) {
-    console.log('onValueSelect');
-    this.valueChange.emit({ value: event.value, avoidCheck: false });
+    let toret = event;
+    if (this.params && this.params.timeOnly) {
+      const date = new Date(event);
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      toret = `${hours}:${minutes}`;
+    } else {
+      const date = new Date(event);
+      toret = date.toLocaleDateString('fr-FR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      });
+    }
+    this.valueChange.emit({ value: toret, avoidCheck: avoidCheck });
   }
 }

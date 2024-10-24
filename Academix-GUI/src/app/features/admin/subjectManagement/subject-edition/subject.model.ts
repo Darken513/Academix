@@ -20,6 +20,17 @@ export class SubjectForm extends FormEntity {
     })
     name: string = '';
 
+    
+    @FormField({
+        label: 'Subject Name',
+        type: 'text',
+        params:{
+            type: 'password'
+        },
+        required: true,
+    })
+    password: string = '';
+
     @FormField({ label: 'lehna hedha test Name', type: 'text', required: true })
     test: string = '';
 
@@ -55,8 +66,11 @@ export class SubjectForm extends FormEntity {
     autocompleteField: any;
 
     @FormField({
-        label: 'autocomplete Options',
+        label: 'calendar field',
         type: 'calendar',
+        params:{
+            timeOnly:true
+        },
         required: true,
         helpers: [
             'this field takes only letters as input',
