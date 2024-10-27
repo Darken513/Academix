@@ -14,16 +14,16 @@ export class AttendanceService extends BaseHttpService<Attendance> {
     const studentRepository: Repository<Student> = DATA_SOURCE.getRepository(Student);
     const sessionRepository: Repository<Session> = DATA_SOURCE.getRepository(Session);
 
-    // Fetch the Student and Session entities based on provided IDs
     const student = await studentRepository.findOne({ where: { id: (data as any).student_id } });
     const session = await sessionRepository.findOne({ where: { id: (data as any).session_id } });
-
+    
     if (!student) {
-      console.log('Student not found')
       throw new Error('Student not found');
     }
     if (!session) {
-      console.log('Session not found')
+      throw new Error('Session not found');
+    }
+    if (!session) {
       throw new Error('Session not found');
     }
 
