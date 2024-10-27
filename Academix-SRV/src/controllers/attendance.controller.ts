@@ -35,7 +35,6 @@ export class AttendanceController extends BaseHttpController<Attendance> {
       console.log("Student ID:", studentId);
       return res.status(400).json({ message: "Invalid student ID" });
     }
-
     try {
       const attendanceRecords = await (this.service as AttendanceService).getAllByStudent(studentId);
       if (attendanceRecords.length === 0) {
@@ -43,6 +42,7 @@ export class AttendanceController extends BaseHttpController<Attendance> {
       }
       return res.status(200).json(attendanceRecords);
     } catch (error) {
+      console.log(error)
       console.log("Student ID:", studentId);
       return res.status(500).json({ message: "An error occurred while fetching attendance", error });
     }

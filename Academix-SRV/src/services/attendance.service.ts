@@ -27,7 +27,6 @@ export class AttendanceService extends BaseHttpService<Attendance> {
       throw new Error('Session not found');
     }
 
-    // Create the Attendance entity and set relationships
     const attendance = this.repository.create({
       ...data,
       student: student,
@@ -47,7 +46,7 @@ export class AttendanceService extends BaseHttpService<Attendance> {
 
   async getAllByStudent(studentId: number): Promise<Attendance[]> {
     return this.repository.find({
-      where: { student: { id: studentId }},
+      where: { student: { id: studentId } },
       relations: ['student'],
     });
   }
