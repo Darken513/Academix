@@ -23,9 +23,6 @@ export class AttendanceService extends BaseHttpService<Attendance> {
     if (!session) {
       throw new Error('Session not found');
     }
-    if (!session) {
-      throw new Error('Session not found');
-    }
 
     const attendance = this.repository.create({
       ...data,
@@ -33,7 +30,6 @@ export class AttendanceService extends BaseHttpService<Attendance> {
       session: session,
     });
 
-    // Save and return the entity
     return await this.repository.save(attendance);
   }
 
