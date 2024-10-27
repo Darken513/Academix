@@ -4,8 +4,6 @@ import { Attendance } from '../models/Attendance';
 import { Request, Response } from 'express';
 
 export class AttendanceController extends BaseHttpController<Attendance> {
-  private attendanceService!: AttendanceService;
-  
   constructor() {
     const service = new AttendanceService();
     super(service);
@@ -18,16 +16,26 @@ export class AttendanceController extends BaseHttpController<Attendance> {
       console.log("Student ID:", studentId);
       return res.status(400).json({ message: "Invalid student ID" });
     }
-
     try {
-      const attendanceRecords = await this.attendanceService.getAttendanceByStudent(studentId);
+      const attendanceRecords = await (this.service as AttendanceService).getAttendanceByStudent(studentId);
       if (attendanceRecords.length === 0) {
         return res.status(404).json({ message: "No attendance records found for this student" });
       }
       return res.status(200).json(attendanceRecords);
     } catch (error) {
+      console.log(error)
       console.log("Student ID:", studentId);
       return res.status(500).json({ message: "An error occurred while fetching attendance", error });
+    }
+  }
+
+  async createAttendance(req: Request, res: Response): Promise<void> {
+    try {
+      const def = await (this.service as AttendanceService).createAttendance(req.body);
+      res.json({ new: def });
+    } catch (error) {
+      console.error('Error adding document:', error);
+      res.status(500).json({ done: false });
     }
   }
 }

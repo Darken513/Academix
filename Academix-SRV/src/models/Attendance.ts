@@ -21,12 +21,12 @@ export class Attendance {
   @Column({ type: 'varchar', length: 255 })
   notes!: string;
 
-  @Column({ type: 'boolean' })
-  enabled!: boolean;
+  @Column({ type: 'boolean', default: true })
+  enabled?: boolean;
 
-  @CreateDateColumn({ type: 'date' })
-  created_at?: Date;
-
-  @CreateDateColumn({ type: 'date' })
+  @Column({ type: 'timestamp', nullable: true })
   last_update?: Date;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  created_at?: Date;
 }

@@ -10,6 +10,7 @@ export class AttendanceRouter extends BaseHttpRouter<Attendance> {
 
     // Define route: /attendance/student?studentId=123
     this.router.get('/student/:studentId', (req, res) => controller.getAttendanceByStudent(req, res));
+    this.router.post('/createAttendance', (req, res) => controller.createAttendance(req, res));
     
   }
 }
