@@ -13,9 +13,9 @@ export class AttendanceController extends BaseHttpController<Attendance> {
 
   // New method to get attendance by student ID
   async getAttendanceByStudent(req: Request, res: Response) {
-    const studentId = parseInt(req.query.studentId as string, 10);
-    console.log(studentId);
+    const studentId = parseInt(req.params.studentId as string, 10);
     if (isNaN(studentId)) {
+      console.log("Student ID:", studentId);
       return res.status(400).json({ message: "Invalid student ID" });
     }
 
@@ -26,6 +26,7 @@ export class AttendanceController extends BaseHttpController<Attendance> {
       }
       return res.status(200).json(attendanceRecords);
     } catch (error) {
+      console.log("Student ID:", studentId);
       return res.status(500).json({ message: "An error occurred while fetching attendance", error });
     }
   }

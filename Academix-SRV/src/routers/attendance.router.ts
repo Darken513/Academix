@@ -8,15 +8,8 @@ export class AttendanceRouter extends BaseHttpRouter<Attendance> {
     const controller = new AttendanceController();
     super(controller);
 
-    // Add custom route for getting attendance by student ID
-    const router = Router();
-
     // Define route: /attendance/student?studentId=123
-    router.get('/attendance/student', (req, res) => controller.getAttendanceByStudent(req, res));
+    this.router.get('/student/:studentId', (req, res) => controller.getAttendanceByStudent(req, res));
     
-    // Register this custom router along with BaseHttpRouter routes
-    this.router.use(router);
-
-    console.log();
   }
 }
