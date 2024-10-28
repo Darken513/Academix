@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  Timestamp,
-  OneToMany,
-} from "typeorm";
+import {Entity,PrimaryGeneratedColumn,Column,CreateDateColumn,Timestamp,OneToMany,} from "typeorm";
 import { Cours } from "./Cours";
 import { TeacherSubject } from "./TeacherSubject";
 
