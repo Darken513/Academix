@@ -14,6 +14,7 @@ import { TeachersRouter } from './teachers.router';
 import { ParentsRouter } from './parents.router';
 import { AdminsRouter } from './admins.router';
 import { StudentsRouter } from './students.router';
+import { CenterReferedUserRouter } from './centerReferedUser.router';
 
 export function initializeRouters(app: Application): void {
     const usersRouter = new UsersRouter();
@@ -31,6 +32,7 @@ export function initializeRouters(app: Application): void {
     const attendanceRouter = new AttendanceRouter();
     const teachersSubjectsRouter = new TeachersSubjectsRouter();
     const coursStudentRouter = new CoursStudentRouter();
+    const centerReferedUserRouter = new CenterReferedUserRouter();
 
     app.use('/users', usersRouter.router);
     app.use('/teachers', teachersRouter.router);
@@ -47,4 +49,5 @@ export function initializeRouters(app: Application): void {
     app.use('/attendance', attendanceRouter.router);
     app.use('/teachersSubjects', teachersSubjectsRouter.router);
     app.use('/coursStudent', coursStudentRouter.router);
+    app.use('/centerReferedUser', centerReferedUserRouter.router);
 }
