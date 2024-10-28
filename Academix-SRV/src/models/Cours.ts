@@ -43,8 +43,8 @@ export class Cours {
   @Column({ type: 'boolean' })
   enabled!: boolean;
 
-  @CreateDateColumn({ type: 'date' })
-  created_at!: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  created_at?: Date;
 
   @Column({ type: 'date', nullable: true })
   last_update!: Date;

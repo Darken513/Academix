@@ -15,7 +15,7 @@ export class CoursStudent {
     @Column({ type: 'boolean', default: true, nullable: true })
     enabled?: boolean;
 
-    @CreateDateColumn({ type: 'timestamp', nullable: true })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at?: Date;
 
     @CreateDateColumn({ type: 'timestamp', nullable: true })

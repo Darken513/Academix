@@ -3,8 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import { initializeRouters } from './routers/routersInitializer';
 import { DATA_SOURCE } from './db/dataSource';
-import { Teacher } from './models/userRoles/Teacher';
-import { Student } from './models/userRoles/Student';
+import { createFakeDB } from './db/fakeDB';
 
 class App {
   public app: express.Application;
@@ -45,6 +44,7 @@ class App {
   public async start(): Promise<void> {
     try {
       await DATA_SOURCE.initialize();
+      createFakeDB().catch(error => console.error(error));
 
       this.app.listen(this.port, () => {
         console.log(`Server started on port ${this.port}`);

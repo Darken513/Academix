@@ -24,9 +24,6 @@ export class Subject {
   enabled!: boolean;
 
   @CreateDateColumn({ type: "timestamp" })
-  created_at!: Date;
-
-  @CreateDateColumn({ type: "timestamp" })
   last_update!: Date;
 
   @OneToMany(() => Cours, (cours) => cours.subject)

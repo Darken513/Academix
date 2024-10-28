@@ -16,7 +16,7 @@ export class Establishment {
     @Column({ type: 'boolean', default: true, nullable: true })
     enabled?: boolean;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at?: Date;
 
     @Column({ type: 'timestamp', nullable: true })

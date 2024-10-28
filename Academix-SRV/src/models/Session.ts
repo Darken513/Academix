@@ -20,7 +20,7 @@ export class Session {
   @Column({ type: "boolean", default: true, nullable: true })
   enabled?: boolean;
 
-  @Column({ type: "timestamp", nullable: true })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at?: Date;
 
   @Column({ type: "timestamp", nullable: true })
@@ -29,11 +29,11 @@ export class Session {
   @OneToMany(() => Attendance, (attendance) => attendance.sessions)
   attendances!: Attendance[];  // One establishment can have many attendance records
   
-  @ManyToOne(() => Rooms, (rooms) => rooms.sessions)
+  @ManyToOne(() => Rooms, (rooms) => rooms.sessions, { nullable: false })
   @JoinColumn({name: 'room_id'})
   rooms?: Rooms;
 
-  @ManyToOne(()=>Cours, (cours)=>cours.sessions)
+  @ManyToOne(()=>Cours, (cours)=>cours.sessions, { nullable: false })
   @JoinColumn({name: 'cours_id'})
-  cours?: Session;
+  cours?: Cours;
 }

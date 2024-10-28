@@ -7,11 +7,11 @@ export class Attendance {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Session, (session) => session.attendances)
+  @ManyToOne(() => Session, (session) => session.attendances, { nullable: false })
   @JoinColumn({ name: 'session_id' })
   sessions!: Session;
 
-  @ManyToOne(() => Student, (student) => student.attendances)
+  @ManyToOne(() => Student, (student) => student.attendances, { nullable: false })
   @JoinColumn({ name: 'student_id' })
   student!: Student;
 
@@ -24,7 +24,7 @@ export class Attendance {
   @Column({ type: 'boolean' })
   enabled!: boolean;
 
-  @CreateDateColumn({ type: 'date' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at?: Date;
 
   @CreateDateColumn({ type: 'date' })
