@@ -6,5 +6,7 @@ export class AttendanceRouter extends BaseHttpRouter<Attendance> {
   constructor() {
     const controller = new AttendanceController();
     super(controller);
+    this.router.get('/getAllByStudent/:studentId', (req, res) => controller.getAllByStudent(req, res));
+    this.router.get('/:studentId/:sessionId', (req, res) => controller.getByStudentAndSession(req, res));
   }
 }
