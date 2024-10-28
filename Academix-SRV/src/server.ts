@@ -45,7 +45,7 @@ class App {
     try {
       await DATA_SOURCE.initialize();
       createFakeDB().catch(error => console.error(error));
-
+     
       this.app.listen(this.port, () => {
         console.log(`Server started on port ${this.port}`);
       });

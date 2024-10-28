@@ -15,7 +15,7 @@ export class User {
   @Column({ type: 'varchar', length: 20, nullable: true })
   phone_number?: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   password!: string;
 
   //this was added to separate two users that has same name same family name and 0 other infos
