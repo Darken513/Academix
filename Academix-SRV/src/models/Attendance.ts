@@ -9,7 +9,7 @@ export class Attendance {
 
   @ManyToOne(() => Session, (session) => session.attendances, { nullable: false })
   @JoinColumn({ name: 'session_id' })
-  sessions!: Session;
+  session!: Session;
 
   @ManyToOne(() => Student, (student) => student.attendances, { nullable: false })
   @JoinColumn({ name: 'student_id' })

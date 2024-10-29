@@ -23,8 +23,8 @@ export class Establishment {
     last_update?: Date;
 
     @OneToMany(() => Student, (student) => student.establishment, { eager: false })
-    student?: Student[];
+    students?: Student[];
 
     @OneToMany(() => Teacher, (teacher) => teacher.establishment, { eager: false })
-    teacher?: Teacher[];
+    teachers?: Teacher[];
 }

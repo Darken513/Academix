@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
 import { Attendance } from './Attendance';
-import { Rooms } from "./Room";
+import { Room } from "./Room";
 import { Cours } from "./Cours";
 
 @Entity("sessions")
@@ -26,18 +26,14 @@ export class Session {
   @Column({ type: "timestamp", nullable: true })
   last_update?: Date;
 
-  @OneToMany(() => Attendance, (attendance) => attendance.sessions)
+  @OneToMany(() => Attendance, (attendance) => attendance.session)
   attendances!: Attendance[];  // One establishment can have many attendance records
   
-  @ManyToOne(() => Rooms, (rooms) => rooms.sessions, { nullable: false })
+  @ManyToOne(() => Room, (room) => room.sessions, { nullable: false })
   @JoinColumn({name: 'room_id'})
-  rooms?: Rooms;
+  room?: Room;
 
   @ManyToOne(()=>Cours, (cours)=>cours.sessions, { nullable: false })
   @JoinColumn({name: 'cours_id'})
   cours?: Cours;
-
-  @ManyToOne(() => Rooms, (room) => room.sessions, { nullable: false })
-  @JoinColumn({ name: 'room_id' })
-  room?: Rooms;
 }

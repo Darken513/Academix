@@ -1,6 +1,6 @@
 import { ChildEntity } from 'typeorm';
 import { Teacher } from './Teacher';
 
-@ChildEntity('Admin')
+@ChildEntity('admins')
 export class Admin extends Teacher {
 }

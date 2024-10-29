@@ -16,7 +16,7 @@ export class TeacherPayment {
   @CreateDateColumn({ type: 'timestamp', nullable: true })
   paid_at?: Date;  // automatically set to the date when the payment was recorded
 
-  @ManyToOne(() => Teacher, (teacher) => teacher.teacherpayments)
+  @ManyToOne(() => Teacher, (teacher) => teacher.teacherpayments, { nullable: false })
   @JoinColumn({name: 'teacher_id'})
   teacher?: Teacher;
 }

@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  CreateDateColumn,
-  Timestamp,
-  OneToMany,
-} from "typeorm";
+import {Entity,PrimaryGeneratedColumn,Column,CreateDateColumn,Timestamp,OneToMany,} from "typeorm";
 import { Cours } from "./Cours";
 import { TeacherSubject } from "./TeacherSubject";
 
@@ -29,6 +22,6 @@ export class Subject {
   @OneToMany(() => Cours, (cours) => cours.subject)
   courses!: Cours[];
 
-  @OneToMany(() => TeacherSubject, (teacherSubject) => teacherSubject.subjects)
+  @OneToMany(() => TeacherSubject, (teacherSubject) => teacherSubject.subject)
   teachersSubjects!: TeacherSubject[];
 }

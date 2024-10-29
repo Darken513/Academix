@@ -31,7 +31,7 @@ export class AttendanceService extends BaseHttpService<Attendance> {
     const attendance = this.repository.create({
       ...data,
       student: student,
-      sessions: session,
+      session: session,
     });
 
     // Save and return the entity
@@ -40,7 +40,7 @@ export class AttendanceService extends BaseHttpService<Attendance> {
 
   async getByStudentAndSession(studentId: number, sessionId: number): Promise<Attendance[]> {
     return this.repository.find({
-      where: { student: { id: studentId }, sessions: { id: sessionId } },
+      where: { student: { id: studentId }, session: { id: sessionId } },
       relations: ['student', 'sessions'],
     });
   }

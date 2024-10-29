@@ -1,8 +1,8 @@
 import { RoomsService } from '../services/rooms.service';
 import { BaseHttpController } from './basehttp.controller';
-import { Rooms } from '../models/Room';
+import { Room } from '../models/Room';
 
-export class RoomsController extends BaseHttpController<Rooms> {
+export class RoomsController extends BaseHttpController<Room> {
   constructor() {
     const service = new RoomsService();
     super(service);

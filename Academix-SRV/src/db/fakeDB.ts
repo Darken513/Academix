@@ -1,8 +1,8 @@
-import { Rooms } from '../models/Room';
+import { Room } from '../models/Room';
 import { DATA_SOURCE } from './dataSource';
 
 async function createRoom() {
-    const roomsRepository = DATA_SOURCE.getRepository(Rooms);
+    const roomsRepository = DATA_SOURCE.getRepository(Room);
     const newRoom = roomsRepository.create({
         name: 'Room A',
         capacity: 20,

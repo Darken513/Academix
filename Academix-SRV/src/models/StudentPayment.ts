@@ -13,7 +13,7 @@ export class StudentPayment {
   @CreateDateColumn({ type: 'date' })
   paid_at!: Date;  // automatically set to the date when the payment was recorded
 
-  @ManyToOne(()=>CoursStudent, (coursStudent)=>coursStudent.studentPayment)
+  @ManyToOne(()=>CoursStudent, (coursStudent)=>coursStudent.studentPayments, { nullable: false })
   @JoinColumn({name: 'cours_student_id'})
   coursStudent?: CoursStudent;
 }

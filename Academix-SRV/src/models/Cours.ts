@@ -3,7 +3,7 @@ import { Subject } from './Subject';
 import { Teacher } from './userRoles/Teacher';
 import { Session } from './Session';
 import { CoursStudent } from './CoursStudent';
-import { CenterReferedUser } from './centerReferedUser';
+import { CenterReferedUser } from './CenterReferedUser';
 
 @Entity('courses')
 export class Cours {
@@ -11,11 +11,11 @@ export class Cours {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Subject, (subject) => subject.courses)
+  @ManyToOne(() => Subject, (subject) => subject.courses, { nullable: false })
   @JoinColumn({ name: 'subject_id' })
   subject!: Subject;
 
-  @ManyToOne(() => Teacher, (teacher) => teacher.courses)
+  @ManyToOne(() => Teacher, (teacher) => teacher.courses, { nullable: false })
   @JoinColumn({ name: 'teacher_id' })
   teacher!: Teacher;
 
@@ -53,7 +53,7 @@ export class Cours {
   sessions?: Session[];
 
   @OneToMany(()=>CoursStudent, (coursStudent)=>coursStudent.cours)
-  coursStudent?: CoursStudent[];
+  coursStudents?: CoursStudent[];
 
   @OneToMany(()=>CenterReferedUser, (centerRefereduser)=>centerRefereduser.cours)
   centerReferedUsers?: CenterReferedUser[];
