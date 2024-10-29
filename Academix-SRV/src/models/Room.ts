@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } f
 import { Session } from './Session';
 
 @Entity('rooms')
-export class Rooms {
+export class Room {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -22,6 +22,6 @@ export class Rooms {
     @CreateDateColumn({ type: 'timestamp', nullable: true })
     last_update?: Date;
 
-    @OneToMany(()=>Session, (session)=>session.rooms)
+    @OneToMany(()=>Session, (session)=>session.room)
     sessions?: Session[];
 }

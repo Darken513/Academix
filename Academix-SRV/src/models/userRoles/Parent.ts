@@ -2,7 +2,7 @@ import { ChildEntity, OneToMany } from 'typeorm';
 import { Student } from './Student';
 import { User } from './User';
 
-@ChildEntity('Parent')
+@ChildEntity('parents')
 export class Parent extends User {
 
   @OneToMany(() => Student, (student) => student.parent)

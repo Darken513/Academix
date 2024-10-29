@@ -4,14 +4,14 @@ import { Establishment } from '../Establishment';
 import { Attendance } from '../Attendance';
 import { Parent } from './Parent';
 import { CoursStudent } from '../CoursStudent';
-import { CenterReferedUser } from '../centerReferedUser';
+import { CenterReferedUser } from '../CenterReferedUser';
 
-@ChildEntity('Student')
+@ChildEntity('students')
 export class Student extends User {
   @Column({ type: 'varchar', length: 255 })
   grade!: string;
 
-  @ManyToOne(() => Establishment, (establishment) => establishment.student, { eager: true })
+  @ManyToOne(() => Establishment, (establishment) => establishment.students, { eager: true })
   @JoinColumn({ name: 'establishment_id' })
   establishment?: Establishment;
 

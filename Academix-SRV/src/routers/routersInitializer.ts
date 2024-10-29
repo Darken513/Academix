@@ -41,10 +41,10 @@ export function initializeRouters(app: Application): void {
     app.use('/establishments', establishmentRouter.router);
     app.use('/sessions', sessionsRouter.router);
     app.use('/courses', coursesRouter.router);
-    app.use('/studentsPayments', StudentsPaymentsRouter.router);
+    app.use('/studentPayments', StudentsPaymentsRouter.router);
     app.use('/teacherPayments', teacherPaymentsRouter.router);
     app.use('/rooms', roomsRouter.router);
-    app.use('/attendance', attendanceRouter.router);
+    app.use('/attendances', attendanceRouter.router);
     app.use('/teachersSubjects', teachersSubjectsRouter.router);
-    app.use('/coursStudent', coursStudentRouter.router);
+    app.use('/coursStudents', coursStudentRouter.router);
 }

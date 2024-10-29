@@ -3,7 +3,7 @@ import { Teacher } from './userRoles/Teacher';
 import { Cours } from './Cours';
 import { Student } from './userRoles/Student';
 
-@Entity('CenterReferedUsers')
+@Entity('centerReferedUsers')
 export class CenterReferedUser {
 
   @PrimaryGeneratedColumn()
