@@ -3,7 +3,7 @@ import { Subject } from './Subject';
 import { Teacher } from './userRoles/Teacher';
 import { Session } from './Session';
 import { CoursStudent } from './CoursStudent';
-import { CenterReferedUser } from './CenterReferedUser';
+import { CenterReferedUser } from './centerReferedUser';
 
 @Entity('courses')
 export class Cours {

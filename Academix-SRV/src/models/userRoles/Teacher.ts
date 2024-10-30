@@ -4,7 +4,7 @@ import { Establishment } from '../Establishment';
 import { Cours } from '../Cours';
 import { TeacherPayment } from '../TeacherPayment';
 import { TeacherSubject } from '../TeacherSubject';
-import { CenterReferedUser } from '../CenterReferedUser';
+import { CenterReferedUser } from '../centerReferedUser';
 
 @ChildEntity('teachers')
 export class Teacher extends User {
