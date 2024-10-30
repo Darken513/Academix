@@ -6,8 +6,5 @@ export class CoursStudentRouter extends BaseHttpRouter<CoursStudent> {
   constructor() {
     const controller = new CoursStudentController();
     super(controller);
-
-    // /coursStudent/createCoursStudent
-    this.router.post('/createCoursStudent', (req, res) => controller.createCoursStudent(req, res));
   }
 }
