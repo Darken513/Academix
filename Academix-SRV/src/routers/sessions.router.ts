@@ -6,8 +6,5 @@ export class SessionsRouter extends BaseHttpRouter<Session> {
   constructor() {
     const controller = new SessionsController();
     super(controller);
-
-    // /sesions/createSession
-    this.router.post('/createSession', (req, res) => controller.createSession(req, res));
   }
 }

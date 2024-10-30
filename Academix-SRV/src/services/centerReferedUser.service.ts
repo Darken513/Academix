@@ -1,10 +1,10 @@
 import { BaseHttpService } from './basehttp.service';
 import { DATA_SOURCE } from '../db/dataSource';
-import { CenterReferedUser } from '../models/centerReferedUser';
 import { Cours } from '../models/Cours';
 import { Teacher } from '../models/userRoles/Teacher';
 import { Student } from '../models/userRoles/Student';
 import { Repository } from 'typeorm';
+import { CenterReferedUser } from '../models/centerReferedUser';
 
 export class CenterReferedUserService extends BaseHttpService<CenterReferedUser> {
   constructor() {

@@ -1,6 +1,6 @@
+import { CenterReferedUser } from '../models/centerReferedUser';
 import { CenterReferedUserService } from '../services/centerReferedUser.service';
 import { BaseHttpController } from './basehttp.controller';
-import { CenterReferedUser } from '../models/centerReferedUser';
 import { Request, Response } from 'express';
 
 export class CenterReferedUserController extends BaseHttpController<CenterReferedUser> {
