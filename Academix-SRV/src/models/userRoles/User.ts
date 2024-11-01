@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, Entity, TableInheritance, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, TableInheritance, OneToMany, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { WalletPayments } from '../walletPayment';
 import bcrypt from 'bcrypt';
 
@@ -33,10 +33,10 @@ export class User {
   @Column({ type: 'boolean', default: true })
   enabled?: boolean;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
   last_update?: Date;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'timestamp', nullable: false })
   created_at?: Date;
 
   @Column({ type: 'varchar', length: 50 })

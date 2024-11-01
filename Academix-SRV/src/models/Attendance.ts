@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn, UpdateDateColumn } from 'typeorm';
 import { Session } from './Session';
 import { Student } from './userRoles/Student';
 @Entity('attendances')
@@ -24,10 +24,9 @@ export class Attendance {
   @Column({ type: 'boolean', default: true })
   enabled?: boolean;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'timestamp', nullable: false})
   created_at?: Date;
 
-  @CreateDateColumn({ type: 'date' })
-  @Column({ type: 'timestamp', nullable: true })
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
   last_update?: Date;
 }

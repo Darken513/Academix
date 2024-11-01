@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Student } from './userRoles/Student';
 import { Teacher } from './userRoles/Teacher';
 
@@ -16,10 +16,10 @@ export class Establishment {
     @Column({ type: 'boolean', default: true, nullable: true })
     enabled?: boolean;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @CreateDateColumn({ type: 'timestamp', nullable: false })
     created_at?: Date;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @UpdateDateColumn({ type: 'timestamp', nullable: true })
     last_update?: Date;
 
     @OneToMany(() => Student, (student) => student.establishment, { eager: false })

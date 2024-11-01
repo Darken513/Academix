@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Attendance } from './Attendance';
 import { Room } from "./Room";
 import { Cours } from "./Cours";
@@ -20,10 +20,10 @@ export class Session {
   @Column({ type: "boolean", default: true, nullable: true })
   enabled?: boolean;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'timestamp', nullable: false})
   created_at?: Date;
 
-  @Column({ type: "timestamp", nullable: true })
+  @UpdateDateColumn({ type: "timestamp", nullable: true })
   last_update?: Date;
 
   @OneToMany(() => Attendance, (attendance) => attendance.session)

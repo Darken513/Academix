@@ -1,4 +1,4 @@
-import {Entity,PrimaryGeneratedColumn,Column,CreateDateColumn,Timestamp,OneToMany,} from "typeorm";
+import {Entity,PrimaryGeneratedColumn,Column,CreateDateColumn,Timestamp,OneToMany, UpdateDateColumn,} from "typeorm";
 import { Cours } from "./Cours";
 import { TeacherSubject } from "./TeacherSubject";
 
@@ -16,7 +16,7 @@ export class Subject {
   @Column()
   enabled!: boolean;
 
-  @CreateDateColumn({ type: "timestamp" })
+  @UpdateDateColumn({ type: "timestamp", nullable: false })
   last_update!: Date;
 
   @OneToMany(() => Cours, (cours) => cours.subject)

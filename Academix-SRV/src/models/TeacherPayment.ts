@@ -16,7 +16,7 @@ export class TeacherPayment {
   @Column({ type: 'boolean' })
   fromWallet!: number;
 
-  @CreateDateColumn({ type: 'timestamp', nullable: true })
+  @CreateDateColumn({ type: 'timestamp', nullable: false })
   paid_at?: Date;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.teacherpayments, { nullable: false })

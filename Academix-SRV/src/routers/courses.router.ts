@@ -6,6 +6,7 @@ export class CoursRouter extends BaseHttpRouter<Cours> {
   constructor() {
     const controller = new CoursController();
     super(controller);
-    this.router.get('/teacher/:teacherId', (req, res) => controller.getCoursesByTeacher(req, res));
+    this.router.get('/teachers/:teacherId', (req, res) => controller.getCoursesByTeacher(req, res));
+    this.router.get('/subjects/:subjectId', (req, res) => controller.getCoursesBySubject(req, res));
   }
 }
