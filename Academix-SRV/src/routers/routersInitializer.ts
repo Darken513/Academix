@@ -14,8 +14,10 @@ import { TeachersRouter } from './teachers.router';
 import { ParentsRouter } from './parents.router';
 import { AdminsRouter } from './admins.router';
 import { StudentsRouter } from './students.router';
+import { AuthRouter } from './auth.router';
 
 export function initializeRouters(app: Application): void {
+    const authRouter = new AuthRouter();
     const usersRouter = new UsersRouter();
     const teachersRouter = new TeachersRouter();
     const parentsRouter = new ParentsRouter();
@@ -32,6 +34,7 @@ export function initializeRouters(app: Application): void {
     const teachersSubjectsRouter = new TeachersSubjectsRouter();
     const coursStudentRouter = new CoursStudentRouter();
 
+    app.use('/auth', authRouter.router);
     app.use('/users', usersRouter.router);
     app.use('/teachers', teachersRouter.router);
     app.use('/parents', parentsRouter.router);
