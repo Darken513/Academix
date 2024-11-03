@@ -42,7 +42,7 @@ export class SessionsService extends BaseHttpService<Session> {
 
   async getSessionsByDate(date: Date): Promise<Session[]> {
     return this.repository.find({
-      where: {last_update: date } 
+      where: {session_date: date } 
     });
   }
 }
