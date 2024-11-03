@@ -83,7 +83,7 @@ export class AuthController {
 
     newUser.first_name = first_name;
     newUser.last_name = last_name;
-    newUser.password = await bcrypt.hash(password, 10);
+    newUser.password = password;
     newUser.phone_number = phone_number;
     newUser.note = note;
     newUser.imgURL = imgURL;
