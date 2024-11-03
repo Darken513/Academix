@@ -4,6 +4,7 @@ import { Teacher } from './userRoles/Teacher';
 import { Session } from './Session';
 import { CoursStudent } from './CoursStudent';
 import { PaymentMode } from './PaymentMode';
+import { TeacherPayment } from './TeacherPayment';
 
 @Entity('courses')
 export class Cours {
@@ -37,4 +38,7 @@ export class Cours {
 
   @OneToMany(() => CoursStudent, (coursStudent) => coursStudent.cours)
   coursStudents?: CoursStudent[];
+  
+  @OneToMany(() => TeacherPayment, (teacherPayemnt) => teacherPayemnt.cours)
+  teacherPayments?: TeacherPayment[];
 }
