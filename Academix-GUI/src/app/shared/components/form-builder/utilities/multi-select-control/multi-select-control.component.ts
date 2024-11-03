@@ -10,7 +10,6 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   ]
 })
 export class MultiSelectControlComponent extends BaseFormFieldComponent {
-  //todo-achraf : fix the case where user blurs the field, it keeps old validation state
   /*
   params could contain the following :
     optionLabel:string, this is an option that maps the displayed value to a certain prop in your object

@@ -4,9 +4,11 @@
 
     <div *ngFor="let option of options" class="form-check" [ngClass]="{ 'is-invalid': !!errorMessage }">
         <input type="checkbox" class="form-check-input" [name]="'checkboxes-' + label"
-            [id]="'checkboxes-' + label + option" [checked]="isChecked(option)"
-            (change)="onCheckboxChange(option, $event); onBlur()">
-        <label [for]="'checkboxes-' + label + option" class="form-check-label">{{ option }}</label>
+            [id]="'checkboxes-' + label + option"
+            [checked]="isChecked(params && params.returnKey ? option[params.returnKey] : option)"
+            (change)="onCheckboxChange(params && params.returnKey ? option[params.returnKey] : option, $event); onBlur()">
+        <label [for]="'checkboxes-' + label + params && params.returnKey ? option[params.returnKey] : option"
+            class="form-check-label">{{ params && params.optionLabel ? option[params.optionLabel] : option }}</label>
     </div>
     <div *ngIf="helpers && helpers.length" class="form-text helpers-wrapper">
         <i class="fa-solid fa-circle-info"></i>

@@ -46,7 +46,16 @@ export class SubjectForm extends FormEntity {
         label: 'Checkbox Options',
         type: 'checkboxes',
         required: true,
-        options: ['first value', 'second value', 'third value'],
+        params: {
+            optionLabel: 'value',
+            returnKey: 'key'
+        },
+        options: [
+            { key: 1, value: 'first value' },
+            { key: 2, value: 'second value' },
+            { key: 3, value: 'third value' },
+            { key: 4, value: 'fourth value' },
+        ],
         fetchOptionsFrom: 'routeHere'
     })
     checkboxOptions: any;
@@ -65,10 +74,10 @@ export class SubjectForm extends FormEntity {
     @FormField({
         label: 'Time field',
         type: 'calendar',
+        required: true,
         params: {
             timeOnly: true
         },
-        required: true,
         helpers: [
             'this field takes only Time as input',
         ],
@@ -89,7 +98,15 @@ export class SubjectForm extends FormEntity {
         label: 'Radio Options',
         type: 'radios',
         required: true,
-        options: ['first value', 'second value', 'third value'],
+        params: {
+            optionLabel: 'value'
+        },
+        options: [
+            { key: 1, value: 'first value' },
+            { key: 2, value: 'second value' },
+            { key: 3, value: 'third value' },
+            { key: 4, value: 'fourth value' },
+        ],
     })
     radioOptions: any;
 
@@ -101,7 +118,16 @@ export class SubjectForm extends FormEntity {
             'this field takes only numbers as input',
             'it expects a number from 0 to 9999'
         ],
-        options: ['first value', 'second value', 'third value'],
+        params: {
+            optionLabel: 'value',
+            returnKey: 'key'
+        },
+        options: [
+            { key: 1, value: 'first value' },
+            { key: 2, value: 'second value' },
+            { key: 3, value: 'third value' },
+            { key: 4, value: 'fourth value' },
+        ],
     })
     selectOptions: any;
 
@@ -136,7 +162,7 @@ export class SubjectForm extends FormEntity {
         let radioOptionsField = FormEntity.getFormFieldByKey(this, 'radioOptions');
         radioOptionsField.displayCondition = () => {
             return (
-                this.checkboxOptions && this.checkboxOptions.includes('second value')
+                this.checkboxOptions && this.checkboxOptions.find((option: any) => option == 3)
             );
         };
         let selectOptionsField = FormEntity.getFormFieldByKey(
@@ -144,7 +170,7 @@ export class SubjectForm extends FormEntity {
             'selectOptions'
         );
         selectOptionsField.displayCondition = () => {
-            return this.radioOptions == 'first value';
+            return this.radioOptions && this.radioOptions.key == 2;
         };
     }
 }

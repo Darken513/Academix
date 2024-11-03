@@ -4,7 +4,7 @@
         <i class="fa-solid fa-circle-info"></i>
     </button>
     <p-multiSelect class="form-control" [ngClass]="{ 'is-invalid': !!errorMessage }" [options]="options" [(ngModel)]="value"
-        (ngModelChange)="onValueChange($event)" (onBlur)="onBlur()" [optionLabel]="params && params.optionLabel" placeholder="Select Cities" />
+        (ngModelChange)="onValueChange($event)" (onBlur)="onBlur()" (onPanelHide)="onBlur()" [optionLabel]="params && params.optionLabel" placeholder="Select Cities" />
 
     <div *ngIf="helpers && helpers.length" class="form-text helpers-wrapper">
         <i class="fa-solid fa-circle-info"></i>

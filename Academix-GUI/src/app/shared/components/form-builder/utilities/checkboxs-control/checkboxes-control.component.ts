@@ -11,7 +11,6 @@ import { HttpClient } from '@angular/common/http';
   ]
 })
 export class CheckboxesControlComponent extends BaseFormFieldComponent {
-  //todo-achraf : add the concept of optionLabel and keyLabel
   onCheckboxChange(option: string, event: any) {
     const checked = event.target.checked;
     if (!this.value) {
@@ -28,7 +27,7 @@ export class CheckboxesControlComponent extends BaseFormFieldComponent {
     this.valueChange.emit({ value: this.value });
   }
 
-  isChecked(option: string): boolean {
+  isChecked(option: any): boolean {
     return this.value && this.value.includes(option);
   }
 }

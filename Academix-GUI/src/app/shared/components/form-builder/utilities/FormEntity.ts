@@ -116,7 +116,6 @@ config: {
     @param {boolean} required Optional, Marks the field as required (optional property). If true, the field must be filled out.
     @param {RegExp} inputRegex Optional, A regular expression for the field's value. If provided, the input will only match the inputRegex pattern.
     @param {string[]} helpers Optional. An array of strings that provide examples or descriptions to help the user understand what input is expected for this field.
-    //todo-achraf make this a list of objects, label value
     @param {any[]} options Optional, For 'select', 'checkboxes', 'autocomplete', 'multiselect' or 'radios' types, these are the options available to choose from.
     @param {string} fetchOptionsFrom Optional, For 'select', 'checkboxes', 'autocomplete', 'multiselect' or 'radios' types, this will tell it to fetch its options with a GET request.
     @param {any} params Optional, further params that are unique to the control you are calling, check the control ts file for more details.

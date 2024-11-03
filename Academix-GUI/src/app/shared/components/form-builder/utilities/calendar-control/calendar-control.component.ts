@@ -10,22 +10,20 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   ]
 })
 export class CalendarControlComponent extends BaseFormFieldComponent {
-  //todo-achraf : fix the case where user ctrl+a and deletes the content, it keeps returning old value
   /*
   params could contain the following :
     timeOnly:boolean, this is an option to force the input to accept only time format HH:MM
   */
-
   override onValueChange(event: any, avoidCheck?: boolean) {
-    if (!event)
-      return;
+    if (event == null)
+      this.valueChange.emit({ value: '', avoidCheck: avoidCheck });
     let toret = event;
-    if (this.params && this.params.timeOnly) {
+    if (this.params && this.params.timeOnly && toret) {
       const date = new Date(event);
       const hours = String(date.getHours()).padStart(2, '0');
       const minutes = String(date.getMinutes()).padStart(2, '0');
       toret = `${hours}:${minutes}`;
-    } else {
+    } else if (toret) {
       const date = new Date(event);
       toret = date.toLocaleDateString('fr-FR', {
         year: 'numeric',

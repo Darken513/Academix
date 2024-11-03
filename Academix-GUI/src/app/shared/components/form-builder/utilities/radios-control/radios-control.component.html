@@ -3,9 +3,13 @@
         *ngIf="helpers && helpers.length" type="button"><i class="fa-solid fa-circle-info"></i></button>
 
     <div *ngFor="let option of options" class="form-check" [ngClass]="{ 'is-invalid': !!errorMessage }">
-        <input [name]="'radios-' + label" [id]="'radios-' + label + option" type="radio" class="form-check-input"
-            [value]="option" [checked]="value === option" (change)="onValueChange(option); onBlur()">
-        <label [for]="'radios-' + label + option" class="form-check-label">{{ option }}</label>
+        <input [name]="'radios-' + label"
+            [id]="'radios-' + label + (params && params.returnKey ? option[params.returnKey] : option)" type="radio"
+            class="form-check-input" [value]="params && params.returnKey ? option[params.returnKey] : option"
+            [checked]="value === (params && params.returnKey ? option[params.returnKey] : option)"
+            (change)="onValueChange(params && params.returnKey ? option[params.returnKey] : option); onBlur()">
+        <label [for]="'radios-' + label + (params && params.returnKey ? option[params.returnKey] : option)"
+            class="form-check-label">{{ params && params.optionLabel ? option[params.optionLabel] : option }}</label>
     </div>
     <div *ngIf="helpers && helpers.length" class="form-text helpers-wrapper">
         <i class="fa-solid fa-circle-info"></i>
