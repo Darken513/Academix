@@ -1,4 +1,5 @@
-import { PrimaryGeneratedColumn, Column, Entity, TableInheritance } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, TableInheritance, OneToMany } from 'typeorm';
+import { WalletPayments } from '../walletPayment';
 
 @Entity('users')
 @TableInheritance({ column: { type: 'varchar', name: 'role' } })
@@ -25,6 +26,9 @@ export class User {
   @Column({ type: 'varchar', length: 255, nullable: true })
   imgURL!: string;
 
+  @Column({ type: 'float' })
+  walletBalance!: number;
+
   @Column({ type: 'boolean', default: true })
   enabled?: boolean;
 
@@ -33,4 +37,7 @@ export class User {
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at?: Date;
+
+  @OneToMany(() => WalletPayments, (walletPayment) => walletPayment.user)
+  walletPaymentss?: WalletPayments[];
 }

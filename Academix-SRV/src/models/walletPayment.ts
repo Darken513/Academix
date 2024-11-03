@@ -1,15 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { CoursStudent } from './CoursStudent';
+import { User } from './userRoles/User';
 
-@Entity('studentPayments')
-export class StudentPayment {
+@Entity('walletPayments')
+export class WalletPayments {
 
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => CoursStudent, (coursStudent) => coursStudent.studentPayments, { nullable: false })
+  @ManyToOne(() => User, (user) => user.walletPaymentss, { nullable: false })
   @JoinColumn({ name: 'cours_student_id' })
-  coursStudent?: CoursStudent;
+  user?: User;
 
   @Column({ type: 'integer' })
   amount!: number;

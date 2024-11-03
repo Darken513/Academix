@@ -5,18 +5,21 @@ import { Teacher } from './userRoles/Teacher';
 export class TeacherPayment {
 
   @PrimaryGeneratedColumn()
-  id!: number;  // primary key, auto-incremented
+  id!: number;
 
   @Column()
-  cours_id!: number;  // foreign key to course entity 
+  cours_id!: number;
 
   @Column({ type: 'integer' })
-  amount?: number;  // the amount paid
+  amount?: number;
+
+  @Column({ type: 'boolean' })
+  fromWallet!: number;
 
   @CreateDateColumn({ type: 'timestamp', nullable: true })
-  paid_at?: Date;  // automatically set to the date when the payment was recorded
+  paid_at?: Date;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.teacherpayments, { nullable: false })
-  @JoinColumn({name: 'teacher_id'})
+  @JoinColumn({ name: 'teacher_id' })
   teacher?: Teacher;
 }

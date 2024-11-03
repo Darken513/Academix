@@ -2,20 +2,20 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, Jo
 import { Teacher } from './userRoles/Teacher';
 import { Subject } from './Subject';
 
-@Entity('teacherSubjects')
+@Entity('teachers_subjects')
 export class TeacherSubject {
 
   @PrimaryGeneratedColumn()
-  id!: number;  
+  id!: number;
 
   @Column({ type: 'boolean', default: true, nullable: true })
   enabled?: boolean;
 
   @ManyToOne(() => Subject, (subjects) => subjects.teachersSubjects, { nullable: false })
-  @JoinColumn({name: 'subject_id'})
+  @JoinColumn({ name: 'subject_id' })
   subject?: Subject;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.teachersSubjects, { nullable: false })
-  @JoinColumn({name: 'teacher_id'})
+  @JoinColumn({ name: 'teacher_id' })
   teacher?: Teacher;
 }

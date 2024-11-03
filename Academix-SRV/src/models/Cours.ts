@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 import { Subject } from './Subject';
 import { Teacher } from './userRoles/Teacher';
 import { Session } from './Session';
 import { CoursStudent } from './CoursStudent';
-import { CenterReferedUser } from './centerReferedUser';
+import { PaymentMode } from './PaymentMode';
 
 @Entity('courses')
 export class Cours {
@@ -19,26 +19,9 @@ export class Cours {
   @JoinColumn({ name: 'teacher_id' })
   teacher!: Teacher;
 
-  @Column({ type: 'boolean' })
-  managed_by_center!: boolean;
-
-  @Column({ type: 'float' })
-  student_price_per_session!: number;
-
-  @Column({ type: 'varchar', length: 255 })
-  paymentType!: string;
-
-  @Column({ type: 'float' })
-  teacher_price_per_session!: number;
-
-  @Column({ type: 'float' })
-  teacher_price_per_student!: number;
-
-  @Column({ type: 'float' })
-  teacher_price_flat_rate!: number;
-
-  @Column({ type: 'integer' })
-  unpaid_total!: number;
+  @OneToOne(() => PaymentMode, { nullable: false })
+  @JoinColumn({ name: 'paymentMode_id' })
+  paymentMode!: PaymentMode;
 
   @Column({ type: 'boolean' })
   enabled!: boolean;
@@ -49,12 +32,9 @@ export class Cours {
   @Column({ type: 'date', nullable: true })
   last_update!: Date;
 
-  @OneToMany(()=>Session, (session)=>session.cours)
+  @OneToMany(() => Session, (session) => session.cours)
   sessions?: Session[];
 
-  @OneToMany(()=>CoursStudent, (coursStudent)=>coursStudent.cours)
+  @OneToMany(() => CoursStudent, (coursStudent) => coursStudent.cours)
   coursStudents?: CoursStudent[];
-
-  @OneToMany(()=>CenterReferedUser, (centerRefereduser)=>centerRefereduser.cours)
-  centerReferedUsers?: CenterReferedUser[];
 }

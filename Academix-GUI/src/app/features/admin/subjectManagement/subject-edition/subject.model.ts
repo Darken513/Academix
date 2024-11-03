@@ -15,7 +15,6 @@ export class SubjectForm extends FormEntity {
             'this field takes only numbers as input',
             'it expects a number from 0 to 9999',
             '../../../../shared/components/form-builder/utilities/FormEntity',
-            '@ManyToOne(() => Cours, (cours) => cours.centerReferedUsers)',
         ],
     })
     name: string = '';
