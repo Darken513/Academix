@@ -1,5 +1,6 @@
-import { PrimaryGeneratedColumn, Column, Entity, TableInheritance, OneToMany } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, TableInheritance, OneToMany, BeforeInsert, BeforeUpdate } from 'typeorm';
 import { WalletPayments } from '../walletPayment';
+import bcrypt from 'bcrypt';
 
 @Entity('users')
 @TableInheritance({ column: { type: 'varchar', name: 'role' } })
@@ -26,7 +27,7 @@ export class User {
   @Column({ type: 'varchar', length: 255, nullable: true })
   imgURL!: string;
 
-  @Column({ type: 'float' })
+  @Column({ type: 'float', nullable: true, default: 0.0 })
   walletBalance!: number;
 
   @Column({ type: 'boolean', default: true })
@@ -38,6 +39,21 @@ export class User {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   created_at?: Date;
 
+  @Column({ type: 'varchar', length: 50 })
+  role!: string;
+
   @OneToMany(() => WalletPayments, (walletPayment) => walletPayment.user)
   walletPaymentss?: WalletPayments[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    if (this.password) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
+  }
+
+  async comparePassword(plainPassword: string): Promise<boolean> {
+    return bcrypt.compare(plainPassword, this.password);
+  }
 }

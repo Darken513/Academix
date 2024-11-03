@@ -6,5 +6,7 @@ export class UsersRouter extends BaseHttpRouter<User> {
   constructor() {
     const controller = new UserController();
     super(controller);
+    this.router.post('/register/', (req, res) => controller.register(req, res));
+    this.router.post('/login/', (req, res) => controller.login(req, res));
   }
 }
