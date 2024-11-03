@@ -1,5 +1,5 @@
 import internal from 'stream';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany, UpdateDateColumn } from 'typeorm';
 import { Session } from './Session';
 
 @Entity('rooms')
@@ -16,10 +16,10 @@ export class Room {
     @Column({ type: 'boolean', default: true, nullable: true })
     enabled?: boolean;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    @CreateDateColumn({ type: 'timestamp', nullable: false})
     created_at?: Date;
 
-    @CreateDateColumn({ type: 'timestamp', nullable: true })
+    @UpdateDateColumn({ type: 'timestamp', nullable: true })
     last_update?: Date;
 
     @OneToMany(()=>Session, (session)=>session.room)

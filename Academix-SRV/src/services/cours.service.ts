@@ -9,13 +9,6 @@ export class CoursService extends BaseHttpService<Cours> {
   constructor() {
     super(DATA_SOURCE.getRepository(Cours));
   }
-
-  async getCoursesByTeacher(teacherId: number): Promise<Cours[]> {
-    return this.repository.find({
-      where: { teacher: { id: teacherId } },
-      relations: ['teacher'],
-    });
-  }
   
   public async create(data: any): Promise<any> {
     const subjectRepository: Repository<Subject> = DATA_SOURCE.getRepository(Subject);
@@ -38,5 +31,19 @@ export class CoursService extends BaseHttpService<Cours> {
     });
 
     return await this.repository.save(Cours);
+  }
+
+  async getCoursesByTeacher(teacherId: number): Promise<Cours[]> {
+    return this.repository.find({
+      where: { teacher: { id: teacherId } },
+      relations: ['teacher'],
+    });
+  }
+
+  async getCoursesBySubject(subjectId: number): Promise<Cours[]> {
+    return this.repository.find({
+      where: { subject: { id: subjectId } },
+      relations: ['subject'],
+    });
   }
 }

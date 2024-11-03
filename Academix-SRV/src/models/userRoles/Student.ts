@@ -10,11 +10,11 @@ export class Student extends User {
   @Column({ type: 'varchar', length: 255 })
   yearLevel!: string;
 
-  @ManyToOne(() => Establishment, (establishment) => establishment.students, { eager: true })
+  @ManyToOne(() => Establishment, (establishment) => establishment.students, { nullable: false })
   @JoinColumn({ name: 'establishment_id' })
   establishment?: Establishment;
 
-  @ManyToOne(() => Parent, (parent) => parent.children)
+  @ManyToOne(() => Parent, (parent) => parent.children, { nullable: false })
   @JoinColumn({ name: 'parent_id' })
   parent?: Parent;
 

@@ -11,11 +11,11 @@ export class TeacherSubject {
   @Column({ type: 'boolean', default: true, nullable: true })
   enabled?: boolean;
 
-  @ManyToOne(() => Subject, (subjects) => subjects.teachersSubjects, { nullable: false })
-  @JoinColumn({ name: 'subject_id' })
-  subject?: Subject;
-
   @ManyToOne(() => Teacher, (teacher) => teacher.teachersSubjects, { nullable: false })
   @JoinColumn({ name: 'teacher_id' })
   teacher?: Teacher;
+  
+  @ManyToOne(() => Subject, (subjects) => subjects.teachersSubjects, { nullable: false })
+  @JoinColumn({ name: 'subject_id' })
+  subject?: Subject;
 }

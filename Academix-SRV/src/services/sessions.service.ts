@@ -32,4 +32,17 @@ export class SessionsService extends BaseHttpService<Session> {
 
     return await this.repository.save(session);
   }
+
+  async getSessionsByCours(coursId: number): Promise<Session[]> {
+    return this.repository.find({
+      where: { cours: { id: coursId } },
+      relations: ['cours'],
+    });
+  }
+
+  async getSessionsByDate(date: Date): Promise<Session[]> {
+    return this.repository.find({
+      where: {session_date: date } 
+    });
+  }
 }

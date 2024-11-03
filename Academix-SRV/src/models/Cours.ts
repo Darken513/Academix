@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn, OneToMany, OneToOne, UpdateDateColumn } from 'typeorm';
 import { Subject } from './Subject';
 import { Teacher } from './userRoles/Teacher';
 import { Session } from './Session';
 import { CoursStudent } from './CoursStudent';
 import { PaymentMode } from './PaymentMode';
+import { TeacherPayment } from './TeacherPayment';
 
 @Entity('courses')
 export class Cours {
@@ -26,10 +27,10 @@ export class Cours {
   @Column({ type: 'boolean' })
   enabled!: boolean;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @CreateDateColumn({ type: 'timestamp', nullable: false})
   created_at?: Date;
 
-  @Column({ type: 'date', nullable: true })
+  @UpdateDateColumn({ type: 'timestamp', nullable: true })
   last_update!: Date;
 
   @OneToMany(() => Session, (session) => session.cours)
@@ -37,4 +38,7 @@ export class Cours {
 
   @OneToMany(() => CoursStudent, (coursStudent) => coursStudent.cours)
   coursStudents?: CoursStudent[];
+  
+  @OneToMany(() => TeacherPayment, (teacherPayemnt) => teacherPayemnt.cours)
+  teacherPayments?: TeacherPayment[];
 }
