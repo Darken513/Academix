@@ -1,0 +1,22 @@
+.form-control {
+  padding: 0 !important;
+}
+
+:host ::ng-deep .p-multiselect {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: var(--bs-border-radius);
+}
+
+:host ::ng-deep ul {
+  margin: 0;
+  padding: 0;
+}
+
+:host ::ng-deep .p-multiselect .p-multiselect-trigger {
+    width: 35px;
+    position: absolute;
+    right: 0;
+    top: 13px;
+}

@@ -7,34 +7,32 @@ export class SubjectForm extends FormEntity {
     id: number | undefined;
 
     @FormField({
-        label: 'Subject Name',
+        label: 'Regex Limited Field',
         type: 'text',
         required: true,
         inputRegex: /^\d{1,4}$/,
         helpers: [
             'this field takes only numbers as input',
             'it expects a number from 0 to 9999',
-            '../../../../shared/components/form-builder/utilities/FormEntity',
         ],
     })
-    name: string = '';
+    regexLimited: string = '';
 
-    
     @FormField({
-        label: 'Subject Name',
+        label: 'Password Field',
         type: 'text',
-        params:{
+        params: {
             type: 'password'
         },
         required: true,
     })
     password: string = '';
 
-    @FormField({ label: 'lehna hedha test Name', type: 'text', required: true })
-    test: string = '';
+    @FormField({ label: 'Text Field', type: 'text', required: true })
+    text: string = '';
 
     @FormField({
-        label: 'Description',
+        label: 'Textarea Field with regex limitiation',
         type: 'textarea',
         required: true,
         inputRegex: /^[A-Za-z]+$/,
@@ -42,7 +40,7 @@ export class SubjectForm extends FormEntity {
             'this field takes only letters as input',
         ],
     })
-    description: string = '';
+    textareaRegex: string = '';
 
     @FormField({
         label: 'Checkbox Options',
@@ -65,14 +63,24 @@ export class SubjectForm extends FormEntity {
     autocompleteField: any;
 
     @FormField({
-        label: 'calendar field',
+        label: 'Time field',
         type: 'calendar',
-        params:{
-            timeOnly:true
+        params: {
+            timeOnly: true
         },
         required: true,
         helpers: [
-            'this field takes only letters as input',
+            'this field takes only Time as input',
+        ],
+    })
+    timeField: any;
+
+    @FormField({
+        label: 'Calendar field',
+        type: 'calendar',
+        required: true,
+        helpers: [
+            'this field takes only Dates as input',
         ],
     })
     calendarField: any;
@@ -96,6 +104,29 @@ export class SubjectForm extends FormEntity {
         options: ['first value', 'second value', 'third value'],
     })
     selectOptions: any;
+
+    @FormField({
+        label: 'Select Options',
+        type: 'multiselect',
+        required: true,
+        params: {
+            optionLabel: 'value',
+        },
+        helpers: [
+            'this field takes only numbers as input',
+            'it expects a number from 0 to 9999'
+        ],
+        options: [
+            { key: 1, value: 'first value' },
+            { key: 2, value: 'second value' },
+            { key: 3, value: 'third value' },
+            { key: 4, value: 'fourth value' },
+            { key: 5, value: 'fifth value' },
+            { key: 6, value: 'sixth value' },
+            { key: 7, value: 'seventh value' },
+        ],
+    })
+    multiSelectOptions: any;
 
     createdAt: Date | undefined;
     lastUpdate: Date | undefined;

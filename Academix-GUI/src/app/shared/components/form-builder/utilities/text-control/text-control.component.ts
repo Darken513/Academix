@@ -10,7 +10,10 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   ]
 })
 export class TextControlComponent extends BaseFormFieldComponent {
-
+  /*
+  params could contain the following :
+    type:string, this is an option that forces the input field ( DOM level ) into a certain type
+  */
   override onValueChange(event: any, avoidCheck?: boolean) {
     let hasValue = event && event.target && typeof event.target.value == "string";
     if (!hasValue)

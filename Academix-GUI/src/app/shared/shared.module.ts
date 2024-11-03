@@ -15,8 +15,10 @@ import { TextAreaControlComponent } from './components/form-builder/utilities/te
 import { CheckboxesControlComponent } from './components/form-builder/utilities/checkboxs-control/checkboxes-control.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { AutoCompleteControlComponent } from './components/form-builder/utilities/auto-complete-control/auto-complete-control.component';
 import { CalendarControlComponent } from './components/form-builder/utilities/calendar-control/calendar-control.component';
+import { MultiSelectControlComponent } from './components/form-builder/utilities/multi-select-control/multi-select-control.component';
 @NgModule({
   declarations: [
     DashboardBuilderComponent,
@@ -30,14 +32,16 @@ import { CalendarControlComponent } from './components/form-builder/utilities/ca
     TextAreaControlComponent,
     CheckboxesControlComponent,
     AutoCompleteControlComponent,
-    CalendarControlComponent
+    CalendarControlComponent,
+    MultiSelectControlComponent
   ],
   imports: [
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
     AutoCompleteModule,
-    CalendarModule
+    CalendarModule,
+    MultiSelectModule
   ],
   providers: [
     AuthService

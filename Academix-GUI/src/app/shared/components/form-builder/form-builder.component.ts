@@ -7,6 +7,7 @@ import { CheckboxesControlComponent } from './utilities/checkboxs-control/checkb
 import { RadiosControlComponent } from './utilities/radios-control/radios-control.component';
 import { AutoCompleteControlComponent } from './utilities/auto-complete-control/auto-complete-control.component';
 import { CalendarControlComponent } from './utilities/calendar-control/calendar-control.component';
+import { MultiSelectControlComponent } from './utilities/multi-select-control/multi-select-control.component';
 
 @Component({
   selector: 'app-form-builder',
@@ -51,6 +52,8 @@ export class FormBuilderComponent {
         componentRef = this.formFieldHost.createComponent(CheckboxesControlComponent);
       } else if (field.formField.type === 'radios') {
         componentRef = this.formFieldHost.createComponent(RadiosControlComponent);
+      } else if (field.formField.type === 'multiselect') {
+        componentRef = this.formFieldHost.createComponent(MultiSelectControlComponent);
       }
 
       if (componentRef) {

@@ -4,13 +4,13 @@ import 'reflect-metadata';
 class FormEntity {
     static addFormField(target: any, key: string, config: {
         label: string,
-        type: 'text' | 'select' | 'autocomplete' |  'calendar' | 'textarea' | 'checkboxes' | 'radios',
+        type: 'text' | 'select' | 'autocomplete' | 'calendar' | 'textarea' | 'checkboxes' | 'radios' | 'multiselect',
         required?: boolean,
         inputRegex?: RegExp,
         helpers?: string[],
         fetchOptionsFrom?: string,
-        params?:any,
-        options?: string[],
+        params?: any,
+        options?: any[],
         validators?: ((value: any) => { valid: boolean, errorMsg: string })[];
         displayCondition?: () => boolean
     }) {
@@ -112,26 +112,26 @@ function hasValue(val: any) {
 /**
 config: {
     @param {string} label The label for the form field, displayed in the UI.
-    @param {string} type The type of form field, can be 'text', 'select', 'textarea', 'autocomplete', 'calendar', 'checkboxes', or 'radios'.
+    @param {string} type The type of form field, can be 'text', 'select', 'textarea', 'autocomplete', 'calendar', 'checkboxes', 'radios' or 'multiselect'.
     @param {boolean} required Optional, Marks the field as required (optional property). If true, the field must be filled out.
     @param {RegExp} inputRegex Optional, A regular expression for the field's value. If provided, the input will only match the inputRegex pattern.
     @param {string[]} helpers Optional. An array of strings that provide examples or descriptions to help the user understand what input is expected for this field.
     //todo-achraf make this a list of objects, label value
-    @param {string[]} options Optional, For 'select', 'checkboxes', or 'radios' types, these are the options available to choose from.
-    @param {string} fetchOptionsFrom Optional, For 'select', 'checkboxes', or 'radios' types, this will tell it to fetch its options with a GET request.
-    @param {any} params Optional, further params that are unique to the control you are calling.
+    @param {any[]} options Optional, For 'select', 'checkboxes', 'autocomplete', 'multiselect' or 'radios' types, these are the options available to choose from.
+    @param {string} fetchOptionsFrom Optional, For 'select', 'checkboxes', 'autocomplete', 'multiselect' or 'radios' types, this will tell it to fetch its options with a GET request.
+    @param {any} params Optional, further params that are unique to the control you are calling, check the control ts file for more details.
     @param {((value: any) => { valid: boolean, errorMsg: string })[]} validators Optional, An array of custom validator functions. Each validator returns an object with a 'valid' flag and an 'errorMsg' if the validation fails.
     @param {(() => boolean)} displayCondition Optional, A function that returns a boolean determining whether this field should be displayed.
 */
 function FormField(config: {
     label: string,
-    type: 'text' | 'select' | 'autocomplete' |  'calendar' |  'textarea' | 'checkboxes' | 'radios',
+    type: 'text' | 'select' | 'autocomplete' | 'calendar' | 'textarea' | 'checkboxes' | 'radios' | 'multiselect',
     required?: boolean,
     inputRegex?: RegExp,
     helpers?: string[],
-    options?: string[],
+    options?: any[],
     fetchOptionsFrom?: string,
-    params?:any,
+    params?: any,
     validators?: ((value: any) => { valid: boolean, errorMsg: string })[],
     displayCondition?: (() => boolean),
 }) {

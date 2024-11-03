@@ -10,4 +10,5 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   ]
 })
 export class RadiosControlComponent extends BaseFormFieldComponent {
+  //todo-achraf : add the concept of optionLabel and keyLabel
 }

@@ -8,7 +8,7 @@ export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
   @Input() label: string = '';
   @Input() required: boolean = false;
   @Input() value: any = '';
-  @Input() options?: string[];
+  @Input() options?: any[];
   @Input() fetchOptionsFrom?: string;
   @Input() params?: any;
   @Input() inputRegex?: RegExp;

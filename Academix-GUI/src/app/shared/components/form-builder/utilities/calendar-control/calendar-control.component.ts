@@ -10,9 +10,10 @@ import { BaseFormFieldComponent } from '../base-form-field-component/base-form-f
   ]
 })
 export class CalendarControlComponent extends BaseFormFieldComponent {
+  //todo-achraf : fix the case where user ctrl+a and deletes the content, it keeps returning old value
   /*
   params could contain the following :
-  timeOnly:boolean
+    timeOnly:boolean, this is an option to force the input to accept only time format HH:MM
   */
 
   override onValueChange(event: any, avoidCheck?: boolean) {
