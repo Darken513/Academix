@@ -160,6 +160,7 @@ export class SubjectForm extends FormEntity {
     constructor() {
         super();
         let radioOptionsField = FormEntity.getFormFieldByKey(this, 'radioOptions');
+        
         radioOptionsField.displayCondition = () => {
             return (
                 this.checkboxOptions && this.checkboxOptions.find((option: any) => option == 3)

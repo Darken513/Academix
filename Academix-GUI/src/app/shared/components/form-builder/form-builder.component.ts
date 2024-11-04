@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChildren, ViewContainerRef, QueryList, AfterViewInit } from '@angular/core';
 import { FormEntity } from './utilities/FormEntity';
 import { TextControlComponent } from './utilities/text-control/text-control.component';
 import { SelectControlComponent } from './utilities/select-control/select-control.component';
@@ -8,59 +8,93 @@ import { RadiosControlComponent } from './utilities/radios-control/radios-contro
 import { AutoCompleteControlComponent } from './utilities/auto-complete-control/auto-complete-control.component';
 import { CalendarControlComponent } from './utilities/calendar-control/calendar-control.component';
 import { MultiSelectControlComponent } from './utilities/multi-select-control/multi-select-control.component';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-form-builder',
   templateUrl: './form-builder.component.html',
-  styleUrl: './form-builder.component.scss'
+  styleUrls: ['./form-builder.component.scss']
 })
-export class FormBuilderComponent {
+export class FormBuilderComponent implements AfterViewInit {
   @Input() entity: FormEntity = new FormEntity();
+  @Input() displayMap?: string[][];
+
   formFields: any[] = [];
 
-  @ViewChild('formFieldHost', { read: ViewContainerRef, static: true }) formFieldHost!: ViewContainerRef;
+  @ViewChildren('dynamicFieldHost', { read: ViewContainerRef }) dynamicFieldHosts!: QueryList<ViewContainerRef>;
   @Output() submitEvent = new EventEmitter<any>();
 
-  constructor() {
+  ngOnInit() {
+    const allFields = FormEntity.getFormFields(this.entity).map((formField: any) => ({
+      formField,
+      componentRef: undefined
+    }));
+
+    if (this.displayMap) {
+      this.formFields = this.displayMap.map(rowFields =>
+        rowFields.map(fieldKey => allFields.find((f: any) => f.formField.key === fieldKey))
+          .filter(field => field !== undefined)
+      );
+    } else {
+      this.formFields = allFields.map((field: any) => [field]);
+    }
   }
 
-  ngOnInit() {
-    this.formFields = FormEntity.getFormFields(this.entity).map((formField: any) => {
-      return {
-        formField,
-        componentRef: undefined
-      }
-    });
+  ngAfterViewInit() {
     this.renderFormFields();
   }
 
   renderFormFields() {
-    this.formFields.forEach((field: any) => {
-      let componentRef;
-
-      if (field.formField.type === 'text') {
-        componentRef = this.formFieldHost.createComponent(TextControlComponent);
-      } else if (field.formField.type === 'textarea') {
-        componentRef = this.formFieldHost.createComponent(TextAreaControlComponent);
-      } else if (field.formField.type === 'autocomplete') {
-        componentRef = this.formFieldHost.createComponent(AutoCompleteControlComponent);
-      } else if (field.formField.type === 'calendar') {
-        componentRef = this.formFieldHost.createComponent(CalendarControlComponent);
-      } else if (field.formField.type === 'select') {
-        componentRef = this.formFieldHost.createComponent(SelectControlComponent);
-      } else if (field.formField.type === 'checkboxes') {
-        componentRef = this.formFieldHost.createComponent(CheckboxesControlComponent);
-      } else if (field.formField.type === 'radios') {
-        componentRef = this.formFieldHost.createComponent(RadiosControlComponent);
-      } else if (field.formField.type === 'multiselect') {
-        componentRef = this.formFieldHost.createComponent(MultiSelectControlComponent);
-      }
-
-      if (componentRef) {
-        field.componentRef = componentRef;
-        this.setupComponentInstance(field);
-      }
+    let currIdx = 0
+    this.formFields.forEach((row) => {
+      row.forEach((field:any, colIndex:number) => {
+        const viewContainerRef = this.dynamicFieldHosts.toArray()[currIdx];
+        currIdx += 1;
+        if (viewContainerRef) {
+          this.createComponentForField(field, viewContainerRef);
+        }
+      });
     });
+  }
+
+  createComponentForField(field: any, viewContainerRef: ViewContainerRef) {
+    let componentRef;
+    switch (field.formField.type) {
+      case 'text':
+        componentRef = viewContainerRef.createComponent(TextControlComponent);
+        break;
+      case 'textarea':
+        componentRef = viewContainerRef.createComponent(TextAreaControlComponent);
+        break;
+      case 'autocomplete':
+        componentRef = viewContainerRef.createComponent(AutoCompleteControlComponent);
+        break;
+      case 'calendar':
+        componentRef = viewContainerRef.createComponent(CalendarControlComponent);
+        break;
+      case 'select':
+        componentRef = viewContainerRef.createComponent(SelectControlComponent);
+        break;
+      case 'checkboxes':
+        componentRef = viewContainerRef.createComponent(CheckboxesControlComponent);
+        break;
+      case 'radios':
+        componentRef = viewContainerRef.createComponent(RadiosControlComponent);
+        break;
+      case 'multiselect':
+        componentRef = viewContainerRef.createComponent(MultiSelectControlComponent);
+        break;
+      default:
+        console.warn(`Unknown form field type: ${field.formField.type}`);
+        break;
+    }
+
+    if (componentRef) {
+      field.componentRef = componentRef;
+      this.setupComponentInstance(field);
+    } else {
+      console.error(`Component for field type ${field.formField.type} could not be created.`);
+    }
   }
 
   setupComponentInstance(field: any) {
@@ -72,7 +106,7 @@ export class FormBuilderComponent {
     field.componentRef.instance.value = (this.entity as any)[field.formField.key] || undefined;
     field.componentRef.instance.inputRegex = field.formField.inputRegex || undefined;
     field.componentRef.instance.helpers = field.formField.helpers || undefined;
-    field.componentRef.instance.displayCondition = field.formField.displayCondition || (() => { return true });
+    field.componentRef.instance.displayCondition = field.formField.displayCondition || (() => true);
     field.componentRef.instance.errorEmitter = field.formField.errorEmitter;
 
     field.componentRef.instance.valueChange.subscribe((event: any) => {
@@ -89,10 +123,12 @@ export class FormBuilderComponent {
     if (event.avoidCheck) {
       return;
     }
-    this.formFields.forEach(field => {
-      if (field.componentRef && field.componentRef.instance.displayCondition) {
-        field.componentRef.instance.checkVisibility();
-      }
+    this.formFields.forEach(rowFields => {
+      rowFields.forEach((field: any) => {
+        if (field.componentRef && field.componentRef.instance.displayCondition) {
+          field.componentRef.instance.checkVisibility();
+        }
+      });
     });
   }
   onFieldBlur(key: string) {

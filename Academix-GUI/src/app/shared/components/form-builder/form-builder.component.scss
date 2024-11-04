@@ -1,3 +1,11 @@
 :host ::ng-deep .form-group{
     margin: 25px 0;
 }
+
+:host ::ng-deep .col-lg:not(:has(.form-group)) {
+    display: none;
+}
+
+.col:not(:has(.form-group)) {
+    display: none;
+}

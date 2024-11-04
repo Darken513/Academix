@@ -1,5 +1,8 @@
 <form (ngSubmit)="onSubmit()">
-    <!-- Dynamically render the form field components -->
-    <ng-container #formFieldHost></ng-container>
+    <div *ngFor="let rowFields of formFields" class="row">
+        <div *ngFor="let field of rowFields" class="col-lg">
+            <ng-container #dynamicFieldHost></ng-container>
+        </div>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
