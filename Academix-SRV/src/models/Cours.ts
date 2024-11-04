@@ -4,7 +4,7 @@ import { Teacher } from './userRoles/Teacher';
 import { Session } from './Session';
 import { CoursStudent } from './CoursStudent';
 import { PaymentMode } from './PaymentMode';
-import { TeacherPayment } from './TeacherPayment';
+import { TeacherPayment } from '../models/TeacherPayment';
 
 @Entity('courses')
 export class Cours {
@@ -20,7 +20,7 @@ export class Cours {
   @JoinColumn({ name: 'teacher_id' })
   teacher!: Teacher;
 
-  @OneToOne(() => PaymentMode, { nullable: false })
+  @OneToOne(() => PaymentMode, { nullable: true })
   @JoinColumn({ name: 'paymentMode_id' })
   paymentMode!: PaymentMode;
 
@@ -38,7 +38,7 @@ export class Cours {
 
   @OneToMany(() => CoursStudent, (coursStudent) => coursStudent.cours)
   coursStudents?: CoursStudent[];
-  
-  @OneToMany(() => TeacherPayment, (teacherPayemnt) => teacherPayemnt.cours)
+
+  @OneToMany(() => TeacherPayment, (TeacherPayment) => TeacherPayment.cours)
   teacherPayments?: TeacherPayment[];
 }
