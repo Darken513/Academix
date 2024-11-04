@@ -9,14 +9,14 @@ export class StudentPayment {
 
   @Column({ type: 'integer' })
   amount!: number;
-
+  
   @Column({ type: 'boolean' })
-  fromWallet!: number;
-
-  @CreateDateColumn({ type: 'timestamp', nullable: false })
-  paid_at!: Date;  // automatically set to the date when the payment was recorded
-
-  @ManyToOne(()=>CoursStudent, (coursStudent)=>coursStudent.studentPayments, { nullable: false })
-  @JoinColumn({name: 'cours_student_id'})
+  fromWallet!: boolean;
+  
+  @CreateDateColumn({ type: 'date' })
+  paid_at!: Date;
+  
+  @ManyToOne(() => CoursStudent, (coursStudent) => coursStudent.studentPayments, { nullable: false })
+  @JoinColumn({ name: 'cours_student_id' })
   coursStudent?: CoursStudent;
 }
