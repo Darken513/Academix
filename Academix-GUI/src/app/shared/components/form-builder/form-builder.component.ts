@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChildren, ViewContainerRef, QueryList, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChildren, ViewContainerRef, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormEntity } from './utilities/FormEntity';
 import { TextControlComponent } from './utilities/text-control/text-control.component';
 import { SelectControlComponent } from './utilities/select-control/select-control.component';
@@ -8,7 +8,6 @@ import { RadiosControlComponent } from './utilities/radios-control/radios-contro
 import { AutoCompleteControlComponent } from './utilities/auto-complete-control/auto-complete-control.component';
 import { CalendarControlComponent } from './utilities/calendar-control/calendar-control.component';
 import { MultiSelectControlComponent } from './utilities/multi-select-control/multi-select-control.component';
-import _ from 'lodash';
 
 @Component({
   selector: 'app-form-builder',
@@ -23,6 +22,9 @@ export class FormBuilderComponent implements AfterViewInit {
 
   @ViewChildren('dynamicFieldHost', { read: ViewContainerRef }) dynamicFieldHosts!: QueryList<ViewContainerRef>;
   @Output() submitEvent = new EventEmitter<any>();
+
+  constructor(private cdr: ChangeDetectorRef){
+  }
 
   ngOnInit() {
     const allFields = FormEntity.getFormFields(this.entity).map((formField: any) => ({
@@ -42,6 +44,7 @@ export class FormBuilderComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.renderFormFields();
+    this.cdr.detectChanges();
   }
 
   renderFormFields() {
