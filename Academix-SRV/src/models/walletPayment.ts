@@ -14,7 +14,7 @@ export class WalletPayments {
   @Column({ type: 'integer' })
   amount!: number;
 
-  @Column({ type: 'boolean' })
+  @Column({ type: 'boolean', nullable: true })
   fromWallet!: boolean;
 
   @CreateDateColumn({ type: 'date' })

@@ -7,7 +7,7 @@ import { TeacherSubject } from '../TeacherSubject';
 
 @ChildEntity('teachers')
 export class Teacher extends User {
-    @ManyToOne(() => Establishment, (establishment) => establishment.teachers, { nullable: false })
+    @ManyToOne(() => Establishment, (establishment) => establishment.teachers, { eager: false })
     @JoinColumn({ name: 'establishment_id' })
     establishment?: Establishment;
 

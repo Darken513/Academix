@@ -23,7 +23,7 @@ export class FormBuilderComponent implements AfterViewInit {
   @ViewChildren('dynamicFieldHost', { read: ViewContainerRef }) dynamicFieldHosts!: QueryList<ViewContainerRef>;
   @Output() submitEvent = new EventEmitter<any>();
 
-  constructor(private cdr: ChangeDetectorRef){
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -50,7 +50,7 @@ export class FormBuilderComponent implements AfterViewInit {
   renderFormFields() {
     let currIdx = 0
     this.formFields.forEach((row) => {
-      row.forEach((field:any, colIndex:number) => {
+      row.forEach((field: any, colIndex: number) => {
         const viewContainerRef = this.dynamicFieldHosts.toArray()[currIdx];
         currIdx += 1;
         if (viewContainerRef) {

@@ -11,9 +11,9 @@ export class TeacherPayment {
   @Column({ type: 'integer' })
   amount?: number;
 
-  @CreateDateColumn({ type: 'timestamp', nullable: false })
+  @Column({ type: 'boolean', nullable: true })
   fromWallet!: boolean;
-  
+
   @CreateDateColumn({ type: 'timestamp', nullable: true })
   paid_at?: Date;
   

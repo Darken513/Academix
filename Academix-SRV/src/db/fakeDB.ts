@@ -167,7 +167,7 @@ async function createStudents(
             last_name: `StudentLastName${i}`,
             role: "student",
         });
-
+        
         if (!savedStudent) {
             // Create a new student if not found
             const newStudent = studentRepository.create({
