@@ -29,11 +29,11 @@ export class Session {
   @OneToMany(() => Attendance, (attendance) => attendance.session)
   attendances!: Attendance[];  // One establishment can have many attendance records
   
-  @ManyToOne(() => Room, (room) => room.sessions, { nullable: false })
+  @ManyToOne(() => Room, (room) => room.sessions, { nullable: false, eager: true })
   @JoinColumn({name: 'room_id'})
   room?: Room;
 
-  @ManyToOne(()=>Cours, (cours)=>cours.sessions, { nullable: false })
+  @ManyToOne(()=>Cours, (cours)=>cours.sessions, { nullable: false, eager: false })
   @JoinColumn({name: 'cours_id'})
   cours?: Cours;
 }

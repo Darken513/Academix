@@ -7,11 +7,11 @@ export class Attendance {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Session, (session) => session.attendances, { nullable: false })
+  @ManyToOne(() => Session, (session) => session.attendances, { nullable: false, eager: true})
   @JoinColumn({ name: 'session_id' })
   session!: Session;
 
-  @ManyToOne(() => Student, (student) => student.attendances, { nullable: false })
+  @ManyToOne(() => Student, (student) => student.attendances, { nullable: false, eager: true })
   @JoinColumn({ name: 'student_id' })
   student!: Student;
 
