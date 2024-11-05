@@ -12,11 +12,11 @@ export class Cours {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Subject, (subject) => subject.courses, { nullable: false })
+  @ManyToOne(() => Subject, (subject) => subject.courses, { nullable: false, eager: true })
   @JoinColumn({ name: 'subject_id' })
   subject!: Subject;
 
-  @ManyToOne(() => Teacher, (teacher) => teacher.courses, { nullable: false })
+  @ManyToOne(() => Teacher, (teacher) => teacher.courses, { nullable: false, eager: true })
   @JoinColumn({ name: 'teacher_id' })
   teacher!: Teacher;
 
