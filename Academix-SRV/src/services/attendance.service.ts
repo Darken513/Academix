@@ -46,4 +46,13 @@ export class AttendanceService extends BaseHttpService<Attendance> {
       relations: ['student'],
     });
   }
+  
+  async countStudentsPresentInSession(sessionId: number): Promise<number> {
+    return this.repository.count({
+      where: {
+        session: { id: sessionId },
+        status: "Present",
+      },
+    });
+  }
 }
