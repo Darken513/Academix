@@ -62,8 +62,8 @@ export class AttendanceService extends BaseHttpService<Attendance> {
       .innerJoin("attendances.session", "sessions")
       .innerJoin("sessions.cours", "courses")
       .where("attendances.student.id = :studentId", { studentId })
-      .andWhere("cours.id = :coursId", { coursId })
-      .andWhere("attendance.status = :status", { status: "Present" })
+      .andWhere("courses.id = :coursId", { coursId })
+      .andWhere("attendances.status = :status", { status: "Present" })
       .getCount();
     return count;
   }
