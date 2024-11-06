@@ -48,7 +48,7 @@ export class AttendanceController extends BaseHttpController<Attendance> {
     }
   }
   
-  async countStudentsPresentInSession(req: Request, res: Response) {
+  async getCountStudentsPresentInSession(req: Request, res: Response) {
     const sessionId = parseInt(req.params.sessionId as string);
     if (isNaN(sessionId)) {
       console.log("Session ID:", sessionId);
@@ -57,7 +57,7 @@ export class AttendanceController extends BaseHttpController<Attendance> {
     try {
       const count = await (
         this.service as AttendanceService
-      ).countStudentsPresentInSession(sessionId);
+      ).getCountStudentsPresentInSession(sessionId);
       return res.status(200).json({ sessionId, presentCount: count });
     } catch (error) {
       console.log(error);
@@ -67,5 +67,33 @@ export class AttendanceController extends BaseHttpController<Attendance> {
         error,
       });
     }
+  }
+
+  async getStudentAttendanceCountByCourse(req: Request, res: Response) {
+    const studentId = parseInt(req.params.studentId as string);
+    const courseId = parseInt(req.params.courseId as string);
+
+    if (isNaN(studentId)) {
+      console.log("Student ID:", studentId);
+      return res.status(400).json({ message: "Invalid Student ID" });
+    }
+    if (isNaN(courseId)) {
+      console.log("Course ID:", courseId);
+      return res.status(400).json({ message: "Invalid Course ID" });
+    }
+    try {
+      const count = await (
+        this.service as AttendanceService
+      ).getStudentAttendanceCountByCourse(studentId, courseId);
+      return res.status(200).json({ studentId, courseId, presentCount: count });
+    } catch (error) {
+      console.log(error);
+      console.log("Student ID:", studentId);
+      return res.status(500).json({
+        message: "An error occurred while counting students present",
+        error,
+      });
+    }
+
   }
 }
