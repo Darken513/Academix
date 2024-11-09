@@ -8,7 +8,8 @@ import { SubjectForm } from './subject.model';
 })
 export class SubjectEditionComponent implements OnInit {
   entity: SubjectForm = new SubjectForm()
-  displayMap = [
+  displayMap = undefined
+  /*[
     [
       "regexLimited",
       "password",
@@ -32,10 +33,10 @@ export class SubjectEditionComponent implements OnInit {
       "selectOptions",
       "multiSelectOptions"
     ]
-  ]
+  ] */
 
   ngOnInit(): void {
-    this.entity.parseJSON({ textareaRegex: 'description here, some long text', regexLimited: '123', password: 'HelloWorld', radioOptions: 'first value' })
+    //this.entity.parseJSON({ textareaRegex: 'description here, some long text', regexLimited: '123', password: 'HelloWorld', radioOptions: 'first value' })
     //it should fetch the data from server or cache
     return;
   }
