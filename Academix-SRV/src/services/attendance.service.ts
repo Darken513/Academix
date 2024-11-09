@@ -47,12 +47,24 @@ export class AttendanceService extends BaseHttpService<Attendance> {
     });
   }
   
-  async countStudentsPresentInSession(sessionId: number): Promise<number> {
+  async getCountStudentsPresentInSession(sessionId: number): Promise<number> {
     return this.repository.count({
       where: {
         session: { id: sessionId },
         status: "Present",
       },
     });
+  }
+
+  async getStudentAttendanceCountByCourse(studentId: number, coursId: number): Promise<number> {
+    const count = await this.repository
+      .createQueryBuilder("attendances")
+      .innerJoin("attendances.session", "sessions")
+      .innerJoin("sessions.cours", "courses")
+      .where("attendances.student.id = :studentId", { studentId })
+      .andWhere("courses.id = :coursId", { coursId })
+      .andWhere("attendances.status = :status", { status: "Present" })
+      .getCount();
+    return count;
   }
 }

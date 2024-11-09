@@ -7,7 +7,8 @@ export class AttendanceRouter extends BaseHttpRouter<Attendance> {
     const controller = new AttendanceController();
     super(controller);
     this.router.get('/getAllByStudent/:studentId', (req, res) => controller.getAllByStudent(req, res));
-    this.router.get('/presenceCount/:sessionId', (req, res) => controller.countStudentsPresentInSession(req, res));
+    this.router.get('/presenceCountBySession/:sessionId', (req, res) => controller.getCountStudentsPresentInSession(req, res));
+    this.router.get('/presenceCountByStudentInCourse/:studentId/:courseId', (req, res) => controller.getStudentAttendanceCountByCourse(req, res));
     this.router.get('/:studentId/:sessionId', (req, res) => controller.getByStudentAndSession(req, res));
   }
 }
