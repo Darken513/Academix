@@ -7,6 +7,30 @@ export class SubjectForm extends FormEntity {
     id: number | undefined;
 
     @FormField({
+        label: 'Subject name',
+        type: 'text',
+        required: true,
+    })
+    name: string = '';
+
+    @FormField({
+        label: 'Subject description',
+        type: 'text',
+        required: true,
+    })
+    description: string = '';
+
+    enabled: boolean | undefined;
+
+    createdAt: Date | undefined;
+
+    lastUpdate: Date |undefined;
+
+
+    /*
+    id: number | undefined;
+
+    @FormField({
         label: 'Regex Limited Field',
         type: 'text',
         required: true,
@@ -156,9 +180,10 @@ export class SubjectForm extends FormEntity {
 
     createdAt: Date | undefined;
     lastUpdate: Date | undefined;
-
+    */
     constructor() {
         super();
+        /*
         let radioOptionsField = FormEntity.getFormFieldByKey(this, 'radioOptions');
         
         radioOptionsField.displayCondition = () => {
@@ -173,5 +198,6 @@ export class SubjectForm extends FormEntity {
         selectOptionsField.displayCondition = () => {
             return this.radioOptions && this.radioOptions.key == 2;
         };
+        */
     }
 }

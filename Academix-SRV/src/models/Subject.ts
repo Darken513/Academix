@@ -16,7 +16,10 @@ export class Subject {
   @Column()
   enabled!: boolean;
 
-  @UpdateDateColumn({ type: "timestamp", nullable: false })
+  @CreateDateColumn({ type: "timestamp", nullable: false })
+  created_at!: Date;
+
+  @UpdateDateColumn({ type: "timestamp", nullable: true })
   last_update!: Date;
 
   @OneToMany(() => Cours, (cours) => cours.subject)
