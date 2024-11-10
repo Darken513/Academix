@@ -71,9 +71,9 @@ export class SessionsService extends BaseHttpService<Session> {
   async getSessionsInTimeInterval(date: Date, startTime: Date, endTime: Date): Promise<Session[]> {
     return this.repository
       .createQueryBuilder('session')
-      .where('session.date = :date', {date} )
-      .andWhere('session.start_time > :startTime', { startTime })
-      .andWhere('session.start_time < :endTime', { endTime })
+      .where('session.session_date = :date', {date} )
+      .andWhere('session.start_time >= :startTime', { startTime })
+      .andWhere('session.start_time <= :endTime', { endTime })
       .getMany();
   }
 }
