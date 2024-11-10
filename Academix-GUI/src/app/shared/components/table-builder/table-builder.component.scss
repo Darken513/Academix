@@ -1,37 +1,126 @@
 .custom-table {
   width: 100%;
   border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background-color: transparent !important;
+  border: none !important;
+  filter: drop-shadow(2px 4px 6px #e0e0e0);
 
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  tr:first-of-type {
+    th:first-of-type {
+      border-top-left-radius: 8px;
+    }
+    th:last-of-type {
+      border-top-right-radius: 8px;
+    }
+  }
+  tr:last-of-type {
+    td:first-of-type {
+      border-bottom-left-radius: 8px;
+    }
+    td:last-of-type {
+      border-bottom-right-radius: 8px;
+    }
+  }
+  th,
+  td {
+    padding: 12px;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   th {
-    background-color: #f4f4f4;
+    background-color: #a3afc9;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    color: white;
+
+    &:hover {
+      background-color: #8c9ec3;
+    }
+
+    span {
+      font-size: 0.8em;
+      margin-left: 5px;
+      color: white;
+    }
+
+    /* Tooltip */
+    &[title] {
+      position: relative;
+    }
+
+    &[title-data]:hover::after {
+      content: attr(title-data);
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 10;
+    }
   }
 
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
+  td {
+    background-color: #fff;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #f4f6f8;
+  }
+
+  tr:hover td {
+    background-color: #e6f1ee;
   }
 
   .icon {
     margin-right: 5px;
+    color: #555;
   }
 }
 
 .table-actions {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
 
   button {
-    margin-right: 10px;
-    padding: 5px 10px;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9em;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+
+    &:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    i {
+      margin-right: 5px;
+    }
   }
 }
 
-.nok-input-message {
-  color: red;
+.no-input-message {
+  color: #d9534f;
   font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
 }

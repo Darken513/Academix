@@ -1,0 +1,22 @@
+:host ::ng-deep button:has(i.fa-solid.fa-xmark) {
+  border: none;
+  background: transparent;
+  color: #c74064;
+  font-size: 1.2rem;
+}
+:host ::ng-deep button:has(i.fa-pen-to-square.fa-regular) {
+  border: none;
+  background: transparent;
+  color: #4268a5;
+  font-size: 1.2rem;
+}
+:host ::ng-deep .table-actions{
+    flex-direction: row-reverse;
+}
+
+:host ::ng-deep .table-actions button:has(i.fa-plus.fa-solid) {
+  background-color: #47a17b;
+}
+:host ::ng-deep .table-actions button:has(i.fa-regular.fa-trash-can) {
+  background-color: #a14759;
+}

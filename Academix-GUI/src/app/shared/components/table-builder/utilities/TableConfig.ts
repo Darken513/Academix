@@ -8,10 +8,10 @@ import { TemplateRef } from "@angular/core";
 * @param {boolean} confirm Optional flag indicating whether a confirmation dialog should be shown before executing the action. If true, a confirmation dialog will be shown; otherwise, the action will be executed immediately.
 */
 interface TableAction {
-    label: string;
+    label?: string;
     icon?: string;
     handler: (...args: any[]) => void;
-    confirm?: boolean;
+    confirmatiomMsg?: string;
 }
 
 /**
@@ -53,8 +53,20 @@ interface TableConfig {
     styles?: { [key: string]: string };
 }
 
+interface BasicTableConfig {
+    columns: ColumnConfig[];
+    add?: boolean;
+    clear?: boolean;
+    delete?: boolean;
+    edit?: boolean;
+    pagination?: boolean;
+    rowSelection?: 'single' | 'multiple';
+    styles?: { [key: string]: string };
+}
+
 export {
     TableAction,
     ColumnConfig,
-    TableConfig
+    TableConfig,
+    BasicTableConfig
 }

@@ -10,7 +10,7 @@ export class TableBuilderComponent implements OnInit {
   @Input() tableConfig?: TableConfig;
   @Input() data?: any[];
 
-  originalData: any[] = []; // To store original data for filtering
+  fullData: any[] = []; // To store full data for filtering
   filteredData: any[] = []; // Store filtered data
   sortedColumn: string | null = null; // Keeps track of the last sorted column
   sortDirection: 'asc' | 'desc' = 'asc'; // Track sort direction
@@ -20,7 +20,7 @@ export class TableBuilderComponent implements OnInit {
   ngOnInit(): void {
     this.validateInputs();
     if (this.data) {
-      this.originalData = [...this.data]; // Store a copy of original data for reset after filtering
+      this.fullData = [...this.data]; // Store a copy of full data for reset after filtering
       this.filteredData = [...this.data];
     }
   }
@@ -34,14 +34,14 @@ export class TableBuilderComponent implements OnInit {
   }
 
   executeGlobalAction(action: TableAction) {
-    if (action.confirm && !confirm('Are you sure you want to proceed?')) {
+    if (action.confirmatiomMsg && !confirm(action.confirmatiomMsg)) {
       return;
     }
     action.handler();
   }
 
   executeRowAction(action: TableAction, rowData: any) {
-    if (action.confirm && !confirm('Are you sure you want to proceed?')) {
+    if (action.confirmatiomMsg && !confirm(action.confirmatiomMsg)) {
       return;
     }
     action.handler(rowData);
@@ -88,7 +88,7 @@ export class TableBuilderComponent implements OnInit {
    * Apply filters to the data based on the input values
    */
   applyFilters() {
-    this.filteredData = this.originalData.filter(row => {
+    this.filteredData = this.fullData.filter(row => {
       return this.tableConfig!.columns.every(col => {
         const cellValue = row[col.field]?.toString().toLowerCase();
         const filterValue = this.filters[col.field] || '';

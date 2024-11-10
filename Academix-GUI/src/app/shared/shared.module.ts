@@ -19,6 +19,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { AutoCompleteControlComponent } from './components/form-builder/utilities/auto-complete-control/auto-complete-control.component';
 import { CalendarControlComponent } from './components/form-builder/utilities/calendar-control/calendar-control.component';
 import { MultiSelectControlComponent } from './components/form-builder/utilities/multi-select-control/multi-select-control.component';
+import { BasicTableBuilderComponent } from './components/basic-table-builder/basic-table-builder.component';
 @NgModule({
   declarations: [
     DashboardBuilderComponent,
@@ -26,6 +27,7 @@ import { MultiSelectControlComponent } from './components/form-builder/utilities
     FormBuilderComponent,
     SideTopMenuComponent,
     TableBuilderComponent,
+    BasicTableBuilderComponent,
     TextControlComponent,
     SelectControlComponent,
     RadiosControlComponent,
@@ -52,6 +54,7 @@ import { MultiSelectControlComponent } from './components/form-builder/utilities
     FormBuilderComponent,
     SideTopMenuComponent,
     TableBuilderComponent,
+    BasicTableBuilderComponent
   ]
 })
 export class SharedModule { }

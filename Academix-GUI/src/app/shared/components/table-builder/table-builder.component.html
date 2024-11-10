@@ -2,7 +2,7 @@
     <!-- Global Actions -->
     <div class="table-actions" *ngIf="tableConfig?.globalActions">
         <button *ngFor="let action of tableConfig?.globalActions" (click)="executeGlobalAction(action)">
-            <i *ngIf="action.icon" class="icon">{{ action.icon }}</i>
+            <i *ngIf="action.icon" [class]="action.icon"></i>
             {{ action.label }}
         </button>
     </div>
@@ -12,34 +12,28 @@
         <thead>
             <tr>
                 <!-- Actions Header -->
-                <th *ngIf="tableConfig?.rowActions">Actions</th>
+                <th *ngIf="tableConfig?.rowActions && tableConfig?.rowActions?.length">Actions</th>
                 <!-- Table Headers -->
-                <th *ngFor="let col of tableConfig?.columns" [ngStyle]="{ width: col.width }">
-                    {{ col.header }}
-                    <button *ngIf="col.sortable" (click)="sortColumn(col.field)">
-                        Sort
+                <ng-container *ngFor="let col of tableConfig?.columns">
+                    <th (click)="col.sortable && sortColumn(col.field)" [ngStyle]="{ width: col.width }" [attr.title-data]="col.sortable 
+                            ? (sortedColumn === col.field 
+                                ? (sortDirection === 'asc' ? 'Click to sort Descending' : 'Click to sort Ascending') 
+                                : 'Click to sort Ascending')
+                            : ''">
+                        {{ col.header }}
                         <span *ngIf="sortedColumn === col.field">
                             {{ sortDirection === 'asc' ? '↑' : '↓' }}
                         </span>
-                    </button>
-                </th>
-            </tr>
-            <tr>
-                <!-- Filter Inputs -->
-                <!-- Actions Filter (empty for row actions) -->
-                <th *ngIf="tableConfig?.rowActions"></th>
-                <th *ngFor="let col of tableConfig?.columns">
-                    <input *ngIf="col.filterable" type="text" placeholder="Filter..."
-                        (input)="onFilterInput(col.field, $event)" />
-                </th>
+                    </th>
+                </ng-container>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let row of filteredData">
                 <!-- Row Actions -->
-                <td *ngIf="tableConfig?.rowActions">
+                <td *ngIf="tableConfig?.rowActions && tableConfig?.rowActions?.length">
                     <button *ngFor="let action of tableConfig?.rowActions" (click)="executeRowAction(action, row)">
-                        <i *ngIf="action.icon" class="icon">{{ action.icon }}</i>
+                        <i *ngIf="action.icon" [class]="action.icon"></i>
                         {{ action.label }}
                     </button>
                 </td>
