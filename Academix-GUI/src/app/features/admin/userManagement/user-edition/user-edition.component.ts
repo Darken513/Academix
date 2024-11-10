@@ -7,8 +7,17 @@ import { UserForm } from './user.model';
   styleUrl: './user-edition.component.scss'
 })
 export class UserEditionComponent {
-  public entity:UserForm = new UserForm();
-  onSubmit(){
+  entity: UserForm = new UserForm()
+  displayMap = undefined
+
+  ngOnInit(): void {
+    //this.entity.parseJSON({ textareaRegex: 'description here, some long text', regexLimited: '123', password: 'HelloWorld', radioOptions: 'first value' })
+    //it should fetch the data from server or cache
+    return;
+  }
+
+  public onSubmit() {
+    //it should send the data to server and save cache version if succeeded
     console.log(this.entity);
   }
 }
