@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import cors from 'cors';
+const cors = require('cors');
 import bodyParser from 'body-parser';
 import { initializeRouters } from './routers/routersInitializer';
 import { DATA_SOURCE } from './db/dataSource';
@@ -20,8 +20,8 @@ class App {
   }
 
   private initializeMiddlewares(): void {
-    this.app.use(express.static(__dirname + "/public"));
     this.app.use(cors());
+    this.app.use(express.static(__dirname + "/public"));
     this.app.use(bodyParser.json());
   }
 

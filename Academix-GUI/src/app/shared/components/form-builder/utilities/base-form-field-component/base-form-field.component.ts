@@ -28,7 +28,7 @@ export abstract class BaseFormFieldComponent implements OnChanges, OnInit {
       this.errorMessage = next.error ? next.error : '';
     })
     if (this.fetchOptionsFrom) {
-      this.http.get<any>(this.fetchOptionsFrom).subscribe({
+      this.http.get<any>('http://localhost:8080' + this.fetchOptionsFrom).subscribe({
         next: (next) => {
           this.options = next;
         }

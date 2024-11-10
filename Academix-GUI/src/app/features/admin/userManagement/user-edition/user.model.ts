@@ -31,6 +31,9 @@ export class UserForm extends FormEntity {
     @FormField({
         label: 'Password',
         type: 'text',
+        params:{
+            type:'password'
+        },
         required: true,
     })
     password: string = '';
@@ -38,6 +41,9 @@ export class UserForm extends FormEntity {
     @FormField({
         label: 'Confirm password',
         type: 'text',
+        params:{
+            type:'password'
+        },
         required: true,
     })
     passwordConfirmation: string = '';
@@ -70,14 +76,9 @@ export class UserForm extends FormEntity {
         required: true,
         params: {
             optionLabel: 'value',
-            returnKey: 'key'
+            returnKey: 'id'
         },
-        options: [
-            { key: 1, value: 'first value' },
-            { key: 2, value: 'second value' },
-            { key: 3, value: 'third value' },
-            { key: 4, value: 'fourth value' },
-        ],
+        options: [],
         fetchOptionsFrom: '/users/getUserRole'
     })
     userType: any;
