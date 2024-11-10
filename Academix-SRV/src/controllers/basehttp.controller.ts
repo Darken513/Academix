@@ -11,6 +11,7 @@ export abstract class BaseHttpController<T extends ObjectLiteral> {
   public async getAll(req: Request, res: Response): Promise<void> {
     try {
       const defs = await this.service.getAll();
+
       res.json({ defs });
     } catch (error) {
       console.error('Error getting documents:', error);

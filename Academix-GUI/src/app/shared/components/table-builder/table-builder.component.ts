@@ -8,7 +8,15 @@ import { TableAction, TableConfig } from './utilities/TableConfig';
 })
 export class TableBuilderComponent implements OnInit {
   @Input() tableConfig?: TableConfig;
-  @Input() data?: any[];
+  private _data?: any[];
+
+  @Input() set data(value: any[] | undefined) {
+    this._data = value;
+    this.ngOnInit();
+  }
+  get data(): any[] | undefined {
+    return this._data;
+  }
 
   fullData: any[] = []; // To store full data for filtering
   filteredData: any[] = []; // Store filtered data
