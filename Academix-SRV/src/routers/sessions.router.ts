@@ -10,6 +10,6 @@ export class SessionsRouter extends BaseHttpRouter<Session> {
     this.router.get('/byDate/:date', (req, res) => controller.getSessionsByDate(req, res));
     this.router.get('/byDate/:date/:startTime/:endTime', (req, res) => controller.getSessionsInTimeInterval(req, res));
     this.router.get('/byRoom/:roomId', (req, res) => controller.getSessionsByRoom(req, res));
-    this.router.post('/byDate/:sessionId/:date/:startTime/:endTime', (req, res) => controller.updateSessionDates(req, res));
+    this.router.put('/byDate/:sessionId/:date/:startTime/:endTime', (req, res) => controller.updateSessionDates(req, res));
   }
 }
