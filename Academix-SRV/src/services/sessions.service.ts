@@ -34,7 +34,7 @@ export class SessionsService extends BaseHttpService<Session> {
     return await this.repository.save(session);
   }
 
-  async updateSessionDates(sessionId: number, newDate: Date, startTime: Timestamp, endTime: Timestamp): Promise<void> {
+  async updateSessionDates(sessionId: number, newDate: Date, startTime: Date, endTime: Date): Promise<void> {
     await this.repository.update(sessionId, {
       session_date : newDate,
       start_time: startTime,
@@ -42,6 +42,12 @@ export class SessionsService extends BaseHttpService<Session> {
     });
   }
 //GET
+
+  async sessionExists(sessionId: number): Promise<boolean> {
+    const session = await this.repository.findOneBy({ id: sessionId });
+    return session !== null;
+  }
+
   async getSessionsByCours(coursId: number): Promise<Session[]> {
     return this.repository.find({
       where: { cours: { id: coursId } },
@@ -62,10 +68,11 @@ export class SessionsService extends BaseHttpService<Session> {
     });
   }
 
-  async getSessionsInTimeInterval(startTime: Timestamp, endTime: Timestamp): Promise<Session[]> {
+  async getSessionsInTimeInterval(date: Date, startTime: Date, endTime: Date): Promise<Session[]> {
     return this.repository
       .createQueryBuilder('session')
-      .where('session.start_time > :startTime', { startTime })
+      .where('session.date = :date', {date} )
+      .andWhere('session.start_time > :startTime', { startTime })
       .andWhere('session.start_time < :endTime', { endTime })
       .getMany();
   }

@@ -39,4 +39,95 @@ export class SessionsController extends BaseHttpController<Session> {
       return res.status(500).json({ message: "An error occurred while fetching sessions", error });
     }
   }
+
+  async getSessionsByRoom(req: Request, res: Response) {
+    const roomId = parseInt(req.params.roomId as string);
+
+    if (isNaN(roomId)) {
+      return res.status(400).json({ message: "Invalid Room ID" });
+    }
+
+    try {
+      const sessionsByRoom = await (this.service as SessionsService).getSessionsByRoom(roomId);
+      return res.status(200).json(sessionsByRoom);
+    } catch (error) {
+      return res.status(500).json({ message: "An error occurred while fetching sessions", error });
+    }
+  }
+
+  async getSessionsInTimeInterval(req: Request, res: Response) {
+    const sessionId = parseInt(req.params.sessionID as string);
+
+    const dateParam = req.params.date as string;
+    const date = new Date(dateParam);
+
+    
+    const startTimeParam = req.params.startTime as string;
+    const startTime = new Date(startTimeParam);
+
+    const endTimeParam = req.params.date as string;
+    const endTime = new Date(endTimeParam);
+
+    if (isNaN(date.getTime())) { 
+      return res.status(400).json({ message: "Invalid date" });
+    }
+
+    if (isNaN(startTime.getTime())) { 
+      return res.status(400).json({ message: "Invalid start time" });
+    }
+
+    if (isNaN(endTime.getTime())) { 
+      return res.status(400).json({ message: "Invalid end time " });
+    }
+
+    try {
+      const sessionsByIntervalTime = await (this.service as SessionsService).getSessionsInTimeInterval(date,startTime,endTime);
+      return res.status(200).json(sessionsByIntervalTime);
+    } catch (error) {
+      return res.status(500).json({ message: "An error occurred while fetching sessions", error });
+    }
+  }
+
+  async updateSessionDates(req: Request, res: Response) {
+    const sessionId = parseInt(req.params.sessionID as string);
+
+    const dateParam = req.params.date as string;
+    const date = new Date(dateParam);
+
+    
+    const startTimeParam = req.params.startTime as string;
+    const startTime = new Date(startTimeParam);
+
+    const endTimeParam = req.params.date as string;
+    const endTime = new Date(endTimeParam);
+    
+    if (isNaN(sessionId)) {
+      return res.status(400).json({ message: "Invalid cours ID" });
+    }
+
+    const existingSession = await  (this.service as SessionsService).sessionExists(sessionId);
+    
+    if (!existingSession) {
+      return res.status(404).json({ message: "Session not found" });
+    }
+
+    if (isNaN(date.getTime())) { 
+      return res.status(400).json({ message: "Invalid date" });
+    }
+
+    if (isNaN(startTime.getTime())) { 
+      return res.status(400).json({ message: "Invalid start time" });
+    }
+
+    if (isNaN(endTime.getTime())) { 
+      return res.status(400).json({ message: "Invalid end time " });
+    }
+
+    try {
+      const sessionsByDate = await (this.service as SessionsService).updateSessionDates(sessionId,date,startTime,endTime);
+      return res.status(200).json(sessionsByDate);
+    } catch (error) {
+      return res.status(500).json({ message: "An error occurred while fetching sessions", error });
+    }
+  }
 }
