@@ -1,7 +1,7 @@
 import { BaseHttpService } from './basehttp.service';
 import { Session } from '../models/Session';
 import { DATA_SOURCE } from '../db/dataSource';
-import { Repository } from 'typeorm';
+import { Repository, Timestamp } from 'typeorm';
 import { Room } from '../models/Room';
 import { Cours } from '../models/Cours';
 
@@ -9,6 +9,7 @@ export class SessionsService extends BaseHttpService<Session> {
   constructor() {
     super(DATA_SOURCE.getRepository(Session));
   }
+//POST
 
   public async create(data: any): Promise<any> {
     const roomRepository: Repository<Room> = DATA_SOURCE.getRepository(Room);
@@ -33,6 +34,20 @@ export class SessionsService extends BaseHttpService<Session> {
     return await this.repository.save(session);
   }
 
+  async updateSessionDates(sessionId: number, newDate: Date, startTime: Date, endTime: Date): Promise<void> {
+    await this.repository.update(sessionId, {
+      session_date : newDate,
+      start_time: startTime,
+      end_time: endTime,
+    });
+  }
+//GET
+
+  async sessionExists(sessionId: number): Promise<boolean> {
+    const session = await this.repository.findOneBy({ id: sessionId });
+    return session !== null;
+  }
+
   async getSessionsByCours(coursId: number): Promise<Session[]> {
     return this.repository.find({
       where: { cours: { id: coursId } },
@@ -44,5 +59,21 @@ export class SessionsService extends BaseHttpService<Session> {
     return this.repository.find({
       where: {session_date: date } 
     });
+  }
+
+  async getSessionsByRoom(roomId: number): Promise<Session[]> {
+    return this.repository.find({
+      where: { room: { id: roomId } },
+      relations: ['room'],
+    });
+  }
+
+  async getSessionsInTimeInterval(date: Date, startTime: Date, endTime: Date): Promise<Session[]> {
+    return this.repository
+      .createQueryBuilder('session')
+      .where('session.session_date = :date', {date} )
+      .andWhere('session.start_time >= :startTime', { startTime })
+      .andWhere('session.start_time <= :endTime', { endTime })
+      .getMany();
   }
 }
