@@ -65,7 +65,7 @@ export class SessionsController extends BaseHttpController<Session> {
     const startTimeParam = req.params.startTime as string;
     const startTime = new Date(startTimeParam);
 
-    const endTimeParam = req.params.date as string;
+    const endTimeParam = req.params.endTime as string;
     const endTime = new Date(endTimeParam);
 
     if (isNaN(date.getTime())) { 
@@ -89,7 +89,7 @@ export class SessionsController extends BaseHttpController<Session> {
   }
 
   async updateSessionDates(req: Request, res: Response) {
-    const sessionId = parseInt(req.params.sessionID as string);
+    const sessionId = parseInt(req.params.sessionId as string);
 
     const dateParam = req.params.date as string;
     const date = new Date(dateParam);
@@ -102,7 +102,7 @@ export class SessionsController extends BaseHttpController<Session> {
     const endTime = new Date(endTimeParam);
     
     if (isNaN(sessionId)) {
-      return res.status(400).json({ message: "Invalid cours ID" });
+      return res.status(400).json({ message: "Invalid session ID" });
     }
 
     const existingSession = await  (this.service as SessionsService).sessionExists(sessionId);
