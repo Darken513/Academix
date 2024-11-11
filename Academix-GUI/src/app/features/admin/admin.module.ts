@@ -135,7 +135,25 @@ import { SharedModule } from '../../shared/shared.module';
           { path: '', redirectTo: 'list', pathMatch: 'full' }
         ]
       },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+      {
+        path: 'session-management',
+        children: [
+          { path: 'list', component: SessionListComponent },
+          { path: 'edit/:id', component: SessionEditionComponent },
+          { path: 'details/:id', component: SessionDetailsComponent },
+          { path: '', redirectTo: 'list', pathMatch: 'full' }
+        ]
+      },
+      {
+        path: 'attendance-management',
+        children: [
+          { path: 'list', component: AttendanceHistoryComponent },
+          { path: 'edit/:id', component: AttendanceEditionComponent },
+          { path: 'details/:id', component: AttendanceDetailsComponent },
+          { path: '', redirectTo: 'list', pathMatch: 'full' }
+        ]
+      },
+      { path: '', redirectTo: 'list', pathMatch: 'full' }
     ])
   ]
 })

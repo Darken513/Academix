@@ -81,13 +81,26 @@ export class UserForm extends FormEntity {
         options: [],
         fetchOptionsFrom: '/users/getUserRole'
     })
-    userType: any;
+    userType: string = '';
 
     enabled: boolean | undefined;
     last_update: Date | undefined;
     created_at: Date | undefined;
+
+
+    @FormField({
+        label: 'Year level',
+        type: 'text',
+        required: true,
+    })
+    yearLevel: string = '';
     
-    
+    @FormField({
+        label: 'Establishment',
+        type: 'text',
+        required: true,
+    })
+    establishment: string = '';
     
     
     
@@ -107,16 +120,28 @@ export class UserForm extends FormEntity {
 
     @FormField({ label: 'Age', type: 'text', required: true, inputRegex: /^[0-9]/ })
     age?: number;
-
+    
     @FormField({ label: 'Email', type: 'text', required: true })
     email?: string;
     */
     constructor() {
         super();
-        /*const emailField = FormEntity.getFormFieldByKey(this, 'email');
+        const yearLevelField = FormEntity.getFormFieldByKey(this, 'yearLevel');
+        yearLevelField.displayCondition = () => {
+            return this.userType == 'student';
+        }
+
+        const establishmentField = FormEntity.getFormFieldByKey(this, 'establishment');
+        establishmentField.displayCondition = () => {
+            return this.userType == 'teacher';
+        }
+
+        /*
+        const emailField = FormEntity.getFormFieldByKey(this, 'email');
         emailField.displayCondition = () => {
             return this.gender == 'Male';
         }
+        
         emailField.validators = [
             (value: any) => {
                 if (/^[^@]+@[^@]+\.[^@]+$/.test(value)) {
