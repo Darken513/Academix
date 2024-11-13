@@ -2,6 +2,9 @@ import { Repository, ObjectLiteral } from 'typeorm';
 
 //todo add some error handling to avoid server crash
 export abstract class BaseHttpService<T extends ObjectLiteral> {
+  getAllRooms() {
+    throw new Error('Method not implemented.');
+  }
   protected repository: Repository<T>;
 
   constructor(repository: Repository<T>) {
