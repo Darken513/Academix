@@ -63,28 +63,9 @@ import { SharedModule } from '../../shared/shared.module';
     RouterModule.forChild([
       { path: 'dashboard', component: DashboardComponent },
       {
-        path: 'attendance-management',
-        children: [
-          { path: 'details/:id', component: AttendanceDetailsComponent },
-          { path: 'edit/:id', component: AttendanceEditionComponent },
-          { path: 'history', component: AttendanceHistoryComponent }
-        ]
-      },
-      {
         path: 'cours-management',
         children: [
-          {
-            path: 'details/:id', component: CoursDetailsComponent,
-          },
-          {
-            path: 'session',
-            children: [
-              { path: 'details/:coursId/:id', component: SessionDetailsComponent },
-              { path: 'edit/:coursId/:id', component: SessionEditionComponent },
-              { path: 'list/:coursId', component: SessionListComponent },
-              { path: '**', redirectTo: '/cours-management/list', pathMatch: 'full' }
-            ]
-          },
+          { path: 'details/:id', component: CoursDetailsComponent },
           { path: 'edit/:id', component: CoursEditionComponent },
           { path: 'list', component: CoursListComponent },
           { path: '', redirectTo: 'list', pathMatch: 'full' }
