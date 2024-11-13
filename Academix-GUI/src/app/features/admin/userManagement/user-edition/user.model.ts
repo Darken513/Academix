@@ -31,8 +31,8 @@ export class UserForm extends FormEntity {
     @FormField({
         label: 'Password',
         type: 'text',
-        params:{
-            type:'password'
+        params: {
+            type: 'password'
         },
         required: true,
     })
@@ -41,8 +41,8 @@ export class UserForm extends FormEntity {
     @FormField({
         label: 'Confirm password',
         type: 'text',
-        params:{
-            type:'password'
+        params: {
+            type: 'password'
         },
         required: true,
     })
@@ -74,10 +74,6 @@ export class UserForm extends FormEntity {
         label: 'User type',
         type: 'select',
         required: true,
-        params: {
-            optionLabel: 'value',
-            returnKey: 'id'
-        },
         options: [],
         fetchOptionsFrom: '/users/getUserRole'
     })
@@ -94,36 +90,14 @@ export class UserForm extends FormEntity {
         required: true,
     })
     yearLevel: string = '';
-    
+
     @FormField({
         label: 'Establishment',
         type: 'text',
         required: true,
     })
     establishment: string = '';
-    
-    
-    
-    
-    
-    
-    
-    /* id?: number;
-    @FormField({ label: 'First Name', type: 'text', required: true })
-    firstName: string = '';
 
-    @FormField({ label: 'Last Name', type: 'text', required: true })
-    lastName: string = '';
-
-    @FormField({ label: 'User Gender', type: 'radios', options: ['Male', 'Female', 'Other'] })
-    gender: string = '';
-
-    @FormField({ label: 'Age', type: 'text', required: true, inputRegex: /^[0-9]/ })
-    age?: number;
-    
-    @FormField({ label: 'Email', type: 'text', required: true })
-    email?: string;
-    */
     constructor() {
         super();
         const yearLevelField = FormEntity.getFormFieldByKey(this, 'yearLevel');
@@ -137,11 +111,6 @@ export class UserForm extends FormEntity {
         }
 
         /*
-        const emailField = FormEntity.getFormFieldByKey(this, 'email');
-        emailField.displayCondition = () => {
-            return this.gender == 'Male';
-        }
-        
         emailField.validators = [
             (value: any) => {
                 if (/^[^@]+@[^@]+\.[^@]+$/.test(value)) {
@@ -158,4 +127,5 @@ export class UserForm extends FormEntity {
             }
         ]
     }*/
-}}
+    }
+}

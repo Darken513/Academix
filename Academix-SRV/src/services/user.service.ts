@@ -14,13 +14,11 @@ export class UserService extends BaseHttpService<User> {
     return await userRepository.findOne({ where: { phone_number } });
   }
 
-  async getUserRole(): Promise<{ id: number; value: string }[]> {
-    // Mimicking an async operation, like a database fetch
-    const userRoles = Object.keys(UserRole).map((key, index) => ({
-       id: index + 1,
-       value: UserRole[key as keyof typeof UserRole]
-    }));
+  getUserRole(): string[] {
+    const userRoles = Object.keys(UserRole).map((key, index) => (
+      UserRole[key as keyof typeof UserRole]
+    ));
 
     return userRoles;
-  }  
+  }
 }

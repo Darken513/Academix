@@ -11,7 +11,7 @@ export class UserController extends BaseHttpController<User> {
 
   async getUserRole(req: Request, res: Response) {
     try {
-      const UserRoles = await (this.service as UserService).getUserRole();
+      const UserRoles = (this.service as UserService).getUserRole();
       return res.status(200).json(UserRoles);
     } catch (error) {
       console.log(error)
