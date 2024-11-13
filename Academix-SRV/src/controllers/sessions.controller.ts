@@ -56,7 +56,6 @@ export class SessionsController extends BaseHttpController<Session> {
   }
 
   async getSessionsInTimeInterval(req: Request, res: Response) {
-    const sessionId = parseInt(req.params.sessionID as string);
 
     const dateParam = req.params.date as string;
     const date = new Date(dateParam);
