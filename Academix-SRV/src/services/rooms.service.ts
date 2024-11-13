@@ -22,8 +22,15 @@ export class RoomsService extends BaseHttpService<Room> {
   async getAvailableRoomsInTimeInterval(date: Date, startTime: Date, endTime: Date): Promise<Room[]> {
     const ongoingSessions = await this.sessionService.getSessionsInTimeInterval(date, startTime, endTime)
     const occupiedRoomIds = ongoingSessions.map((session) => session.room);
-    return this.repository.createQueryBuilder('room')
-      .where('room.id NOT IN (:...occupiedRoomIds)', { occupiedRoomIds }).getMany()
+    
+    if (occupiedRoomIds.length === 0) {
+      return this.repository.createQueryBuilder('room').getMany();
+    }
+
+    return this.repository
+      .createQueryBuilder('room')
+      .where('room.id NOT IN (:...occupiedRoomIds)', { occupiedRoomIds })
+      .getMany();
   }
 
 }
