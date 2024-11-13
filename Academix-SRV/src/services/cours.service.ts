@@ -6,10 +6,19 @@ import { Teacher } from '../models/userRoles/Teacher';
 import { Repository } from 'typeorm';
 
 export class CoursService extends BaseHttpService<Cours> {
-  constructor() {
+  private static instance: CoursService;
+
+  private constructor() {
     super(DATA_SOURCE.getRepository(Cours));
   }
-  
+    
+  public static getInstance(): CoursService {
+    if (!CoursService.instance) {
+      CoursService.instance = new CoursService();
+    }
+    return CoursService.instance;
+  }
+
   public async create(data: any): Promise<any> {
     const subjectRepository: Repository<Subject> = DATA_SOURCE.getRepository(Subject);
     const teacherRepository: Repository<Teacher> = DATA_SOURCE.getRepository(Teacher);

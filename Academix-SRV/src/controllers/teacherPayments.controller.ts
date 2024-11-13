@@ -4,7 +4,7 @@ import { TeacherPayment } from '../models/TeacherPayment';
 
 export class TeacherPaymentsController extends BaseHttpController<TeacherPayment> {
   constructor() {
-    const service = new TeacherPaymentsService();
+    const service = TeacherPaymentsService.getInstance();
     super(service);
   }
 }

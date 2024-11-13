@@ -6,8 +6,17 @@ import { Student } from '../models/userRoles/Student';
 import { Session } from '../models/Session';
 
 export class AttendanceService extends BaseHttpService<Attendance> {
-  constructor() {
+  private static instance: AttendanceService;
+
+  private constructor() {
     super(DATA_SOURCE.getRepository(Attendance));
+  }
+  
+  public static getInstance(): AttendanceService {
+    if (!AttendanceService.instance) {
+      AttendanceService.instance = new AttendanceService();
+    }
+    return AttendanceService.instance;
   }
 
   public async create(data: Attendance): Promise<Attendance> {
@@ -16,7 +25,7 @@ export class AttendanceService extends BaseHttpService<Attendance> {
 
     const student = await studentRepository.findOne({ where: { id: (data as any).student_id } });
     const session = await sessionRepository.findOne({ where: { id: (data as any).session_id } });
-    
+
     if (!student) {
       throw new Error('Student not found');
     }
@@ -46,7 +55,7 @@ export class AttendanceService extends BaseHttpService<Attendance> {
       relations: ['student'],
     });
   }
-  
+
   async getCountStudentsPresentInSession(sessionId: number): Promise<number> {
     return this.repository.count({
       where: {

@@ -6,8 +6,17 @@ import { Parent } from '../models/userRoles/Parent';
 import { Repository } from 'typeorm';
 
 export class StudentService extends BaseHttpService<Student> {
-  constructor() {
+  private static instance: StudentService;
+
+  private constructor() {
     super(DATA_SOURCE.getRepository(Student));
+  }
+
+  public static getInstance(): StudentService {
+    if (!StudentService.instance) {
+      StudentService.instance = new StudentService();
+    }
+    return StudentService.instance;
   }
 
   public async create(data: Student): Promise<Student> {

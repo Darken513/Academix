@@ -4,7 +4,7 @@ import { BaseHttpController } from './basehttp.controller';
 
 export class StudentController extends BaseHttpController<Student> {
   constructor() {
-    const service = new StudentService();
+    const service = StudentService.getInstance();
     super(service);
   }
 }

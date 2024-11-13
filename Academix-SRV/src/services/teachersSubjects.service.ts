@@ -6,8 +6,17 @@ import { Repository } from 'typeorm';
 import { DATA_SOURCE } from '../db/dataSource';
 
 export class TeachersSubjectsService extends BaseHttpService<TeacherSubject> {
-  constructor() {
+  private static instance: TeachersSubjectsService;
+
+  private constructor() {
     super(DATA_SOURCE.getRepository(TeacherSubject));
+  }
+
+  public static getInstance(): TeachersSubjectsService {
+    if (!TeachersSubjectsService.instance) {
+      TeachersSubjectsService.instance = new TeachersSubjectsService();
+    }
+    return TeachersSubjectsService.instance;
   }
 
   public async create(data: TeacherSubject): Promise<TeacherSubject> {

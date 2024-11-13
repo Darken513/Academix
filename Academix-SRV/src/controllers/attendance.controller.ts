@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 export class AttendanceController extends BaseHttpController<Attendance> {
   
   constructor() {
-    const service = new AttendanceService();
+    const service = AttendanceService.getInstance();
     super(service);
   }
 

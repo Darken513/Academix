@@ -14,12 +14,12 @@ import { Parent } from '../models/userRoles/Parent';
 import { Admin } from '../models/userRoles/Admin';
 
 export class AuthController {
-  private userService = new UserService();
+  private userService = UserService.getInstance();
   private servicesByRole = {
-    [UserRole.TEACHER]: new TeacherService(),
-    [UserRole.STUDENT]: new StudentService(),
-    [UserRole.PARENT]: new ParentService(),
-    [UserRole.ADMIN]: new AdminService(),
+    [UserRole.TEACHER]: TeacherService.getInstance(),
+    [UserRole.STUDENT]: StudentService.getInstance(),
+    [UserRole.PARENT]: ParentService.getInstance(),
+    [UserRole.ADMIN]: AdminService.getInstance(),
   };
 
   constructor() { }

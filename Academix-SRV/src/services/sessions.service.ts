@@ -6,10 +6,19 @@ import { Room } from '../models/Room';
 import { Cours } from '../models/Cours';
 
 export class SessionsService extends BaseHttpService<Session> {
-  constructor() {
+  private static instance: SessionsService;
+
+  private constructor() {
     super(DATA_SOURCE.getRepository(Session));
   }
 //POST
+
+  public static getInstance(): SessionsService {
+    if (!SessionsService.instance) {
+      SessionsService.instance = new SessionsService();
+    }
+    return SessionsService.instance;
+  }
 
   public async create(data: any): Promise<any> {
     const roomRepository: Repository<Room> = DATA_SOURCE.getRepository(Room);
@@ -57,7 +66,7 @@ export class SessionsService extends BaseHttpService<Session> {
 
   async getSessionsByDate(date: Date): Promise<Session[]> {
     return this.repository.find({
-      where: {session_date: date } 
+      where: { session_date: date }
     });
   }
 

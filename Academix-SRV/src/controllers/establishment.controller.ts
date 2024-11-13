@@ -4,7 +4,7 @@ import { Establishment } from '../models/Establishment';
 
 export class EstablishmentController extends BaseHttpController<Establishment> {
   constructor() {
-    const service = new EstablishmentService();
+    const service = EstablishmentService.getInstance();
     super(service);
   }
 }

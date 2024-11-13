@@ -4,7 +4,7 @@ import { Admin } from '../models/userRoles/Admin';
 
 export class AdminController extends BaseHttpController<Admin> {
   constructor() {
-    const service = new AdminService();
+    const service = AdminService.getInstance();
     super(service);
   }
 }

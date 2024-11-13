@@ -13,7 +13,7 @@ export class RoomsController extends BaseHttpController<Room> {
     'any' :['name', 'capacity']
   } */
   constructor() {
-    const service = new RoomsService();
-    super(service, /* DAOMapper */);
+    const service = RoomsService.getInstance();
+    super(service);
   }
 }

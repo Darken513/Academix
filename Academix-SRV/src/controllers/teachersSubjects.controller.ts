@@ -4,7 +4,7 @@ import { TeacherSubject } from '../models/TeacherSubject';
 
 export class TeachersSubjectsController extends BaseHttpController<TeacherSubject> {
   constructor() {
-    const service = new TeachersSubjectsService();
+    const service = TeachersSubjectsService.getInstance();
     super(service);
   }
 }

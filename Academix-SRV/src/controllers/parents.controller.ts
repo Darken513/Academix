@@ -4,7 +4,7 @@ import { BaseHttpController } from './basehttp.controller';
 
 export class ParentController extends BaseHttpController<Parent> {
   constructor() {
-    const service = new ParentService();
+    const service = ParentService.getInstance();
     super(service);
   }
 }
