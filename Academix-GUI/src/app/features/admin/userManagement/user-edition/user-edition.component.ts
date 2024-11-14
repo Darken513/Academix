@@ -8,7 +8,38 @@ import { UserForm } from './user.model';
 })
 export class UserEditionComponent {
   entity: UserForm = new UserForm()
-  displayMap = undefined
+  displayMap = [
+    [
+      "firstName",
+      "lastName"
+    ],
+    [
+      "phoneNumber"
+    ],
+    [
+      "password"
+    ],
+    [
+      "passwordConfirmation"
+    ],
+    [
+      "note"
+    ],
+    [
+      "imgURL"
+    ],
+    [
+      "walletBalance"
+    ],
+    [
+      "userType"
+    ],
+    [
+      "Establishment",
+      "yearLevel"
+    ]
+  ]
+
 
   ngOnInit(): void {
     //this.entity.parseJSON({ textareaRegex: 'description here, some long text', regexLimited: '123', password: 'HelloWorld', radioOptions: 'first value' })

@@ -27,8 +27,8 @@ export class SessionForm extends FormEntity {
     endTime: string = '';
 
     enabled: boolean | undefined;
-    last_update: Date | undefined;
-    created_at: Date | undefined;
+    lastUpdate: Date | undefined;
+    createdAt: Date | undefined;
 
     room: undefined; //ManyToOne
     cours: undefined; //ManyToOne

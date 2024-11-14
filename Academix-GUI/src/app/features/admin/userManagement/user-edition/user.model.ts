@@ -103,12 +103,12 @@ export class UserForm extends FormEntity {
         const yearLevelField = FormEntity.getFormFieldByKey(this, 'yearLevel');
         yearLevelField.displayCondition = () => {
             return this.userType == 'student';
-        }
+        };
 
         const establishmentField = FormEntity.getFormFieldByKey(this, 'establishment');
         establishmentField.displayCondition = () => {
             return this.userType == 'teacher';
-        }
+        };
 
         /*
         emailField.validators = [
