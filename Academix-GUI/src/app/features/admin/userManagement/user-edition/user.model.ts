@@ -8,14 +8,14 @@ export class UserForm extends FormEntity {
         type: 'text',
         required: true,
     })
-    firstName: string = '';
+    first_name: string = '';
 
     @FormField({
         label: 'Last name',
         type: 'text',
         required: true,
     })
-    lastName: string = '';
+    last_name: string = '';
 
     @FormField({
         label: 'Phone number',
@@ -26,7 +26,7 @@ export class UserForm extends FormEntity {
             'this field takes only numbers as input',
         ],
     })
-    phoneNumber: string = '';
+    phone_number: string = '';
 
     @FormField({
         label: 'Password',
@@ -77,12 +77,11 @@ export class UserForm extends FormEntity {
         options: [],
         fetchOptionsFrom: '/users/getUserRole'
     })
-    userType: string = '';
+    role: string = '';
 
     enabled: boolean | undefined;
     last_update: Date | undefined;
     created_at: Date | undefined;
-
 
     @FormField({
         label: 'Year level',
@@ -93,39 +92,45 @@ export class UserForm extends FormEntity {
 
     @FormField({
         label: 'Establishment',
-        type: 'text',
+        type: 'select',
         required: true,
+        options: [],
+        params: {
+            optionLabel: 'name',
+            returnKey: 'id',
+            hasFilter: true
+        },
+        fetchOptionsFrom: '/establishments/getAll'
     })
-    establishment: string = '';
+    establishment_id: string = '';
 
     constructor() {
         super();
         const yearLevelField = FormEntity.getFormFieldByKey(this, 'yearLevel');
         yearLevelField.displayCondition = () => {
-            return this.userType == 'student';
+            return this.role == 'student';
         };
 
         const establishmentField = FormEntity.getFormFieldByKey(this, 'establishment');
         establishmentField.displayCondition = () => {
-            return this.userType == 'teacher';
+            return this.role == 'teacher';
         };
 
-        /*
-        emailField.validators = [
-            (value: any) => {
-                if (/^[^@]+@[^@]+\.[^@]+$/.test(value)) {
-                    return {
-                        valid: true,
-                        errorMsg: ''
-                    }
-                } else {
-                    return {
-                        valid: false,
-                        errorMsg: 'should contain email'
-                    }
+        const passwordField = FormEntity.getFormFieldByKey(this, 'password');
+        const passwordConfirmationField = FormEntity.getFormFieldByKey(this, 'passwordConfirmation');
+        let passwordMatchValidator = (value: any) => {
+            if (this.password == this.passwordConfirmation) {
+                return {
+                    valid: true,
+                    errorMsg: ''
                 }
             }
-        ]
-    }*/
+            return {
+                valid: false,
+                errorMsg: 'Password mismatch'
+            }
+        }
+        passwordField.validators = [passwordMatchValidator]
+        passwordConfirmationField.validators = [passwordMatchValidator]
     }
 }

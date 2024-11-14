@@ -11,7 +11,7 @@ export abstract class BaseHttpController<T extends ObjectLiteral> {
   public async getAll(req: Request, res: Response): Promise<void> {
     try {
       const defs = await this.service.getAll();
-      res.json({ defs });
+      res.status(200).json(defs);
     } catch (error) {
       console.error('Error getting documents:', error);
       res.status(500).json({ title: 'Error', body: 'No Data available.' });
@@ -24,7 +24,7 @@ export abstract class BaseHttpController<T extends ObjectLiteral> {
       if (!def) {
         res.status(404).json({ title: 'Error', body: 'Item not found.' });
       } else {
-        res.json({ def });
+        res.status(200).json(def);
       }
     } catch (error) {
       console.error('Error getting document:', error);
