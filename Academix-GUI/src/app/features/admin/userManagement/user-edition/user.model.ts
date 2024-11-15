@@ -104,6 +104,20 @@ export class UserForm extends FormEntity {
     })
     establishment_id: string = '';
 
+    @FormField({
+        label: 'Parent',
+        type: 'select',
+        required: false,
+        options: [],
+        params: {
+            optionLabel: 'first_name',
+            returnKey: 'id',
+            hasFilter: true
+        },
+        fetchOptionsFrom: '/parents/getAll'
+    })
+    parent_id: string = '';
+
     constructor() {
         super();
         const yearLevelField = FormEntity.getFormFieldByKey(this, 'yearLevel');
@@ -111,9 +125,14 @@ export class UserForm extends FormEntity {
             return this.role == 'student';
         };
 
-        const establishmentField = FormEntity.getFormFieldByKey(this, 'establishment');
+        const establishmentField = FormEntity.getFormFieldByKey(this, 'establishment_id');
         establishmentField.displayCondition = () => {
-            return this.role == 'teacher';
+            return this.role == 'teacher' || this.role == 'student';
+        };
+
+        const parentField = FormEntity.getFormFieldByKey(this, 'parent_id');
+        parentField.displayCondition = () => {
+            return this.role == 'student';
         };
 
         const passwordField = FormEntity.getFormFieldByKey(this, 'password');

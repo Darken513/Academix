@@ -19,9 +19,10 @@ export class UserEditionComponent {
     ['imgURL'],
     ['walletBalance'],
     ['role'],
-    ['establishment', 'yearLevel'],
+    ['parent_id'],
+    ['establishment_id', 'yearLevel'],
   ];
-
+  
   constructor(private http: HttpClient) {
   }
 

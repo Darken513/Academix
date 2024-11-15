@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AttendanceForm } from './attendance.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-attendance-edition',
@@ -8,7 +9,11 @@ import { AttendanceForm } from './attendance.model';
 })
 export class AttendanceEditionComponent {
   entity: AttendanceForm = new AttendanceForm()
+  isNew: boolean = true;
   displayMap = undefined
+
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
     //this.entity.parseJSON({ textareaRegex: 'description here, some long text', regexLimited: '123', password: 'HelloWorld', radioOptions: 'first value' })
@@ -17,7 +22,11 @@ export class AttendanceEditionComponent {
   }
 
   public onSubmit() {
-    //it should send the data to server and save cache version if succeeded
     console.log(this.entity);
+    this.http.post<any>('http://localhost:8080/attendances/create', this.entity).subscribe({
+      next: (next) => {
+        console.log(next);
+      }
+    });
   }
 }

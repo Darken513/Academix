@@ -8,7 +8,7 @@ export class SessionForm extends FormEntity {
         type: 'calendar',
         required: true,
     })
-    sessionDate: any;
+    session_date: any;
 
     @FormField({
         label: 'Start time',
@@ -16,7 +16,7 @@ export class SessionForm extends FormEntity {
         params:{timeOnly:true},
         required: true,
     })
-    startTime: string = '';
+    start_time: string = '';
 
     @FormField({
         label: 'End time',
@@ -24,14 +24,38 @@ export class SessionForm extends FormEntity {
         params:{timeOnly:true},
         required: true,
     })
-    endTime: string = '';
+    end_time: string = '';
 
     enabled: boolean | undefined;
-    lastUpdate: Date | undefined;
-    createdAt: Date | undefined;
+    last_update: Date | undefined;
+    created_at: Date | undefined;
 
-    room: undefined; //ManyToOne
-    cours: undefined; //ManyToOne
+    @FormField({
+        label: 'Room',
+        type: 'select',
+        required: true,
+        options: [],
+        params: {
+            optionLabel: 'name',
+            returnKey: 'id',
+        },
+        fetchOptionsFrom: '/rooms/getAll'
+    })
+    room_id: string = '';
+
+
+    @FormField({
+        label: 'Cours',
+        type: 'select',
+        required: true,
+        options: [],
+        params: {
+            optionLabel: 'id',
+            returnKey: 'id',
+        },
+        fetchOptionsFrom: '/courses/getAll'
+    })
+    cours_id: string = '';
     
     constructor() {
         super();

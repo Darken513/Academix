@@ -4,8 +4,8 @@ export class AttendanceForm extends FormEntity {
     id: number | undefined;
 
     enabled: boolean | undefined;
-    lastUpdate: Date | undefined;
-    createdAt: Date | undefined;
+    last_update: Date | undefined;
+    created_at: Date | undefined;
     @FormField({
         label: 'Status',
         type: 'text',
@@ -20,8 +20,33 @@ export class AttendanceForm extends FormEntity {
     })
     notes: string = '';
 
-    session: undefined; //ManyToOne
-    student: undefined; //ManyToOne
+    @FormField({
+        label: 'Session',
+        type: 'select',
+        required: true,
+        options: [],
+        params: {
+            optionLabel: 'id',
+            returnKey: 'id',
+            hasFilter: true
+        },
+        fetchOptionsFrom: '/sessions/getAll'
+    })
+    session_id: string = '';
+
+    @FormField({
+        label: 'Student',
+        type: 'select',
+        required: true,
+        options: [],
+        params: {
+            optionLabel: 'name',
+            returnKey: 'id',
+            hasFilter: true
+        },
+        fetchOptionsFrom: '/students/getAll'
+    })
+    student_id: string = '';
     
     constructor() {
         super();
