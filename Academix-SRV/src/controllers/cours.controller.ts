@@ -1,7 +1,8 @@
 import { CoursService } from '../services/cours.service';
 import { BaseHttpController } from './basehttp.controller';
 import { Cours } from '../models/Cours';
-import { Request, Response } from 'express';
+import { Response } from 'express';
+import { AppRequest } from '../core/AppRequest';
 
 export class CoursController extends BaseHttpController<Cours> {
   constructor() {
@@ -9,7 +10,7 @@ export class CoursController extends BaseHttpController<Cours> {
     super(service);
   }
 
-  async getCoursesByTeacher(req: Request, res: Response) {
+  async getCoursesByTeacher(req: AppRequest, res: Response) {
     const teacherId = parseInt(req.params.teacherId as string);
 
     if (isNaN(teacherId)) {
@@ -23,8 +24,8 @@ export class CoursController extends BaseHttpController<Cours> {
       return res.status(500).json({ message: "An error occurred while fetching courses", error });
     }
   }
-  
-  async getCoursesBySubject(req: Request, res: Response) {
+
+  async getCoursesBySubject(req: AppRequest, res: Response) {
     const subjectId = parseInt(req.params.subjectId as string);
 
     if (isNaN(subjectId)) {

@@ -33,7 +33,7 @@ export class Session {
   @JoinColumn({name: 'room_id'})
   room?: Room;
 
-  @ManyToOne(()=>Cours, (cours)=>cours.sessions, { nullable: false, eager: false })
+  @ManyToOne(()=>Cours, (cours)=>cours.sessions, { nullable: false, eager: true })
   @JoinColumn({name: 'cours_id'})
   cours?: Cours;
 }

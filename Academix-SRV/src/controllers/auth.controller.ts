@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { UserRole } from '../models/userRoles/Role';
@@ -12,6 +12,7 @@ import { Teacher } from '../models/userRoles/Teacher';
 import { User } from '../models/userRoles/User';
 import { Parent } from '../models/userRoles/Parent';
 import { Admin } from '../models/userRoles/Admin';
+import { AppRequest } from '../core/AppRequest';
 
 export class AuthController {
   private userService = UserService.getInstance();
@@ -24,7 +25,7 @@ export class AuthController {
 
   constructor() { }
 
-  async register(req: Request, res: Response): Promise<Response> {
+  async register(req: AppRequest, res: Response): Promise<Response> {
     try {
       const { phone_number, role } = req.body;
 
@@ -44,7 +45,7 @@ export class AuthController {
     }
   }
 
-  async login(req: Request, res: Response): Promise<Response> {
+  async login(req: AppRequest, res: Response): Promise<Response> {
     try {
       const { phone_number, password } = req.body;
 
@@ -110,7 +111,7 @@ export class AuthController {
   private generateJwtToken(user: User): string {
     return jwt.sign(
       { id: user.id, phone_number: user.phone_number, role: user.role },
-      'Academix',
+      process.env.JWT_SECRET!,
       { expiresIn: '1h' }
     );
   }

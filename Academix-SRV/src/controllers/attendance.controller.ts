@@ -1,7 +1,8 @@
 import { AttendanceService } from '../services/attendance.service';
 import { BaseHttpController } from './basehttp.controller';
 import { Attendance } from '../models/Attendance';
-import { Request, Response } from 'express';
+import { Response } from 'express';
+import { AppRequest } from '../core/AppRequest';
 
 export class AttendanceController extends BaseHttpController<Attendance> {
   
@@ -10,7 +11,7 @@ export class AttendanceController extends BaseHttpController<Attendance> {
     super(service);
   }
 
-  async getByStudentAndSession(req: Request, res: Response) {
+  async getByStudentAndSession(req: AppRequest, res: Response) {
     const studentId = parseInt(req.params.studentId as string);
     const sessionId = parseInt(req.params.sessionId as string);
 
@@ -29,7 +30,7 @@ export class AttendanceController extends BaseHttpController<Attendance> {
     }
   }
 
-  async getAllByStudent(req: Request, res: Response) {
+  async getAllByStudent(req: AppRequest, res: Response) {
     const studentId = parseInt(req.params.studentId as string);
     if (isNaN(studentId)) {
       console.log("Student ID:", studentId);
@@ -48,7 +49,7 @@ export class AttendanceController extends BaseHttpController<Attendance> {
     }
   }
   
-  async getCountStudentsPresentInSession(req: Request, res: Response) {
+  async getCountStudentsPresentInSession(req: AppRequest, res: Response) {
     const sessionId = parseInt(req.params.sessionId as string);
     if (isNaN(sessionId)) {
       console.log("Session ID:", sessionId);
@@ -69,7 +70,7 @@ export class AttendanceController extends BaseHttpController<Attendance> {
     }
   }
 
-  async getStudentAttendanceCountByCourse(req: Request, res: Response) {
+  async getStudentAttendanceCountByCourse(req: AppRequest, res: Response) {
     const studentId = parseInt(req.params.studentId as string);
     const courseId = parseInt(req.params.courseId as string);
 
