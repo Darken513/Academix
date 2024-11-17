@@ -13,7 +13,7 @@ export class Establishment {
     @Column({ type: 'varchar', length: 255, nullable: true })
     description?: string;
 
-    @Column({ type: 'boolean', default: true, nullable: true })
+    @Column({ type: 'boolean', default: true })
     enabled?: boolean;
 
     @CreateDateColumn({ type: 'timestamp', nullable: false })

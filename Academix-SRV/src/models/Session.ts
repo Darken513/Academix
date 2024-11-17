@@ -17,7 +17,7 @@ export class Session {
   @Column({ type: "timestamp", nullable: false })
   end_time?: Date;
 
-  @Column({ type: "boolean", default: true, nullable: true })
+  @Column({ type: "boolean", default: true })
   enabled?: boolean;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false})
