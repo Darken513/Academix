@@ -26,7 +26,7 @@ export class SessionsService extends BaseHttpService<Session> {
 
     const session = this.repository.create({
       ...data,
-      rooms: room,
+      room: room,
       cours: cours,
     });
 

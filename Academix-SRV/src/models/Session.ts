@@ -11,10 +11,10 @@ export class Session {
   @Column({ type: "date", nullable: false })
   session_date?: Date;
 
-  @Column({ type: "timestamp", nullable: false })
+  @Column({ type: "time", nullable: false })
   start_time?: Date;
 
-  @Column({ type: "timestamp", nullable: false })
+  @Column({ type: "time", nullable: false })
   end_time?: Date;
 
   @Column({ type: "boolean", default: true })
