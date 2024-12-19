@@ -25,8 +25,8 @@ class App {
   }
 
   private initializeMiddlewares(): void {
-    this.app.use(express.static(__dirname + "/public"));
     this.app.use(cors());
+    this.app.use(express.static(__dirname + "/public"));
     this.app.use(bodyParser.json());
     this.app.use(this.jwtVerifyMiddleware);
   }

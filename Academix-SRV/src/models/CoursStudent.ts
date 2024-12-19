@@ -15,7 +15,7 @@ export class CoursStudent {
     @Column({ type: 'boolean', default: false })
     refered?: boolean;
 
-    @Column({ type: 'boolean', default: true, nullable: true })
+    @Column({ type: 'boolean', default: true })
     enabled?: boolean;
 
     @CreateDateColumn({ type: 'timestamp', nullable: false})

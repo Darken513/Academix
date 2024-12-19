@@ -6,5 +6,6 @@ export class UsersRouter extends BaseHttpRouter<User> {
   constructor() {
     const controller = new UserController();
     super(controller);
+    this.router.get('/getUserRole', (req, res) => controller.getUserRole(req, res));
   }
 }

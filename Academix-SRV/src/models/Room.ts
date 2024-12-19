@@ -13,7 +13,7 @@ export class Room {
     @Column({ type: 'integer'})
     capacity!: number;
 
-    @Column({ type: 'boolean', default: true, nullable: true })
+    @Column({ type: 'boolean', default: true })
     enabled?: boolean;
 
     @CreateDateColumn({ type: 'timestamp', nullable: false})

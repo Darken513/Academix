@@ -22,7 +22,11 @@ export class RoomForm extends FormEntity {
     })
     capacity: number = 0;
 
+    enabled: boolean | undefined;
+    last_update: Date | undefined;
+    created_at: Date | undefined;
+    
     constructor() {
         super();
     }
-}
+}//

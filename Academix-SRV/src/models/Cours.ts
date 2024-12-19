@@ -24,8 +24,8 @@ export class Cours {
   @JoinColumn({ name: 'paymentMode_id' })
   paymentMode!: PaymentMode;
 
-  @Column({ type: 'boolean' })
-  enabled!: boolean;
+  @Column({ type: 'boolean', default: true })
+  enabled?: boolean;
 
   @CreateDateColumn({ type: 'timestamp', nullable: false})
   created_at?: Date;

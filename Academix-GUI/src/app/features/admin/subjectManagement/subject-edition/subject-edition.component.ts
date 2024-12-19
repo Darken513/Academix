@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubjectForm } from './subject.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-subject-edition',
@@ -8,6 +9,7 @@ import { SubjectForm } from './subject.model';
 })
 export class SubjectEditionComponent implements OnInit {
   entity: SubjectForm = new SubjectForm()
+  isNew: boolean = true;
   displayMap = undefined
   /*[
     [
@@ -35,6 +37,9 @@ export class SubjectEditionComponent implements OnInit {
     ]
   ] */
 
+  constructor(private http: HttpClient) {
+  }
+
   ngOnInit(): void {
     //this.entity.parseJSON({ textareaRegex: 'description here, some long text', regexLimited: '123', password: 'HelloWorld', radioOptions: 'first value' })
     //it should fetch the data from server or cache
@@ -42,7 +47,11 @@ export class SubjectEditionComponent implements OnInit {
   }
 
   public onSubmit() {
-    //it should send the data to server and save cache version if succeeded
     console.log(this.entity);
+    this.http.post<any>('http://localhost:8080/subjects/create', this.entity).subscribe({
+      next: (next) => {
+        console.log(next);
+      }
+    });
   }
 }

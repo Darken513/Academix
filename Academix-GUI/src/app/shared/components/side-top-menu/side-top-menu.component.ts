@@ -29,13 +29,23 @@ export class SideTopMenuComponent {
       href: 'admin/user-management'
     },
     {
-      name: 'Courses',
+      name: 'Sessions',
       icon: 'fa-solid fa-calendar-days',
+      href: 'admin/session-management'
+    },
+    {
+      name: 'Attendances',
+      icon: 'fa-solid fa-user-check',
+      href: 'admin/attendance-management'
+    },
+    {
+      name: 'Courses',
+      icon: 'fa-solid fa-chalkboard-user',
       href: 'admin/cours-management'
     },
     {
       name: 'Rooms',
-      icon: 'fa-solid fa-chalkboard-user',
+      icon: 'fa-solid fa-chalkboard',
       href: 'admin/room-management'
     },
     {

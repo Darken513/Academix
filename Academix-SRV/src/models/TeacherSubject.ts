@@ -8,7 +8,7 @@ export class TeacherSubject {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'boolean', default: true, nullable: true })
+  @Column({ type: 'boolean', default: true })
   enabled?: boolean;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.teachersSubjects, { nullable: false })

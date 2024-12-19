@@ -13,8 +13,8 @@ export class Subject {
   @Column({ type: "varchar", length: 255 })
   description!: string;
 
-  @Column()
-  enabled!: boolean;
+  @Column({ type: 'boolean', default: true })
+  enabled?: boolean;
 
   @CreateDateColumn({ type: "timestamp", nullable: false })
   created_at!: Date;
