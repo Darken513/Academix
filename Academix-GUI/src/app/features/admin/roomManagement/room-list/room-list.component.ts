@@ -43,7 +43,7 @@ export class RoomListComponent {
   ngOnInit(): void {
     this.httpService.get("/rooms/getAll").subscribe({
       next: (res: any) => {
-        this.data = res.defs;
+        this.data = res;
       },
     })
   }

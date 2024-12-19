@@ -43,7 +43,7 @@ export class SubjectListComponent implements OnInit {
   ngOnInit(): void {
     this.httpService.get("/subjects/getAll").subscribe({
       next: (res: any) => {
-        this.data = res.defs;
+        this.data = res;
       },
     })
   }

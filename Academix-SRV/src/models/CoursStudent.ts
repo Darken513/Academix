@@ -24,14 +24,14 @@ export class CoursStudent {
     @UpdateDateColumn({ type: 'timestamp', nullable: true })
     last_update?: Date;
 
-    @ManyToOne(()=>Cours, (cours)=>cours.coursStudents, { nullable: false })
+    @ManyToOne(()=>Cours, (cours)=>cours.coursStudents, { nullable: false , eager: true})
     @JoinColumn({name: 'cours_id'})
     cours?: Cours;
 
-    @ManyToOne(()=>Student, (student)=>student.coursStudent, { nullable: false })
+    @ManyToOne(()=>Student, (student)=>student.coursStudent, { nullable: false , eager: true})
     @JoinColumn({name: 'student_id'})
     student?: Student;
 
-    @OneToMany(()=>StudentPayment, (studentPayment)=>studentPayment.coursStudent)
+    @OneToMany(()=>StudentPayment, (studentPayment)=>studentPayment.coursStudent, { eager: true})
     studentPayments?: StudentPayment[];
 }
