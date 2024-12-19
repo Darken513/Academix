@@ -1,8 +1,11 @@
-<form (ngSubmit)="onSubmit()">
-    <div *ngFor="let rowFields of formFields" class="row">
-        <div *ngFor="let field of rowFields" class="col-lg">
-            <ng-container #dynamicFieldHost></ng-container>
+<div [ngClass]="{'card-wrapper': config && config.cardMode }">
+    <h2 *ngIf="config && config.cardMode && config.cardTitle" class="card-title">{{config.cardTitle}}</h2>
+    <form (ngSubmit)="onSubmit()">
+        <div *ngFor="let rowFields of formFields" class="row">
+            <div *ngFor="let field of rowFields" class="col-lg">
+                <ng-container #dynamicFieldHost></ng-container>
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

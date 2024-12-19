@@ -17,6 +17,7 @@ import { MultiSelectControlComponent } from './utilities/multi-select-control/mu
 export class FormBuilderComponent implements AfterViewInit {
   @Input() entity: FormEntity = new FormEntity();
   @Input() displayMap?: string[][];
+  @Input() config?: any;
 
   formFields: any[] = [];
 

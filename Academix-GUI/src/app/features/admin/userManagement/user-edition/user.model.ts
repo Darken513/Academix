@@ -35,6 +35,7 @@ export class UserForm extends FormEntity {
             type: 'password'
         },
         required: true,
+        linkedFields: ['passwordConfirmation']
     })
     password: string = '';
 
@@ -45,6 +46,7 @@ export class UserForm extends FormEntity {
             type: 'password'
         },
         required: true,
+        linkedFields: ['password']
     })
     passwordConfirmation: string = '';
 

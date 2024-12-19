@@ -12,6 +12,7 @@ class FormEntity {
         params?: any,
         options?: any[],
         validators?: ((value: any) => { valid: boolean, errorMsg: string })[];
+        linkedFields?: string[];
         displayCondition?: () => boolean
     }) {
         if (!Reflect.hasMetadata('formFields', target)) {
@@ -33,21 +34,28 @@ class FormEntity {
     }
 
     // Validate fields with custom validators
-    static validateField(entity: any, fieldKey: string, fieldValue: any): boolean {
+    static validateField(entity: any, fieldKey: string, fieldValue: any, validatedFields: Set<string> = new Set()): boolean {
+        if (validatedFields.has(fieldKey)) {
+            return true; // Avoid circular validation
+        }
+    
+        validatedFields.add(fieldKey);
+    
         const field = this.getFormFields(entity).find((f: any) => f.key === fieldKey);
         if (!field) return true;
+    
         if (field.displayCondition && !field.displayCondition()) {
             field.errorEmitter.emit({ error: false });
             return true;
         }
-
+    
         if (field.required && !hasValue(fieldValue)) {
             field.errorEmitter.emit({
                 error: field.label + ' is required'
             });
             return false;
         }
-
+    
         if (field.validators) {
             for (const validator of field.validators) {
                 const validation = validator(fieldValue);
@@ -59,9 +67,19 @@ class FormEntity {
                 }
             }
         }
+    
         field.errorEmitter.emit({ error: false });
+    
+        if (field.linkedFields) {
+            field.linkedFields.forEach((linkedKey:string) => {
+                const linkedFieldValue = entity[linkedKey];
+                this.validateField(entity, linkedKey, linkedFieldValue, validatedFields);
+            });
+        }
+    
         return true;
     }
+    
 
     // Validate the entire form data
     static validateForm(entity: any): { valid: boolean } {
@@ -120,6 +138,9 @@ config: {
     @param {string} fetchOptionsFrom Optional, For 'select', 'checkboxes', 'autocomplete', 'multiselect' or 'radios' types, this will tell it to fetch its options with a GET request.
     @param {any} params Optional, further params that are unique to the control you are calling, check the control ts file for more details.
     @param {((value: any) => { valid: boolean, errorMsg: string })[]} validators Optional, An array of custom validator functions. Each validator returns an object with a 'valid' flag and an 'errorMsg' if the validation fails.
+    @param {string[]} linkedFields Optional, Linked fields keys, it will bind validation for these fields
+
+    
     @param {(() => boolean)} displayCondition Optional, A function that returns a boolean determining whether this field should be displayed.
 */
 function FormField(config: {
@@ -132,6 +153,7 @@ function FormField(config: {
     fetchOptionsFrom?: string,
     params?: any,
     validators?: ((value: any) => { valid: boolean, errorMsg: string })[],
+    linkedFields?: string[];
     displayCondition?: (() => boolean),
 }) {
     // target refers to the prototype of the class using the decorator
